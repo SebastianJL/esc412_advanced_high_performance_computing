@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/genpromote.dir/genpromote.cpp.o -o genpromote 

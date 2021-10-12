@@ -22,7 +22,7 @@
  */ 
 
 // Generated source file.  Do not edit. 
-// /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genarrbops.cpp $Revision$ Sep 24 2021 15:50:00
+// /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genarrbops.cpp $Revision$ Oct  9 2021 17:42:47
 
 #ifndef BZ_ARRAYBOPS_CC
 #define BZ_ARRAYBOPS_CC

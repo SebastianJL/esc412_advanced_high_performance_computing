@@ -1,5 +1,5 @@
 // Generated source file.  Do not edit.
-// Created by: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genmatbops.cpp $Revision$ Sep 24 2021 15:50:03
+// Created by: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genmatbops.cpp $Revision$ Oct  9 2021 17:42:51
 
 #ifndef BZ_MATBOPS_H
 #define BZ_MATBOPS_H

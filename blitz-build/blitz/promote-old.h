@@ -23,7 +23,7 @@
  ***************************************************************************
  */
 
-// Generated: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genpromote.cpp $Revision$ Sep 24 2021 15:50:01
+// Generated: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genpromote.cpp $Revision$ Oct  9 2021 17:42:48
 template<typename A, typename B>
 class promote_trait {
 public:

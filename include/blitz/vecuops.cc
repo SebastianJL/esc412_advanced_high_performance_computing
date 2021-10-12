@@ -22,7 +22,7 @@
  */ 
 
 // Generated source file.  Do not edit. 
-// /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genvecuops.cpp $Revision$ Sep 24 2021 15:50:02
+// /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genvecuops.cpp $Revision$ Oct  9 2021 17:42:49
 
 #ifndef BZ_VECUOPS_CC
 #define BZ_VECUOPS_CC

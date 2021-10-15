@@ -2,16 +2,13 @@
 #include "tipsy.h"
 
 /**
- * Return the nearest grid point for a particle .
+ * Return the nearest grid point for a single coordinate.
  *
- * @param coords coordinates of the particle.
+ * @param coord coordinate.
  * @param n_grid size of the grid.
  */
-blitz::TinyVector<int, 3>
-ngp(blitz::Array<float, 1> coords, int n_grid) {
-    blitz::TinyVector<int, 3> res(0);
-
-    return blitz::ceil(n_grid * (coords + 0.5) - 1);
+float ngp(float coord, int n_grid) {
+    return std::ceil(n_grid * (coord + 0.5) - 1);
 }
 
 /**
@@ -23,17 +20,19 @@ ngp(blitz::Array<float, 1> coords, int n_grid) {
 blitz::Array<float, 3>
 assign_mass_ngp(blitz::Array<float, 2> particles, int n_grid) {
     blitz::Array<float, 3> res(n_grid, n_grid, n_grid);
-    for (auto i=0; i<=particles.extent(blitz::firstDim); ++i) {
-        float mass = 1.;
-        auto p = particles(i, blitz::Range::all());
-        auto grid_point = ngp(p, n_grid);
+    for (auto i=0; i<particles.extent(blitz::firstDim); ++i) {
+        blitz::TinyVector<float, 3> grid_point;
+        for (auto j=0; j<particles.extent(blitz::secondDim); ++j) {
+            float p = particles(i, j);
+            grid_point(j) = ngp(p, n_grid);
 
-        // std::cout << *p << std::endl;
-        // std::cout << p.position() << std::endl;
-        // std::cout << particles(p.position(), blitz::Range::all()) << std::endl;
-        // std::cout << grid_point << std::endl;
-        // std::cout << std::endl;
-        
+            // std::cout << *p << std::endl;
+            // std::cout << p.position() << std::endl;
+            // std::cout << particles(p.position(), blitz::Range::all()) << std::endl;
+            // std::cout << grid_point << std::endl;
+            // std::cout << std::endl;
+        }
+        float mass = 1.;
         res(grid_point) += mass;
     }
     return res;
@@ -91,20 +90,6 @@ int main() {
 
     cout << endl;
 
-    // Test ngp();
-    Array<float, 1> test_vector(3);
-    cout << "N_grid/2: " << N_grid/2 << endl;
-    cout << "ngp of " << test_vector << ": " <<  ngp(test_vector, N_grid) << endl;
-
-    test_vector = -0.5, -0.499999, 0.5; 
-    cout << "N_grid: " << N_grid << endl;
-    cout << "ngp of " << test_vector << ": " <<  ngp(test_vector, N_grid) << endl;
-    
-    cout << "element 0: " << r(0) << endl;
-    cout << "ngp of element 0: " << ngp((Array<float,1>)r(0), N_grid) << endl;
-
-    cout << endl;
-
     // Test assign_mass_ngp()
     auto n_grid = 64; // Number of grid cells per dimension.
     auto mass_grid = assign_mass_ngp(r, n_grid); 
@@ -116,7 +101,7 @@ int main() {
     secondIndex j;
     thirdIndex k;
     Array<float, 2> mass_grid_2d(n_grid, n_grid);
-    mass_grid_2d = max(mass_grid(i, k, j), k);
+    mass_grid_2d = max(mass_grid, k);
     cout << mass_grid_2d << endl;
 
     // Write to file

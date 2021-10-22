@@ -83,9 +83,7 @@ assign_mass(blitz::Array<float, 2> particles, int n_grid) {
                 }
             }
         }
-        std::cout << row << std::endl;
     }
-        std::cout << "done." << std::endl;
     return res;
 }
 

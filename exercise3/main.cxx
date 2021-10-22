@@ -1,6 +1,7 @@
 #include <cstdint> 
 #include "tipsy.h"
 #include "aweights.hpp"
+#include <chrono>
 
 /**
  * Return the nearest grid point for a single coordinate.
@@ -47,6 +48,28 @@ assign_mass_ngp(blitz::Array<float, 2> particles, int n_grid) {
 }
 
 /**
+ * Wrap the point i on a grid with size n_grid using the % operator.
+ *
+ * @param i Coordinate to wrap.
+ * @param n_grid Wrap modulo n_grid.
+ */
+int wrap_modulo(int i, int n_grid) {
+    return (i + n_grid) % n_grid;
+}
+
+/**
+ * Wrap the point i on a grid with size n_grid using if else statements.
+ *
+ * @param i Coordinate to wrap.
+ * @param n_grid Wrap modulo n_grid.
+ */
+int wrap_if_else(int i, int n_grid) {
+    if (i >= n_grid) return i - n_grid;
+    if (i < 0) return i + n_grid;
+    return i;
+}
+
+/**
  * Return a grid of mass densities given a particle distribution.
  *
  * @param particles Particles to distribute
@@ -55,7 +78,7 @@ assign_mass_ngp(blitz::Array<float, 2> particles, int n_grid) {
  */
 template<int Order>
 blitz::Array<float, 3>
-assign_mass(blitz::Array<float, 2> particles, int n_grid) {
+assign_mass(blitz::Array<float, 2> particles, int n_grid, int (*wrap) (int, int)) {
     blitz::Array<float, 3> res(n_grid, n_grid, n_grid);
     res = 0;
     for (auto row=0; row<particles.extent(blitz::firstDim); ++row) {
@@ -76,9 +99,9 @@ assign_mass(blitz::Array<float, 2> particles, int n_grid) {
         for (auto i=0; i<Order; ++i) {
             for (auto j=0; j<Order; ++j) {
                 for (auto k=0; k<Order; ++k) {
-                    int x = (wx.i + i + n_grid) % n_grid;
-                    int y = (wy.i + j + n_grid) % n_grid;
-                    int z = (wz.i + k + n_grid) % n_grid;
+                    int x = wrap(wx.i + i, n_grid);
+                    int y = wrap(wy.i + i, n_grid);
+                    int z = wrap(wz.i + i, n_grid);
                     res(x, y, z) += wx.H[i] * wy.H[j] * wz.H[k];
                 }
             }
@@ -113,9 +136,11 @@ blitz::Array<float, 2> project_3d_to_2d(blitz::Array<float, 3> grid_3d) {
     return grid_2d;
 }
 
+
 int main() {
     using std::cout, std::endl;
     using namespace blitz;
+    using namespace std::chrono;
 
     // Load data.
     TipsyIO io;
@@ -133,11 +158,14 @@ int main() {
     io.load(r);
     
     // Print some data.
-    cout << r(Range(0,10), Range::all()) << endl;
-
+    firstIndex i;
+    secondIndex j;
+    thirdIndex k;
+    Array<float, 1> max_r(3);
     cout << "max_x = " << max(r(Range::all(), 0)) << endl;
     cout << "max_y = " << max(r(Range::all(), 1)) << endl;
     cout << "max_z = " << max(r(Range::all(), 2)) << endl;
+    cout << "max = " << max(r(Range::all(), 2)) << endl;
 
     cout << endl;
 
@@ -147,24 +175,53 @@ int main() {
 
     cout << endl;
 
-    // Test assign_mass_ngp()
+    // Time different wrapping functions
     auto n_grid = 64; // Number of grid cells per dimension.
-    auto mass_grid_ngp = assign_mass_ngp(r, n_grid); 
-    auto mass_grid_2nd = assign_mass<2>(r, n_grid); 
-    auto mass_grid_3rd = assign_mass<3>(r, n_grid); 
-    auto mass_grid_4th = assign_mass<4>(r, n_grid); 
     
-    // Project to 2d grid.
-    auto mass_grid_ngp_2d = project_3d_to_2d(mass_grid_ngp);
-    auto mass_grid_2nd_2d = project_3d_to_2d(mass_grid_2nd);
-    auto mass_grid_3rd_2d = project_3d_to_2d(mass_grid_3rd);
-    auto mass_grid_4th_2d = project_3d_to_2d(mass_grid_4th);
+    // 2nd order modulo
+    auto start = chrono::high_resolution_clock::now();
+    auto mass_grid = assign_mass<2>(r, n_grid, &wrap_modulo); 
+    auto stop = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+    cout << "2nd order wrap_modulo: " << duration.count() << " miliseconds" << endl;
 
-    // Write to file
-    write_to_csv(mass_grid_ngp_2d, "mass_grid_ngp_2d.csv");
-    write_to_csv(mass_grid_2nd_2d, "mass_grid_2nd_2d.csv");
-    write_to_csv(mass_grid_3rd_2d, "mass_grid_3rd_2d.csv");
-    write_to_csv(mass_grid_4th_2d, "mass_grid_4th_2d.csv");
+    // 2nd order if-else
+    start = chrono::high_resolution_clock::now();
+    mass_grid = assign_mass<2>(r, n_grid, &wrap_if_else); 
+    stop = chrono::high_resolution_clock::now();
+    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+    cout << "2nd order if-else: " << duration.count() << " miliseconds" << endl;
 
+    cout << endl;
+
+    // 3nd order modulo
+    start = chrono::high_resolution_clock::now();
+    mass_grid = assign_mass<3>(r, n_grid, &wrap_modulo); 
+    stop = chrono::high_resolution_clock::now();
+    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+    cout << "3nd order wrap_modulo: " << duration.count() << " miliseconds" << endl;
+
+    // 3nd order if-else
+    start = chrono::high_resolution_clock::now();
+    mass_grid = assign_mass<3>(r, n_grid, &wrap_if_else); 
+    stop = chrono::high_resolution_clock::now();
+    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+    cout << "3nd order if-else: " << duration.count() << " miliseconds" << endl;
+
+    cout << endl;
+
+    // 4nd order modulo
+    start = chrono::high_resolution_clock::now();
+    mass_grid = assign_mass<4>(r, n_grid, &wrap_modulo); 
+    stop = chrono::high_resolution_clock::now();
+    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+    cout << "4nd order wrap_modulo: " << duration.count() << " miliseconds" << endl;
+
+    // 4nd order if-else
+    start = chrono::high_resolution_clock::now();
+    mass_grid = assign_mass<4>(r, n_grid, &wrap_if_else); 
+    stop = chrono::high_resolution_clock::now();
+    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+    cout << "4nd order if-else: " << duration.count() << " miliseconds" << endl;
 
 }

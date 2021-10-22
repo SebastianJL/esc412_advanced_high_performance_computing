@@ -94,8 +94,6 @@ assign_mass(blitz::Array<float, 2> particles, int n_grid, int (*wrap) (int, int)
         p_grid = grid_coordinate(p, n_grid);
         AssignmentWeights<Order> wz(p_grid);
 
-        float mass = 1.;
-        
         for (auto i=0; i<Order; ++i) {
             for (auto j=0; j<Order; ++j) {
                 for (auto k=0; k<Order; ++k) {

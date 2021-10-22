@@ -1,7 +1,9 @@
 #include <cstdint> 
+#include <chrono>
+#include "blitz/array.h"
 #include "tipsy.h"
 #include "aweights.hpp"
-#include <chrono>
+
 
 /**
  * Return the nearest grid point for a single coordinate.

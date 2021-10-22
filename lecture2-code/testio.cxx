@@ -121,8 +121,8 @@ int main() {
     TipsyIO io;
 
     io.open("b0-final.std");
-    int N_grid = io.count();
-    std::cout << "N_grid = " << N_grid << endl << endl;
+    int n_particle = io.count();
+    std::cout << "n_particle = " << n_particle << endl << endl;
 
     if (io.fail()) {
         std::cerr << "Unable to open file" << std::endl;

@@ -125,15 +125,17 @@ assign_mass_with_margins(blitz::Array<float, 2> particles, int n_grid) {
     using blitz::Array;
     using blitz::Range;
     using blitz::firstDim;
+    
+    int margin = (Order - 1);
     Array<float, 3> res_with_margins(
-            Range(0, n_grid + 2*Order - 1),
-            Range(0, n_grid + 2*Order - 1),
-            Range(0, n_grid + 2*Order - 1)
+            Range(0, n_grid + 2 * margin - 1),
+            Range(0, n_grid + 2 * margin - 1),
+            Range(0, n_grid + 2 * margin - 1)
             );
     Array<float, 3> res = res_with_margins(
-            Range(Order, n_grid - 1),
-            Range(Order, n_grid - 1),
-            Range(Order, n_grid - 1)
+            Range(margin, n_grid + margin - 1),
+            Range(margin, n_grid + margin - 1),
+            Range(margin, n_grid + margin - 1)
             );
     res = 0;
     for (auto row=0; row<particles.extent(firstDim); ++row) {
@@ -160,17 +162,18 @@ assign_mass_with_margins(blitz::Array<float, 2> particles, int n_grid) {
             }
         }
 
-        // Copy margins
-        //// x-direction
-        //res(Range(0, Order), Range::all(), Range::all()) += res(Range(n_grid, n_grid + Order - 1), Range::all(),  Range::all());
-        //res(Range(n_grid - Order, n_grid - 1), Range::all(), Range::all()) += res(Range(-Order, - 1), Range::all(), Range::all());
-        //// y-direction
-        //res(Range::all(), Range(0, Order), Range::all()) += res(Range::all(), Range(n_grid, n_grid + Order - 1), Range::all());
-        //res(Range::all(), Range(n_grid - Order, n_grid - 1), Range::all()) += res(Range::all(), Range(-Order, - 1), Range::all());
-        //// z-direction
-        //res(Range::all(), Range::all(), Range(0, Order)) += res(Range::all(), Range::all(), Range(n_grid, n_grid + Order - 1));
-        //res(Range::all(), Range::all(), Range(n_grid - Order, n_grid - 1)) += res(Range::all(), Range::all(), Range(-Order, - 1));
     }
+    // Copy margins
+    // x-direction
+    Range all = Range::all();
+    res(Range(0, margin), all, all) += res(Range(n_grid, n_grid + margin - 1), all, all);
+    res(Range(n_grid - margin, n_grid - 1), all, all) += res(Range(-margin, - 1), all, all);
+    // y-direction
+    res(all, Range(0, margin), all) += res(all, Range(n_grid, n_grid + margin - 1), all);
+    res(all, Range(n_grid - margin, n_grid - 1), all) += res(all, Range(-margin, - 1), all);
+    // z-direction
+    res(all, all, Range(0, margin)) += res(all, all, Range(n_grid, n_grid + margin - 1));
+    res(all, all, Range(n_grid - margin, n_grid - 1)) += res(all, all, Range(-margin, - 1));
     return res;
 }
 
@@ -180,11 +183,14 @@ int write_to_csv(blitz::Array<float,2> array, const char* fname) {
     if (!out.is_open()) {
         return 1;
     }
-
-    for (auto i=0; i<array.extent(blitz::firstDim); ++i) {
-        for (auto j=0; j<array.extent(blitz::secondDim); ++j) {
+    
+    int i_max = array.extent(blitz::firstDim);
+    int j_max = array.extent(blitz::secondDim);
+    for (auto i=0; i<i_max; ++i) {
+        for (auto j=0; j<j_max - 1; ++j) {
             out << array(i, j) << ",";
         }
+        out << array(i, j_max -1);
         out << std::endl;
     }
     out.close();
@@ -248,6 +254,10 @@ int main() {
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "2nd order wrap_modulo: " << duration.count() << " miliseconds" << endl;
+    auto mass_grid_modulo_2d = project_3d_to_2d(mass_grid_modulo);
+
+    // Write to file
+    write_to_csv(mass_grid_modulo_2d, "mass_grid_modulo_2d.csv");
 
     // 2nd order if-else
     start = chrono::high_resolution_clock::now();
@@ -264,6 +274,10 @@ int main() {
     cout << "2nd order with margins: " << duration.count() << " miliseconds" << endl;
     cout << "modulo == if-else: " << all(mass_grid_modulo == mass_grid_if_else) << endl;
     cout << "modulo == margins: " << all(mass_grid_modulo == mass_grid_with_margins) << endl;
+    auto mass_grid_with_margins_2d = project_3d_to_2d(mass_grid_with_margins);
+
+    // Write to file
+    write_to_csv(mass_grid_with_margins_2d, "mass_grid_with_margins_2d.csv");
 
     cout << endl;
 

@@ -33,3 +33,7 @@
 
 # Swap files
 *.swp
+
+# Jupter notebook cache
+*.ipynb_checkpoints/
+

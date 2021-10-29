@@ -254,8 +254,6 @@ int main() {
     cout << "2nd order wrap_modulo: " << duration.count() << " miliseconds"
          << endl;
     auto mass_grid_modulo_2d = project_3d_to_2d(mass_grid_modulo);
-
-    // Write to file
     write_to_csv(mass_grid_modulo_2d, "mass_grid_modulo_2d.csv");
 
     // 2nd order if-else
@@ -264,6 +262,8 @@ int main() {
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "2nd order if-else: " << duration.count() << " miliseconds" << endl;
+    auto mass_grid_if_else_2d = project_3d_to_2d(mass_grid_if_else);
+    write_to_csv(mass_grid_if_else_2d, "mass_grid_if_else_2d.csv");
 
     // 2nd order with margins
     start = chrono::high_resolution_clock::now();
@@ -272,14 +272,14 @@ int main() {
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "2nd order with margins: " << duration.count() << " miliseconds"
          << endl;
+    auto mass_grid_with_margins_2d = project_3d_to_2d(mass_grid_with_margins);
+    write_to_csv(mass_grid_with_margins_2d, "mass_grid_with_margins_2d.csv");
+
+    // Compare 2nd order methods.
     cout << "modulo == if-else: " << all(mass_grid_modulo == mass_grid_if_else)
          << endl;
     cout << "modulo == margins: "
          << all(mass_grid_modulo == mass_grid_with_margins) << endl;
-    auto mass_grid_with_margins_2d = project_3d_to_2d(mass_grid_with_margins);
-
-    // Write to file
-    write_to_csv(mass_grid_with_margins_2d, "mass_grid_with_margins_2d.csv");
 
     cout << endl;
 

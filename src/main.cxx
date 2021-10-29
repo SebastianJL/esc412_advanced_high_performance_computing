@@ -5,7 +5,7 @@
 #include "blitz/array.h"
 #include "tipsy.h"
 
-using real_t = float;
+using real_t = double;
 
 /**
  * Return the nearest grid point for a single coordinate.
@@ -36,7 +36,7 @@ real_t grid_coordinate(real_t coord, int n_grid) {
  * @param n_grid Grid size in 3d.
  */
 blitz::Array<real_t, 3> assign_mass_ngp(blitz::Array<real_t, 2> particles,
-                                       int n_grid) {
+                                        int n_grid) {
     blitz::Array<real_t, 3> res(n_grid, n_grid, n_grid);
     for (auto i = 0; i < particles.extent(blitz::firstDim); ++i) {
         blitz::TinyVector<real_t, 3> grid_point;
@@ -78,8 +78,8 @@ int wrap_if_else(int i, int n_grid) {
  * @param order Order of the mass asignement weights.
  */
 template <int Order>
-blitz::Array<real_t, 3> assign_mass(blitz::Array<real_t, 2> particles, int n_grid,
-                                   int (*wrap)(int, int)) {
+blitz::Array<real_t, 3> assign_mass(blitz::Array<real_t, 2> particles,
+                                    int n_grid, int (*wrap)(int, int)) {
     blitz::Array<real_t, 3> res(n_grid, n_grid, n_grid);
     res = 0;
     for (auto row = 0; row < particles.extent(blitz::firstDim); ++row) {
@@ -99,8 +99,8 @@ blitz::Array<real_t, 3> assign_mass(blitz::Array<real_t, 2> particles, int n_gri
             for (auto j = 0; j < Order; ++j) {
                 for (auto k = 0; k < Order; ++k) {
                     int x = wrap(wx.i + i, n_grid);
-                    int y = wrap(wy.i + i, n_grid);
-                    int z = wrap(wz.i + i, n_grid);
+                    int y = wrap(wy.i + j, n_grid);
+                    int z = wrap(wz.i + k, n_grid);
                     res(x, y, z) += wx.H[i] * wy.H[j] * wz.H[k];
                 }
             }
@@ -126,14 +126,13 @@ blitz::Array<real_t, 3> assign_mass_with_margins(
     using blitz::Range;
 
     int margin = (Order - 1);
-    Array<real_t, 3> res_with_margins(Range(0, n_grid + 2 * margin - 1),
-                                     Range(0, n_grid + 2 * margin - 1),
-                                     Range(0, n_grid + 2 * margin - 1));
-    res_with_margins = 0;
-    Array<real_t, 3> res = res_with_margins(Range(margin, n_grid + margin - 1),
-                                           Range(margin, n_grid + margin - 1),
-                                           Range(margin, n_grid + margin - 1));
-    res = 0;
+    int n_grid_m = n_grid + 2 * margin;
+    Array<real_t, 3> res_m(n_grid_m, n_grid_m, n_grid_m);
+    res_m = 0;
+
+    Range inside(Range(margin, n_grid + margin - 1));
+    Array<real_t, 3> res = res_m(inside, inside, inside);
+
     for (auto row = 0; row < particles.extent(firstDim); ++row) {
         real_t p = particles(row, 0);
         real_t p_grid = grid_coordinate(p, n_grid);
@@ -150,31 +149,31 @@ blitz::Array<real_t, 3> assign_mass_with_margins(
         for (auto i = 0; i < Order; ++i) {
             for (auto j = 0; j < Order; ++j) {
                 for (auto k = 0; k < Order; ++k) {
-                    int x = wx.i + i;
-                    int y = wy.i + i;
-                    int z = wz.i + i;
-                    res(x, y, z) += wx.H[i] * wy.H[j] * wz.H[k];
+                    int x = wx.i + i + margin;
+                    int y = wy.i + j + margin;
+                    int z = wz.i + k + margin;
+                    res_m(x, y, z) += wx.H[i] * wy.H[j] * wz.H[k];
                 }
             }
         }
     }
+
     // Copy margins
-    // x-direction
     Range all = Range::all();
-    res(Range(0, margin), all, all) +=
-        res(Range(n_grid, n_grid + margin - 1), all, all);
-    res(Range(n_grid - margin, n_grid - 1), all, all) +=
-        res(Range(-margin, -1), all, all);
+    Range left = Range(margin, 2 * margin - 1);
+    Range left_margin = Range(0, margin - 1);
+    Range right = Range(n_grid, n_grid + margin - 1);
+    Range right_margin = Range(margin + n_grid, n_grid + 2*margin - 1);
+    // x-direction
+    res_m(left, all, all) += res_m(right_margin, all, all);
+    res_m(right, all, all) += res_m(left_margin, all, all);
     // y-direction
-    res(all, Range(0, margin), all) +=
-        res(all, Range(n_grid, n_grid + margin - 1), all);
-    res(all, Range(n_grid - margin, n_grid - 1), all) +=
-        res(all, Range(-margin, -1), all);
+    res_m(all, left, all) += res_m(all, right_margin, all);
+    res_m(all, right, all) += res_m(all, left_margin, all);
     // z-direction
-    res(all, all, Range(0, margin)) +=
-        res(all, all, Range(n_grid, n_grid + margin - 1));
-    res(all, all, Range(n_grid - margin, n_grid - 1)) +=
-        res(all, all, Range(-margin, -1));
+    res_m(all, all, left) += res_m(all, all, right_margin);
+    res_m(all, all, right) += res_m(all, all, left_margin);
+
     return res;
 }
 

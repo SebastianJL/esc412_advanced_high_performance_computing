@@ -5,13 +5,15 @@
 #include "blitz/array.h"
 #include "tipsy.h"
 
+using real_t = float;
+
 /**
  * Return the nearest grid point for a single coordinate.
  *
  * @param coord coordinate.
  * @param n_grid size of the grid.
  */
-float ngp(float coord, int n_grid) {
+real_t ngp(real_t coord, int n_grid) {
     return std::floor(n_grid * (coord + 0.5));
 }
 
@@ -21,7 +23,7 @@ float ngp(float coord, int n_grid) {
  * @param coord coordinate.
  * @param n_grid size of the grid.
  */
-float grid_coordinate(float coord, int n_grid) {
+real_t grid_coordinate(real_t coord, int n_grid) {
     return n_grid * (coord + 0.5);
 }
 
@@ -33,16 +35,16 @@ float grid_coordinate(float coord, int n_grid) {
  * @param particles Particles to distribute
  * @param n_grid Grid size in 3d.
  */
-blitz::Array<float, 3> assign_mass_ngp(blitz::Array<float, 2> particles,
+blitz::Array<real_t, 3> assign_mass_ngp(blitz::Array<real_t, 2> particles,
                                        int n_grid) {
-    blitz::Array<float, 3> res(n_grid, n_grid, n_grid);
+    blitz::Array<real_t, 3> res(n_grid, n_grid, n_grid);
     for (auto i = 0; i < particles.extent(blitz::firstDim); ++i) {
-        blitz::TinyVector<float, 3> grid_point;
+        blitz::TinyVector<real_t, 3> grid_point;
         for (auto j = 0; j < particles.extent(blitz::secondDim); ++j) {
-            float p = particles(i, j);
+            real_t p = particles(i, j);
             grid_point(j) = ngp(p, n_grid);
         }
-        float mass = 1.;
+        real_t mass = 1.;
         res(grid_point) += mass;
     }
     return res;
@@ -76,13 +78,13 @@ int wrap_if_else(int i, int n_grid) {
  * @param order Order of the mass asignement weights.
  */
 template <int Order>
-blitz::Array<float, 3> assign_mass(blitz::Array<float, 2> particles, int n_grid,
+blitz::Array<real_t, 3> assign_mass(blitz::Array<real_t, 2> particles, int n_grid,
                                    int (*wrap)(int, int)) {
-    blitz::Array<float, 3> res(n_grid, n_grid, n_grid);
+    blitz::Array<real_t, 3> res(n_grid, n_grid, n_grid);
     res = 0;
     for (auto row = 0; row < particles.extent(blitz::firstDim); ++row) {
-        float p = particles(row, 0);
-        float p_grid = grid_coordinate(p, n_grid);
+        real_t p = particles(row, 0);
+        real_t p_grid = grid_coordinate(p, n_grid);
         AssignmentWeights<Order> wx(p_grid);
 
         p = particles(row, 1);
@@ -117,24 +119,24 @@ blitz::Array<float, 3> assign_mass(blitz::Array<float, 2> particles, int n_grid,
  * @param order Order of the mass asignement weights.
  */
 template <int Order>
-blitz::Array<float, 3> assign_mass_with_margins(
-    blitz::Array<float, 2> particles, int n_grid) {
+blitz::Array<real_t, 3> assign_mass_with_margins(
+    blitz::Array<real_t, 2> particles, int n_grid) {
     using blitz::Array;
     using blitz::firstDim;
     using blitz::Range;
 
     int margin = (Order - 1);
-    Array<float, 3> res_with_margins(Range(0, n_grid + 2 * margin - 1),
+    Array<real_t, 3> res_with_margins(Range(0, n_grid + 2 * margin - 1),
                                      Range(0, n_grid + 2 * margin - 1),
                                      Range(0, n_grid + 2 * margin - 1));
     res_with_margins = 0;
-    Array<float, 3> res = res_with_margins(Range(margin, n_grid + margin - 1),
+    Array<real_t, 3> res = res_with_margins(Range(margin, n_grid + margin - 1),
                                            Range(margin, n_grid + margin - 1),
                                            Range(margin, n_grid + margin - 1));
     res = 0;
     for (auto row = 0; row < particles.extent(firstDim); ++row) {
-        float p = particles(row, 0);
-        float p_grid = grid_coordinate(p, n_grid);
+        real_t p = particles(row, 0);
+        real_t p_grid = grid_coordinate(p, n_grid);
         AssignmentWeights<Order> wx(p_grid);
 
         p = particles(row, 1);
@@ -176,7 +178,7 @@ blitz::Array<float, 3> assign_mass_with_margins(
     return res;
 }
 
-int write_to_csv(blitz::Array<float, 2> array, const char* fname) {
+int write_to_csv(blitz::Array<real_t, 2> array, const char* fname) {
     std::ofstream out;
     out.open(fname);
     if (!out.is_open()) {
@@ -196,10 +198,10 @@ int write_to_csv(blitz::Array<float, 2> array, const char* fname) {
     return 0;
 }
 
-blitz::Array<float, 2> project_3d_to_2d(blitz::Array<float, 3> grid_3d) {
+blitz::Array<real_t, 2> project_3d_to_2d(blitz::Array<real_t, 3> grid_3d) {
     int n_grid = grid_3d.extent(blitz::firstDim);
     blitz::thirdIndex k;
-    blitz::Array<float, 2> grid_2d(n_grid, n_grid);
+    blitz::Array<real_t, 2> grid_2d(n_grid, n_grid);
 
     grid_2d = max(grid_3d, k);
     return grid_2d;
@@ -222,14 +224,14 @@ int main() {
         abort();
     }
 
-    Array<float, 2> r(io.count(), 3);
+    Array<real_t, 2> r(io.count(), 3);
     io.load(r);
 
     // Print some data.
     firstIndex i;
     secondIndex j;
     thirdIndex k;
-    Array<float, 1> max_r(3);
+    Array<real_t, 1> max_r(3);
     cout << "max_x = " << max(r(Range::all(), 0)) << endl;
     cout << "max_y = " << max(r(Range::all(), 1)) << endl;
     cout << "max_z = " << max(r(Range::all(), 2)) << endl;

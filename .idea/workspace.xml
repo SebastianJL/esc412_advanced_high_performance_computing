@@ -11,9 +11,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3">
-      <change afterPath="$PROJECT_DIR$/.clang-format" afterDir="false" />
+    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Added .clang-format options.">
+      <change afterPath="$PROJECT_DIR$/src/my_io.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/my_io.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cxx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cxx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +23,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -68,7 +71,7 @@
       <recent name="$PROJECT_DIR$/input/" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.density_map">
+  <component name="RunManager" selected="CMake Application.project">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
@@ -128,7 +131,7 @@
       <workItem from="1636054035519" duration="202000" />
       <workItem from="1636054257247" duration="169000" />
       <workItem from="1636054446000" duration="324000" />
-      <workItem from="1636054967760" duration="5704000" />
+      <workItem from="1636054967760" duration="10328000" />
     </task>
     <task id="LOCAL-00001" summary="Removed binaries from src folder and added idea project metadata.">
       <created>1636055251662</created>
@@ -165,7 +168,21 @@
       <option name="project" value="LOCAL" />
       <updated>1636059876490</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added .clang-format options.">
+      <created>1636060880024</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1636060880024</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added .clang-format options.">
+      <created>1636060890020</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1636060890020</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,7 +206,8 @@
     <MESSAGE value="Git ignore cmake-build-debug folder." />
     <MESSAGE value="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3&#10;-j is an argument passed to make. It's the number of jobs running parallel." />
     <MESSAGE value="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3" />
+    <MESSAGE value="Added .clang-format options." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added .clang-format options." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

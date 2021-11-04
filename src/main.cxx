@@ -2,6 +2,7 @@
 
 #include "aweights.hpp"
 #include "blitz/array.h"
+#include "my_io.h"
 #include "tipsy.h"
 
 using real_t = double;
@@ -176,26 +177,6 @@ assign_mass_with_margins(blitz::Array<real_t, 2> particles, int n_grid) {
     res_m(all, all, right) += res_m(all, all, left_margin);
 
     return res;
-}
-
-int write_to_csv(blitz::Array<real_t, 2> array, const char *filename) {
-    std::ofstream out;
-    out.open(filename);
-    if (!out.is_open()) {
-        return 1;
-    }
-
-    int i_max = array.extent(blitz::firstDim);
-    int j_max = array.extent(blitz::secondDim);
-    for (auto i = 0; i < i_max; ++i) {
-        for (auto j = 0; j < j_max - 1; ++j) {
-            out << array(i, j) << ",";
-        }
-        out << array(i, j_max - 1);
-        out << std::endl;
-    }
-    out.close();
-    return 0;
 }
 
 blitz::Array<real_t, 2>

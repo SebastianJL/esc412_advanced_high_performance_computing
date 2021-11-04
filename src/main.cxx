@@ -206,21 +206,22 @@ blitz::Array<real_t, 2> project_3d_to_2d(const blitz::Array<real_t, 3>& grid_3d)
 }
 
 int main() {
-    using std::cout, std::endl;
+    using std::cout, std::endl, std::cerr;
     using namespace blitz;
     using namespace std::chrono;
 
     // Load data.
     TipsyIO io;
 
-    io.open("b0-final.std");
-    uint64_t n_particle = io.count();
-    std::cout << "n_particle = " << n_particle << endl << endl;
-
+    auto filename = "input/b0-final.std";
+    io.open(filename);
     if (io.fail()) {
-        std::cerr << "Unable to open file" << std::endl;
+        cerr << "Unable to open file '" << filename << "'" << endl;
         abort();
     }
+
+    uint64_t n_particle = io.count();
+    cout << "n_particle = " << n_particle << endl;
 
     Array<real_t, 2> r(io.count(), 3);
     io.load(r);
@@ -254,7 +255,7 @@ int main() {
     cout << "2nd order wrap_modulo: " << duration.count() << " milliseconds"
          << endl;
     auto mass_grid_modulo_2d = project_3d_to_2d(mass_grid_modulo);
-    write_to_csv(mass_grid_modulo_2d, "mass_grid_modulo_2d.csv");
+    write_to_csv(mass_grid_modulo_2d, "output/mass_grid_modulo_2d.csv");
 
     // 2nd order if-else
     start = chrono::high_resolution_clock::now();
@@ -263,7 +264,7 @@ int main() {
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "2nd order if-else: " << duration.count() << " milliseconds" << endl;
     auto mass_grid_if_else_2d = project_3d_to_2d(mass_grid_if_else);
-    write_to_csv(mass_grid_if_else_2d, "mass_grid_if_else_2d.csv");
+    write_to_csv(mass_grid_if_else_2d, "output/mass_grid_if_else_2d.csv");
 
     // 2nd order with margins
     start = chrono::high_resolution_clock::now();
@@ -273,7 +274,7 @@ int main() {
     cout << "2nd order with margins: " << duration.count() << " milliseconds"
          << endl;
     auto mass_grid_with_margins_2d = project_3d_to_2d(mass_grid_with_margins);
-    write_to_csv(mass_grid_with_margins_2d, "mass_grid_with_margins_2d.csv");
+    write_to_csv(mass_grid_with_margins_2d, "output/mass_grid_with_margins_2d.csv");
 
     // Compare 2nd order methods.
     cout << "modulo == if-else: " << all(mass_grid_modulo == mass_grid_if_else)

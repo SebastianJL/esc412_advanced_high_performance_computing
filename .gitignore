@@ -37,3 +37,5 @@
 # Jupter notebook cache
 *.ipynb_checkpoints/
 
+# outputs
+output/

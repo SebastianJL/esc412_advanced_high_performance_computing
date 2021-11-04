@@ -11,7 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Git ignore cmake-build-debug folder.">
+    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3">
       <change afterPath="$PROJECT_DIR$/.clang-format" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cxx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cxx" afterDir="false" />
@@ -21,7 +21,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -129,7 +128,7 @@
       <workItem from="1636054035519" duration="202000" />
       <workItem from="1636054257247" duration="169000" />
       <workItem from="1636054446000" duration="324000" />
-      <workItem from="1636054967760" duration="4428000" />
+      <workItem from="1636054967760" duration="5704000" />
     </task>
     <task id="LOCAL-00001" summary="Removed binaries from src folder and added idea project metadata.">
       <created>1636055251662</created>
@@ -152,7 +151,21 @@
       <option name="project" value="LOCAL" />
       <updated>1636057796419</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3">
+      <created>1636059780060</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1636059780060</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3">
+      <created>1636059876490</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1636059876490</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,7 +187,9 @@
     <MESSAGE value="Removed binaries from src folder and added idea project metadata." />
     <MESSAGE value="Fix warnings in main.cxx." />
     <MESSAGE value="Git ignore cmake-build-debug folder." />
-    <option name="LAST_COMMIT_MESSAGE" value="Git ignore cmake-build-debug folder." />
+    <MESSAGE value="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3&#10;-j is an argument passed to make. It's the number of jobs running parallel." />
+    <MESSAGE value="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -64,8 +64,10 @@ int wrap_modulo(int i, int n_grid) { return (i + n_grid) % n_grid; }
  * @param n_grid Wrap modulo n_grid.
  */
 int wrap_if_else(int i, int n_grid) {
-    if (i >= n_grid) return i - n_grid;
-    if (i < 0) return i + n_grid;
+    if (i >= n_grid)
+        return i - n_grid;
+    if (i < 0)
+        return i + n_grid;
     return i;
 }
 
@@ -118,8 +120,8 @@ blitz::Array<real_t, 3> assign_mass(blitz::Array<real_t, 2> particles,
  * @param order Order of the mass assignment weights.
  */
 template <int Order>
-blitz::Array<real_t, 3> assign_mass_with_margins(
-    blitz::Array<real_t, 2> particles, int n_grid) {
+blitz::Array<real_t, 3>
+assign_mass_with_margins(blitz::Array<real_t, 2> particles, int n_grid) {
     using blitz::Array;
     using blitz::firstDim;
     using blitz::Range;
@@ -162,7 +164,7 @@ blitz::Array<real_t, 3> assign_mass_with_margins(
     Range left = Range(margin, 2 * margin - 1);
     Range left_margin = Range(0, margin - 1);
     Range right = Range(n_grid, n_grid + margin - 1);
-    Range right_margin = Range(margin + n_grid, n_grid + 2*margin - 1);
+    Range right_margin = Range(margin + n_grid, n_grid + 2 * margin - 1);
     // x-direction
     res_m(left, all, all) += res_m(right_margin, all, all);
     res_m(right, all, all) += res_m(left_margin, all, all);
@@ -176,9 +178,9 @@ blitz::Array<real_t, 3> assign_mass_with_margins(
     return res;
 }
 
-int write_to_csv(blitz::Array<real_t, 2> array, const char* fname) {
+int write_to_csv(blitz::Array<real_t, 2> array, const char *filename) {
     std::ofstream out;
-    out.open(fname);
+    out.open(filename);
     if (!out.is_open()) {
         return 1;
     }
@@ -196,7 +198,8 @@ int write_to_csv(blitz::Array<real_t, 2> array, const char* fname) {
     return 0;
 }
 
-blitz::Array<real_t, 2> project_3d_to_2d(const blitz::Array<real_t, 3>& grid_3d) {
+blitz::Array<real_t, 2>
+project_3d_to_2d(const blitz::Array<real_t, 3> &grid_3d) {
     int n_grid = grid_3d.extent(blitz::firstDim);
     blitz::thirdIndex k;
     blitz::Array<real_t, 2> grid_2d(n_grid, n_grid);
@@ -245,7 +248,7 @@ int main() {
     cout << endl;
 
     // Time different wrapping functions
-    auto n_grid = 64;  // Number of grid cells per dimension.
+    auto n_grid = 64; // Number of grid cells per dimension.
 
     // 2nd order modulo
     auto start = chrono::high_resolution_clock::now();
@@ -262,7 +265,8 @@ int main() {
     auto mass_grid_if_else = assign_mass<2>(r, n_grid, &wrap_if_else);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    cout << "2nd order if-else: " << duration.count() << " milliseconds" << endl;
+    cout << "2nd order if-else: " << duration.count() << " milliseconds"
+         << endl;
     auto mass_grid_if_else_2d = project_3d_to_2d(mass_grid_if_else);
     write_to_csv(mass_grid_if_else_2d, "output/mass_grid_if_else_2d.csv");
 
@@ -274,7 +278,8 @@ int main() {
     cout << "2nd order with margins: " << duration.count() << " milliseconds"
          << endl;
     auto mass_grid_with_margins_2d = project_3d_to_2d(mass_grid_with_margins);
-    write_to_csv(mass_grid_with_margins_2d, "output/mass_grid_with_margins_2d.csv");
+    write_to_csv(mass_grid_with_margins_2d,
+                 "output/mass_grid_with_margins_2d.csv");
 
     // Compare 2nd order methods.
     cout << "modulo == if-else: " << all(mass_grid_modulo == mass_grid_if_else)
@@ -297,7 +302,8 @@ int main() {
     mass_grid_if_else = assign_mass<3>(r, n_grid, &wrap_if_else);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    cout << "3nd order if-else: " << duration.count() << " milliseconds" << endl;
+    cout << "3nd order if-else: " << duration.count() << " milliseconds"
+         << endl;
 
     // 3rd order with margins
     start = chrono::high_resolution_clock::now();
@@ -326,7 +332,8 @@ int main() {
     mass_grid_if_else = assign_mass<4>(r, n_grid, &wrap_if_else);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    cout << "4nd order if-else: " << duration.count() << " milliseconds" << endl;
+    cout << "4nd order if-else: " << duration.count() << " milliseconds"
+         << endl;
 
     // 4th order with margins
     start = chrono::high_resolution_clock::now();

@@ -39,3 +39,6 @@
 
 # outputs
 output/
+
+# cmake-build-debug
+cmake-build-debug/

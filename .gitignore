@@ -37,13 +37,12 @@
 # Jupter notebook cache
 *.ipynb_checkpoints/
 
-# outputs
-output/
-
 # cmake-build-debug
 cmake-build-debug/
 
-# ignore executables
+# ignore input, output and executables
+input/
+output/
 run/
 
 # ignore blitz build

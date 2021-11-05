@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/genpromote.dir/genpromote.cpp.o"
+  "CMakeFiles/genpromote.dir/genpromote.cpp.o.d"
   "genpromote"
   "genpromote.pdb"
 )

@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/genmatuops.dir/genmatuops.cpp.o"
+  "CMakeFiles/genmatuops.dir/genmatuops.cpp.o.d"
   "genmatuops"
   "genmatuops.pdb"
 )

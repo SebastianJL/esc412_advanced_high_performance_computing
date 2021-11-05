@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/genmathfunc.dir/genmathfunc.cpp.o"
+  "CMakeFiles/genmathfunc.dir/genmathfunc.cpp.o.d"
   "genmathfunc"
   "genmathfunc.pdb"
 )

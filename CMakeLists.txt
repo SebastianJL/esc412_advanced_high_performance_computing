@@ -8,6 +8,7 @@ include_directories(include/blitz)
 include_directories(include/blitz/array)
 include_directories(include/blitz/meta)
 include_directories(include/random)
+include_directories(src)
 
 add_executable(project
         src/main.cpp

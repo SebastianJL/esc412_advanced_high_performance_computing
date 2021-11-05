@@ -1,4 +1,4 @@
-// Generated: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genmathfunc.cpp $Revision$ Oct  9 2021 17:42:51
+// Generated: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genmathfunc.cpp $Revision$ Nov  5 2021 19:36:53
 
 #ifndef BZ_MATHFUNC_H
 #define BZ_MATHFUNC_H

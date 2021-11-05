@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/genvecwhere.dir/genvecwhere.cpp.o"
+  "CMakeFiles/genvecwhere.dir/genvecwhere.cpp.o.d"
   "genvecwhere"
   "genvecwhere.pdb"
 )

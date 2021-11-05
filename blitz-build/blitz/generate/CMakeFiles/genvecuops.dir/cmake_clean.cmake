@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/genvecuops.dir/genvecuops.cpp.o"
+  "CMakeFiles/genvecuops.dir/genvecuops.cpp.o.d"
   "genvecuops"
   "genvecuops.pdb"
 )

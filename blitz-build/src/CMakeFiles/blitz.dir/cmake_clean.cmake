@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/blitz.dir/globals.cpp.o"
+  "CMakeFiles/blitz.dir/globals.cpp.o.d"
   "libblitz.pdb"
   "libblitz.so"
   "libblitz.so.0"

@@ -3,6 +3,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
+foreach(lang )
   include(CMakeFiles/stencil-classes.cc.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

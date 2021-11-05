@@ -22,7 +22,7 @@
  */ 
 
 // Generated source file.  Do not edit. 
-// /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genvecbfn.cpp $Revision$ Oct  9 2021 17:42:50
+// /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/blitz/generate/genvecbfn.cpp $Revision$ Nov  5 2021 19:36:51
 
 #ifndef BZ_VECBFN_CC
 #define BZ_VECBFN_CC

@@ -42,3 +42,6 @@ output/
 
 # cmake-build-debug
 cmake-build-debug/
+
+# ignore executables
+run

@@ -12,7 +12,18 @@ make -C ./blitz-build
 make -C ./blitz-build install
 ```
 
-Then build the project itself.
+Create the necessary folder
 ```bash
-
+mkdir input
+mkdir output
+mkdir run
 ```
+Put the particle file in input.
+
+Then either run the project with clion and the provide CMakeLists.txt in the root folder or
+compile and run from the root folder in the command line with `g++` or other c++ compiler. 
+```bash
+ g++ -Wall -O2 -I include -std=c++17 -o run/main src/main.cpp src/tipsy.cpp src/my_io.cpp && ./run/main 
+```
+
+You might have to adjust the src files.

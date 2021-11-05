@@ -11,12 +11,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Added .clang-format options.">
-      <change afterPath="$PROJECT_DIR$/src/my_io.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/my_io.h" afterDir="false" />
+    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Split array_to_csv() into own file.&#10;&#10;Also move header files into include folder.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cxx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cxx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,15 +64,13 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/include" />
+      <recent name="$PROJECT_DIR$/include/random" />
       <recent name="$PROJECT_DIR$/input/" />
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.project">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -85,6 +79,11 @@
     <configuration name="project" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="project" TARGET_NAME="project" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="project" RUN_TARGET_NAME="project">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="density_map" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -131,7 +130,7 @@
       <workItem from="1636054035519" duration="202000" />
       <workItem from="1636054257247" duration="169000" />
       <workItem from="1636054446000" duration="324000" />
-      <workItem from="1636054967760" duration="10328000" />
+      <workItem from="1636054967760" duration="10858000" />
     </task>
     <task id="LOCAL-00001" summary="Removed binaries from src folder and added idea project metadata.">
       <created>1636055251662</created>
@@ -182,7 +181,21 @@
       <option name="project" value="LOCAL" />
       <updated>1636060890020</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Split array_to_csv() into own file.&#10;&#10;Also move header files into include folder.">
+      <created>1636067199114</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1636067199114</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Split array_to_csv() into own file.&#10;&#10;Also move header files into include folder.">
+      <created>1636067215198</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1636067215198</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +220,8 @@
     <MESSAGE value="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3&#10;-j is an argument passed to make. It's the number of jobs running parallel." />
     <MESSAGE value="Set up Clion-project with cmake.&#10;&#10;Build project with&#10;cmake --build cmake-build-debug --target project -- -j 3" />
     <MESSAGE value="Added .clang-format options." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added .clang-format options." />
+    <MESSAGE value="Split array_to_csv() into own file.&#10;&#10;Also move header files into include folder." />
+    <option name="LAST_COMMIT_MESSAGE" value="Split array_to_csv() into own file.&#10;&#10;Also move header files into include folder." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

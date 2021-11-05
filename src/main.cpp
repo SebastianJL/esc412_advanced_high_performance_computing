@@ -1,6 +1,6 @@
 #include <chrono>
 
-#include "aweights.hpp"
+#include "aweights.h"
 #include "blitz/array.h"
 #include "my_io.h"
 #include "tipsy.h"

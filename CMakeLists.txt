@@ -10,6 +10,6 @@ include_directories(include/blitz/meta)
 include_directories(include/random)
 
 add_executable(project
-        src/main.cxx
-        src/tipsy.cxx
+        src/main.cpp
+        src/tipsy.cpp
         src/my_io.cpp)

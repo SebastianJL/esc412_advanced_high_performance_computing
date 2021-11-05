@@ -1,0 +1,1088 @@
+The system is: Linux - 5.14.0-2-amd64 - x86_64
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/c++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/3.21.4/CompilerIdCXX/a.out"
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_7128e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7128e.dir/build.make CMakeFiles/cmTC_7128e.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++   -v -o CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Debian 11.2.0-10' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-9Chg0b/gcc-11-11.2.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-9Chg0b/gcc-11-11.2.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+Thread model: posix
+Supported LTO compression algorithms: zlib zstd
+gcc version 11.2.0 (Debian 11.2.0-10) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_7128e.dir/'
+ /usr/lib/gcc/x86_64-linux-gnu/11/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_7128e.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -o /tmp/ccLuXIK1.s
+GNU C++17 (Debian 11.2.0-10) version 11.2.0 (x86_64-linux-gnu)
+	compiled by GNU C version 11.2.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/11"
+ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/include/c++/11
+ /usr/include/x86_64-linux-gnu/c++/11
+ /usr/include/c++/11/backward
+ /usr/lib/gcc/x86_64-linux-gnu/11/include
+ /usr/local/include
+ /usr/include/x86_64-linux-gnu
+ /usr/include
+End of search list.
+GNU C++17 (Debian 11.2.0-10) version 11.2.0 (x86_64-linux-gnu)
+	compiled by GNU C version 11.2.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 55aa48915dd03ad9a944e6b7b5370f83
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_7128e.dir/'
+ as -v --64 -o CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccLuXIK1.s
+GNU assembler version 2.37 (x86_64-linux-gnu) using BFD version (GNU Binutils for Debian) 2.37
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.'
+Linking CXX executable cmTC_7128e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7128e.dir/link.txt --verbose=1
+/usr/bin/c++  -v -rdynamic CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_7128e 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Debian 11.2.0-10' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-9Chg0b/gcc-11-11.2.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-9Chg0b/gcc-11-11.2.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+Thread model: posix
+Supported LTO compression algorithms: zlib zstd
+gcc version 11.2.0 (Debian 11.2.0-10) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_7128e' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_7128e.'
+ /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccUFkhMr.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_7128e /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_7128e' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_7128e.'
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/include/c++/11]
+    add: [/usr/include/x86_64-linux-gnu/c++/11]
+    add: [/usr/include/c++/11/backward]
+    add: [/usr/lib/gcc/x86_64-linux-gnu/11/include]
+    add: [/usr/local/include]
+    add: [/usr/include/x86_64-linux-gnu]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/include/c++/11] ==> [/usr/include/c++/11]
+  collapse include dir [/usr/include/x86_64-linux-gnu/c++/11] ==> [/usr/include/x86_64-linux-gnu/c++/11]
+  collapse include dir [/usr/include/c++/11/backward] ==> [/usr/include/c++/11/backward]
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/11/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/11/include]
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/include/c++/11;/usr/include/x86_64-linux-gnu/c++/11;/usr/include/c++/11/backward;/usr/lib/gcc/x86_64-linux-gnu/11/include;/usr/local/include;/usr/include/x86_64-linux-gnu;/usr/include]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_7128e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7128e.dir/build.make CMakeFiles/cmTC_7128e.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++   -v -o CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Debian 11.2.0-10' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-9Chg0b/gcc-11-11.2.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-9Chg0b/gcc-11-11.2.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib zstd]
+  ignore line: [gcc version 11.2.0 (Debian 11.2.0-10) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_7128e.dir/']
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_7128e.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -o /tmp/ccLuXIK1.s]
+  ignore line: [GNU C++17 (Debian 11.2.0-10) version 11.2.0 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 11.2.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/11"]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/include/c++/11]
+  ignore line: [ /usr/include/x86_64-linux-gnu/c++/11]
+  ignore line: [ /usr/include/c++/11/backward]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/include]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /usr/include/x86_64-linux-gnu]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C++17 (Debian 11.2.0-10) version 11.2.0 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 11.2.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: 55aa48915dd03ad9a944e6b7b5370f83]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_7128e.dir/']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccLuXIK1.s]
+  ignore line: [GNU assembler version 2.37 (x86_64-linux-gnu) using BFD version (GNU Binutils for Debian) 2.37]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.']
+  ignore line: [Linking CXX executable cmTC_7128e]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7128e.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++  -v -rdynamic CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_7128e ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Debian 11.2.0-10' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-9Chg0b/gcc-11-11.2.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-9Chg0b/gcc-11-11.2.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib zstd]
+  ignore line: [gcc version 11.2.0 (Debian 11.2.0-10) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_7128e' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_7128e.']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccUFkhMr.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_7128e /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/11/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccUFkhMr.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_7128e] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/11] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib]
+    arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..]
+    arg [CMakeFiles/cmTC_7128e.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+  collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o] ==> [/usr/lib/x86_64-linux-gnu/Scrt1.o]
+  collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+  collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11] ==> [/usr/lib/gcc/x86_64-linux-gnu/11]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> [/usr/lib]
+  collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+  collapse library dir [/lib/../lib] ==> [/lib]
+  collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> [/usr/lib]
+  implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+  implicit objs: [/usr/lib/x86_64-linux-gnu/Scrt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o;/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/11;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+  implicit fwks: []
+
+
+Determining if the CXX compiler supports exceptions passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_427db/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_427db.dir/build.make CMakeFiles/cmTC_427db.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_427db.dir/exceptions.cpp.o
+/usr/bin/c++    -o CMakeFiles/cmTC_427db.dir/exceptions.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/exceptions.cpp
+Linking CXX executable cmTC_427db
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_427db.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_427db.dir/exceptions.cpp.o -o cmTC_427db 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports Run-Time Type Identification passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ed651/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ed651.dir/build.make CMakeFiles/cmTC_ed651.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ed651.dir/rtti.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -o CMakeFiles/cmTC_ed651.dir/rtti.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/rtti.cpp
+Linking CXX executable cmTC_ed651
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ed651.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_ed651.dir/rtti.cpp.o -o cmTC_ed651 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports member constants passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_efce5/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_efce5.dir/build.make CMakeFiles/cmTC_efce5.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_efce5.dir/member_constants.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -o CMakeFiles/cmTC_efce5.dir/member_constants.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/member_constants.cpp
+Linking CXX executable cmTC_efce5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_efce5.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_efce5.dir/member_constants.cpp.o -o cmTC_efce5 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler accepts the old for scoping rules failed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_23e34/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_23e34.dir/build.make CMakeFiles/cmTC_23e34.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_23e34.dir/old_for_scoping.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -o CMakeFiles/cmTC_23e34.dir/old_for_scoping.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/old_for_scoping.cpp
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/old_for_scoping.cpp: In function ‘int main()’:
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/old_for_scoping.cpp:23:7: error: ‘i’ was not declared in this scope
+   23 |     z=i;
+      |       ^
+gmake[1]: *** [CMakeFiles/cmTC_23e34.dir/build.make:78: CMakeFiles/cmTC_23e34.dir/old_for_scoping.cpp.o] Error 1
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_23e34/fast] Error 2
+
+
+
+Determining if the CXX compiler supports the explicit keyword passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3b8ab/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3b8ab.dir/build.make CMakeFiles/cmTC_3b8ab.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_3b8ab.dir/explicit.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -o CMakeFiles/cmTC_3b8ab.dir/explicit.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/explicit.cpp
+Linking CXX executable cmTC_3b8ab
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3b8ab.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_3b8ab.dir/explicit.cpp.o -o cmTC_3b8ab 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports the mutable keyword passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_1f3d2/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_1f3d2.dir/build.make CMakeFiles/cmTC_1f3d2.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_1f3d2.dir/mutable.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -o CMakeFiles/cmTC_1f3d2.dir/mutable.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/mutable.cpp
+Linking CXX executable cmTC_1f3d2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1f3d2.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_1f3d2.dir/mutable.cpp.o -o cmTC_1f3d2 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler recognizes typename passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2670b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2670b.dir/build.make CMakeFiles/cmTC_2670b.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_2670b.dir/typename.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -o CMakeFiles/cmTC_2670b.dir/typename.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/typename.cpp
+Linking CXX executable cmTC_2670b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2670b.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_2670b.dir/typename.cpp.o -o cmTC_2670b 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports the Numerical C Extensions Group restrict keyword failed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f1fb4/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f1fb4.dir/build.make CMakeFiles/cmTC_f1fb4.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f1fb4.dir/nceg_restrict.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -o CMakeFiles/cmTC_f1fb4.dir/nceg_restrict.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/nceg_restrict.cpp
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/nceg_restrict.cpp:19:38: error: expected ‘,’ or ‘...’ before ‘a’
+   19 | void add(int length,double* restrict a,const double* restrict b,const double* restrict c) {
+      |                                      ^
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/nceg_restrict.cpp: In function ‘void add(int, double*)’:
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/nceg_restrict.cpp:21:9: error: ‘a’ was not declared in this scope
+   21 |         a[i] = b[i]+c[i];
+      |         ^
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/nceg_restrict.cpp:21:16: error: ‘b’ was not declared in this scope
+   21 |         a[i] = b[i]+c[i];
+      |                ^
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/nceg_restrict.cpp:21:21: error: ‘c’ was not declared in this scope
+   21 |         a[i] = b[i]+c[i];
+      |                     ^
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/nceg_restrict.cpp: In function ‘int main()’:
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/nceg_restrict.cpp:31:8: error: too many arguments to function ‘void add(int, double*)’
+   31 |     add(10,a,b,c);
+      |     ~~~^~~~~~~~~~
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/nceg_restrict.cpp:19:6: note: declared here
+   19 | void add(int length,double* restrict a,const double* restrict b,const double* restrict c) {
+      |      ^~~
+gmake[1]: *** [CMakeFiles/cmTC_f1fb4.dir/build.make:78: CMakeFiles/cmTC_f1fb4.dir/nceg_restrict.cpp.o] Error 1
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_f1fb4/fast] Error 2
+
+
+
+Determining if the CXX compiler recognizes the '__restrict__' keyword passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3e8cd/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3e8cd.dir/build.make CMakeFiles/cmTC_3e8cd.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_3e8cd.dir/restrict_egcs.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -o CMakeFiles/cmTC_3e8cd.dir/restrict_egcs.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/restrict_egcs.cpp
+Linking CXX executable cmTC_3e8cd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3e8cd.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_3e8cd.dir/restrict_egcs.cpp.o -o cmTC_3e8cd 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler recognizes bool as a built-in type passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_62d2b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_62d2b.dir/build.make CMakeFiles/cmTC_62d2b.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_62d2b.dir/bool.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -o CMakeFiles/cmTC_62d2b.dir/bool.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/bool.cpp
+Linking CXX executable cmTC_62d2b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_62d2b.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_62d2b.dir/bool.cpp.o -o cmTC_62d2b 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports const_cast<> passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f485a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f485a.dir/build.make CMakeFiles/cmTC_f485a.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f485a.dir/const_cast.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -o CMakeFiles/cmTC_f485a.dir/const_cast.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/const_cast.cpp
+Linking CXX executable cmTC_f485a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f485a.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_f485a.dir/const_cast.cpp.o -o cmTC_f485a 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports static_cast<> passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_b53d3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b53d3.dir/build.make CMakeFiles/cmTC_b53d3.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b53d3.dir/static_cast.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -o CMakeFiles/cmTC_b53d3.dir/static_cast.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/static_cast.cpp
+Linking CXX executable cmTC_b53d3
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b53d3.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_b53d3.dir/static_cast.cpp.o -o cmTC_b53d3 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports reinterpret_cast<> passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9c664/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9c664.dir/build.make CMakeFiles/cmTC_9c664.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_9c664.dir/reinterpret_cast.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -o CMakeFiles/cmTC_9c664.dir/reinterpret_cast.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/reinterpret_cast.cpp
+Linking CXX executable cmTC_9c664
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9c664.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_9c664.dir/reinterpret_cast.cpp.o -o cmTC_9c664 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports dynamic_cast<> passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_bdaef/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bdaef.dir/build.make CMakeFiles/cmTC_bdaef.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_bdaef.dir/dynamic_cast.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -o CMakeFiles/cmTC_bdaef.dir/dynamic_cast.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/dynamic_cast.cpp
+Linking CXX executable cmTC_bdaef
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bdaef.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_bdaef.dir/dynamic_cast.cpp.o -o cmTC_bdaef 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports basic templates passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_7d1b6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7d1b6.dir/build.make CMakeFiles/cmTC_7d1b6.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_7d1b6.dir/templates.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -o CMakeFiles/cmTC_7d1b6.dir/templates.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/templates.cpp
+Linking CXX executable cmTC_7d1b6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7d1b6.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_7d1b6.dir/templates.cpp.o -o cmTC_7d1b6 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports partial specialization passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3c55c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3c55c.dir/build.make CMakeFiles/cmTC_3c55c.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_3c55c.dir/partial_specialization.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -o CMakeFiles/cmTC_3c55c.dir/partial_specialization.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/partial_specialization.cpp
+Linking CXX executable cmTC_3c55c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3c55c.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_3c55c.dir/partial_specialization.cpp.o -o cmTC_3c55c 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports partial ordering passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_1d1af/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_1d1af.dir/build.make CMakeFiles/cmTC_1d1af.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_1d1af.dir/partial_ordering.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -o CMakeFiles/cmTC_1d1af.dir/partial_ordering.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/partial_ordering.cpp
+Linking CXX executable cmTC_1d1af
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1d1af.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_1d1af.dir/partial_ordering.cpp.o -o cmTC_1d1af 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports default template parameters passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_05394/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_05394.dir/build.make CMakeFiles/cmTC_05394.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_05394.dir/default_template_parameters.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -o CMakeFiles/cmTC_05394.dir/default_template_parameters.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/default_template_parameters.cpp
+Linking CXX executable cmTC_05394
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_05394.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_05394.dir/default_template_parameters.cpp.o -o cmTC_05394 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports member templates passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_81c40/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_81c40.dir/build.make CMakeFiles/cmTC_81c40.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_81c40.dir/member_templates.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -o CMakeFiles/cmTC_81c40.dir/member_templates.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/member_templates.cpp
+Linking CXX executable cmTC_81c40
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_81c40.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_81c40.dir/member_templates.cpp.o -o cmTC_81c40 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports member templates outside the class declaration passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_02c7f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_02c7f.dir/build.make CMakeFiles/cmTC_02c7f.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_02c7f.dir/member_templates_outside_class.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -o CMakeFiles/cmTC_02c7f.dir/member_templates_outside_class.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/member_templates_outside_class.cpp
+Linking CXX executable cmTC_02c7f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_02c7f.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_02c7f.dir/member_templates_outside_class.cpp.o -o cmTC_02c7f 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler recognizes the full specialization syntax passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_4851d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_4851d.dir/build.make CMakeFiles/cmTC_4851d.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_4851d.dir/full_specialization_syntax.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -o CMakeFiles/cmTC_4851d.dir/full_specialization_syntax.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/full_specialization_syntax.cpp
+Linking CXX executable cmTC_4851d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4851d.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_4851d.dir/full_specialization_syntax.cpp.o -o cmTC_4851d 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports function templates with non-type parameters passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_18b39/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_18b39.dir/build.make CMakeFiles/cmTC_18b39.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_18b39.dir/function_nontype_parameters.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -o CMakeFiles/cmTC_18b39.dir/function_nontype_parameters.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/function_nontype_parameters.cpp
+Linking CXX executable cmTC_18b39
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_18b39.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_18b39.dir/function_nontype_parameters.cpp.o -o cmTC_18b39 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports template-qualified base class specifiers passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ea34c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ea34c.dir/build.make CMakeFiles/cmTC_ea34c.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ea34c.dir/template_qualified_base_class.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -o CMakeFiles/cmTC_ea34c.dir/template_qualified_base_class.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/template_qualified_base_class.cpp
+Linking CXX executable cmTC_ea34c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ea34c.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_ea34c.dir/template_qualified_base_class.cpp.o -o cmTC_ea34c 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports template-qualified return types passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9c18d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9c18d.dir/build.make CMakeFiles/cmTC_9c18d.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_9c18d.dir/template_qualified_return_type.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -o CMakeFiles/cmTC_9c18d.dir/template_qualified_return_type.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/template_qualified_return_type.cpp
+Linking CXX executable cmTC_9c18d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9c18d.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_9c18d.dir/template_qualified_return_type.cpp.o -o cmTC_9c18d 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports explicit template function qualification passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_051ae/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_051ae.dir/build.make CMakeFiles/cmTC_051ae.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_051ae.dir/explicit_template_function_qualification.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -o CMakeFiles/cmTC_051ae.dir/explicit_template_function_qualification.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/explicit_template_function_qualification.cpp
+Linking CXX executable cmTC_051ae
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_051ae.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_051ae.dir/explicit_template_function_qualification.cpp.o -o cmTC_051ae 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports templates as template arguments passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_56e8c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_56e8c.dir/build.make CMakeFiles/cmTC_56e8c.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_56e8c.dir/templates_as_template_arguments.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -o CMakeFiles/cmTC_56e8c.dir/templates_as_template_arguments.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/templates_as_template_arguments.cpp
+Linking CXX executable cmTC_56e8c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56e8c.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_56e8c.dir/templates_as_template_arguments.cpp.o -o cmTC_56e8c 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports use of the template keyword as a qualifier passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_10748/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_10748.dir/build.make CMakeFiles/cmTC_10748.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_10748.dir/template_keyword_qualifier.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -o CMakeFiles/cmTC_10748.dir/template_keyword_qualifier.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/template_keyword_qualifier.cpp
+Linking CXX executable cmTC_10748
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_10748.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_10748.dir/template_keyword_qualifier.cpp.o -o cmTC_10748 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports function matching with argument types which are template scope-qualified passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_be51a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_be51a.dir/build.make CMakeFiles/cmTC_be51a.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_be51a.dir/template_scoped_argument_matching.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -o CMakeFiles/cmTC_be51a.dir/template_scoped_argument_matching.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/template_scoped_argument_matching.cpp
+Linking CXX executable cmTC_be51a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_be51a.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_be51a.dir/template_scoped_argument_matching.cpp.o -o cmTC_be51a 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler support the vector type promotion mechanism passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_8fa17/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_8fa17.dir/build.make CMakeFiles/cmTC_8fa17.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_8fa17.dir/type_promotion.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -o CMakeFiles/cmTC_8fa17.dir/type_promotion.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/type_promotion.cpp
+Linking CXX executable cmTC_8fa17
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8fa17.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_8fa17.dir/type_promotion.cpp.o -o cmTC_8fa17 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports numeric traits promotions passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2c677/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2c677.dir/build.make CMakeFiles/cmTC_2c677.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_2c677.dir/use_numtrait.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -o CMakeFiles/cmTC_2c677.dir/use_numtrait.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/use_numtrait.cpp
+Linking CXX executable cmTC_2c677
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2c677.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_2c677.dir/use_numtrait.cpp.o -o cmTC_2c677 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler handles computations inside an enum passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_bdef8/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bdef8.dir/build.make CMakeFiles/cmTC_bdef8.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_bdef8.dir/enum_computations.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -o CMakeFiles/cmTC_bdef8.dir/enum_computations.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/enum_computations.cpp
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/enum_computations.cpp: In instantiation of ‘struct Z<A, B>’:
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/enum_computations.cpp:27:25:   required from here
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/enum_computations.cpp:21:22: warning: comparison between ‘enum A::<unnamed>’ and ‘enum B::<unnamed>’ [-Wenum-compare]
+   21 |     enum { a = (T1::a>T2::a) ? T1::a : T2::b,
+      |                ~~~~~~^~~~~~~
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/enum_computations.cpp:21:30: warning: enumerated mismatch in conditional expression: ‘A::<unnamed enum>’ vs ‘B::<unnamed enum>’ [-Wenum-compare]
+   21 |     enum { a = (T1::a>T2::a) ? T1::a : T2::b,
+      |                ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+Linking CXX executable cmTC_bdef8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bdef8.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_bdef8.dir/enum_computations.cpp.o -o cmTC_bdef8 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler handles (int) casts in enum computations passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_1680b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_1680b.dir/build.make CMakeFiles/cmTC_1680b.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_1680b.dir/enum_computations_with_cast.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -o CMakeFiles/cmTC_1680b.dir/enum_computations_with_cast.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/enum_computations_with_cast.cpp
+Linking CXX executable cmTC_1680b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1680b.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_1680b.dir/enum_computations_with_cast.cpp.o -o cmTC_1680b 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has complex<T> passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ef81f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ef81f.dir/build.make CMakeFiles/cmTC_ef81f.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ef81f.dir/have_complex.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -o CMakeFiles/cmTC_ef81f.dir/have_complex.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex.cpp
+Linking CXX executable cmTC_ef81f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ef81f.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_ef81f.dir/have_complex.cpp.o -o cmTC_ef81f 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has standard complex<T> functions passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9cd9d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9cd9d.dir/build.make CMakeFiles/cmTC_9cd9d.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_9cd9d.dir/have_complex_fcns.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -o CMakeFiles/cmTC_9cd9d.dir/have_complex_fcns.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_fcns.cpp
+Linking CXX executable cmTC_9cd9d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9cd9d.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_9cd9d.dir/have_complex_fcns.cpp.o -o cmTC_9cd9d 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has numeric_limits<T> passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_b7da8/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b7da8.dir/build.make CMakeFiles/cmTC_b7da8.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b7da8.dir/have_numeric_limits.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -o CMakeFiles/cmTC_b7da8.dir/have_numeric_limits.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_numeric_limits.cpp
+Linking CXX executable cmTC_b7da8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b7da8.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_b7da8.dir/have_numeric_limits.cpp.o -o cmTC_b7da8 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has <climits> header passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_b3a13/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b3a13.dir/build.make CMakeFiles/cmTC_b3a13.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b3a13.dir/have_climits.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -o CMakeFiles/cmTC_b3a13.dir/have_climits.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_climits.cpp
+Linking CXX executable cmTC_b3a13
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b3a13.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_b3a13.dir/have_climits.cpp.o -o cmTC_b3a13 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has valarray<T> passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_44489/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_44489.dir/build.make CMakeFiles/cmTC_44489.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_44489.dir/have_valarray.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -o CMakeFiles/cmTC_44489.dir/have_valarray.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_valarray.cpp
+Linking CXX executable cmTC_44489
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_44489.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_44489.dir/have_valarray.cpp.o -o cmTC_44489 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has complex math functions passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_5a77b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5a77b.dir/build.make CMakeFiles/cmTC_5a77b.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_5a77b.dir/have_complex_math1.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -o CMakeFiles/cmTC_5a77b.dir/have_complex_math1.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math1.cpp
+Linking CXX executable cmTC_5a77b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5a77b.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_5a77b.dir/have_complex_math1.cpp.o -o cmTC_5a77b 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has more complex math functions failed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f636b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f636b.dir/build.make CMakeFiles/cmTC_f636b.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f636b.dir/have_complex_math2.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -o CMakeFiles/cmTC_f636b.dir/have_complex_math2.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp: In function ‘int main()’:
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:25:10: error: no matching function for call to ‘atan2(std::complex<double>&, std::complex<double>&)’
+   25 |     atan2(x,y);
+      |     ~~~~~^~~~~
+In file included from /usr/include/c++/11/complex:44,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/c++/11/cmath:155:5: note: candidate: ‘template<class _Tp, class _Up> constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type std::atan2(_Tp, _Up)’
+  155 |     atan2(_Tp __y, _Up __x)
+      |     ^~~~~
+/usr/include/c++/11/cmath:155:5: note:   template argument deduction/substitution failed:
+/usr/include/c++/11/cmath: In substitution of ‘template<class _Tp, class _Up> constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type std::atan2(_Tp, _Up) [with _Tp = std::complex<double>; _Up = std::complex<double>]’:
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:25:10:   required from here
+/usr/include/c++/11/cmath:155:5: error: no type named ‘__type’ in ‘struct __gnu_cxx::__promote<std::complex<double>, false>’
+In file included from /usr/include/features.h:461,
+                 from /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:39,
+                 from /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:586,
+                 from /usr/include/c++/11/complex:41,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:59:1: note: candidate: ‘double atan2(double, double)’
+   59 | __MATHCALL (atan2,, (_Mdouble_ __y, _Mdouble_ __x));
+      | ^~~~~~~~~~
+In file included from /usr/include/c++/11/cmath:45,
+                 from /usr/include/c++/11/complex:44,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:59:1: note:   no known conversion for argument 1 from ‘std::complex<double>’ to ‘double’
+   59 | __MATHCALL (atan2,, (_Mdouble_ __y, _Mdouble_ __x));
+      | ^
+In file included from /usr/include/c++/11/complex:44,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/c++/11/cmath:148:3: note: candidate: ‘constexpr long double std::atan2(long double, long double)’
+  148 |   atan2(long double __y, long double __x)
+      |   ^~~~~
+/usr/include/c++/11/cmath:148:21: note:   no known conversion for argument 1 from ‘std::complex<double>’ to ‘long double’
+  148 |   atan2(long double __y, long double __x)
+      |         ~~~~~~~~~~~~^~~
+/usr/include/c++/11/cmath:144:3: note: candidate: ‘constexpr float std::atan2(float, float)’
+  144 |   atan2(float __y, float __x)
+      |   ^~~~~
+/usr/include/c++/11/cmath:144:15: note:   no known conversion for argument 1 from ‘std::complex<double>’ to ‘float’
+  144 |   atan2(float __y, float __x)
+      |         ~~~~~~^~~
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:26:10: error: no matching function for call to ‘atan2(std::complex<double>&, double)’
+   26 |     atan2(x,double(3.0));
+      |     ~~~~~^~~~~~~~~~~~~~~
+In file included from /usr/include/c++/11/complex:44,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/c++/11/cmath:155:5: note: candidate: ‘template<class _Tp, class _Up> constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type std::atan2(_Tp, _Up)’
+  155 |     atan2(_Tp __y, _Up __x)
+      |     ^~~~~
+/usr/include/c++/11/cmath:155:5: note:   template argument deduction/substitution failed:
+/usr/include/c++/11/cmath: In substitution of ‘template<class _Tp, class _Up> constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type std::atan2(_Tp, _Up) [with _Tp = std::complex<double>; _Up = double]’:
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:26:10:   required from here
+/usr/include/c++/11/cmath:155:5: error: no type named ‘__type’ in ‘struct __gnu_cxx::__promote<std::complex<double>, false>’
+In file included from /usr/include/features.h:461,
+                 from /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:39,
+                 from /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:586,
+                 from /usr/include/c++/11/complex:41,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:59:1: note: candidate: ‘double atan2(double, double)’
+   59 | __MATHCALL (atan2,, (_Mdouble_ __y, _Mdouble_ __x));
+      | ^~~~~~~~~~
+In file included from /usr/include/c++/11/cmath:45,
+                 from /usr/include/c++/11/complex:44,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:59:1: note:   no known conversion for argument 1 from ‘std::complex<double>’ to ‘double’
+   59 | __MATHCALL (atan2,, (_Mdouble_ __y, _Mdouble_ __x));
+      | ^
+In file included from /usr/include/c++/11/complex:44,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/c++/11/cmath:148:3: note: candidate: ‘constexpr long double std::atan2(long double, long double)’
+  148 |   atan2(long double __y, long double __x)
+      |   ^~~~~
+/usr/include/c++/11/cmath:148:21: note:   no known conversion for argument 1 from ‘std::complex<double>’ to ‘long double’
+  148 |   atan2(long double __y, long double __x)
+      |         ~~~~~~~~~~~~^~~
+/usr/include/c++/11/cmath:144:3: note: candidate: ‘constexpr float std::atan2(float, float)’
+  144 |   atan2(float __y, float __x)
+      |   ^~~~~
+/usr/include/c++/11/cmath:144:15: note:   no known conversion for argument 1 from ‘std::complex<double>’ to ‘float’
+  144 |   atan2(float __y, float __x)
+      |         ~~~~~~^~~
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:27:10: error: no matching function for call to ‘atan2(double, std::complex<double>&)’
+   27 |     atan2(double(3.0),x);
+      |     ~~~~~^~~~~~~~~~~~~~~
+In file included from /usr/include/c++/11/complex:44,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/c++/11/cmath:155:5: note: candidate: ‘template<class _Tp, class _Up> constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type std::atan2(_Tp, _Up)’
+  155 |     atan2(_Tp __y, _Up __x)
+      |     ^~~~~
+/usr/include/c++/11/cmath:155:5: note:   template argument deduction/substitution failed:
+/usr/include/c++/11/cmath: In substitution of ‘template<class _Tp, class _Up> constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type std::atan2(_Tp, _Up) [with _Tp = double; _Up = std::complex<double>]’:
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:27:10:   required from here
+/usr/include/c++/11/cmath:155:5: error: no type named ‘__type’ in ‘struct __gnu_cxx::__promote<std::complex<double>, false>’
+In file included from /usr/include/features.h:461,
+                 from /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:39,
+                 from /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:586,
+                 from /usr/include/c++/11/complex:41,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:59:1: note: candidate: ‘double atan2(double, double)’
+   59 | __MATHCALL (atan2,, (_Mdouble_ __y, _Mdouble_ __x));
+      | ^~~~~~~~~~
+In file included from /usr/include/c++/11/cmath:45,
+                 from /usr/include/c++/11/complex:44,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:59:1: note:   no known conversion for argument 2 from ‘std::complex<double>’ to ‘double’
+   59 | __MATHCALL (atan2,, (_Mdouble_ __y, _Mdouble_ __x));
+      | ^
+In file included from /usr/include/c++/11/complex:44,
+                 from /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_complex_math2.cpp:17:
+/usr/include/c++/11/cmath:148:3: note: candidate: ‘constexpr long double std::atan2(long double, long double)’
+  148 |   atan2(long double __y, long double __x)
+      |   ^~~~~
+/usr/include/c++/11/cmath:148:38: note:   no known conversion for argument 2 from ‘std::complex<double>’ to ‘long double’
+  148 |   atan2(long double __y, long double __x)
+      |                          ~~~~~~~~~~~~^~~
+/usr/include/c++/11/cmath:144:3: note: candidate: ‘constexpr float std::atan2(float, float)’
+  144 |   atan2(float __y, float __x)
+      |   ^~~~~
+/usr/include/c++/11/cmath:144:26: note:   no known conversion for argument 2 from ‘std::complex<double>’ to ‘float’
+  144 |   atan2(float __y, float __x)
+      |                    ~~~~~~^~~
+gmake[1]: *** [CMakeFiles/cmTC_f636b.dir/build.make:78: CMakeFiles/cmTC_f636b.dir/have_complex_math2.cpp.o] Error 1
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_f636b/fast] Error 2
+
+
+
+Determining if the CXX compiler supports IEEE math library passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_4e042/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_4e042.dir/build.make CMakeFiles/cmTC_4e042.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_4e042.dir/have_ieee_math.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -o CMakeFiles/cmTC_4e042.dir/have_ieee_math.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_ieee_math.cpp
+Linking CXX executable cmTC_4e042
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4e042.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_4e042.dir/have_ieee_math.cpp.o -o cmTC_4e042 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports System V math library failed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9a9a0/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9a9a0.dir/build.make CMakeFiles/cmTC_9a9a0.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_9a9a0.dir/have_system_v_math.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -DHAVE_IEEE_MATH -o CMakeFiles/cmTC_9a9a0.dir/have_system_v_math.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_system_v_math.cpp
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_system_v_math.cpp: In function ‘int main()’:
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_system_v_math.cpp:32:5: error: ‘_class’ was not declared in this scope; did you mean ‘class’?
+   32 |     _class(x);
+      |     ^~~~~~
+      |     class
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_system_v_math.cpp:35:5: error: ‘itrunc’ was not declared in this scope; did you mean ‘trunc’?
+   35 |     itrunc(x);
+      |     ^~~~~~
+      |     trunc
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_system_v_math.cpp:36:5: error: ‘nearest’ was not declared in this scope
+   36 |     nearest(x);
+      |     ^~~~~~~
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_system_v_math.cpp:37:5: error: ‘rsqrt’ was not declared in this scope; did you mean ‘sqrt’?
+   37 |     rsqrt(x);
+      |     ^~~~~
+      |     sqrt
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_system_v_math.cpp:38:5: error: ‘uitrunc’ was not declared in this scope; did you mean ‘trunc’?
+   38 |     uitrunc(x);
+      |     ^~~~~~~
+      |     trunc
+/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_system_v_math.cpp:41:5: error: ‘unordered’ was not declared in this scope; did you mean ‘isunordered’?
+   41 |     unordered(x,y);
+      |     ^~~~~~~~~
+      |     isunordered
+gmake[1]: *** [CMakeFiles/cmTC_9a9a0.dir/build.make:78: CMakeFiles/cmTC_9a9a0.dir/have_system_v_math.cpp.o] Error 1
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_9a9a0/fast] Error 2
+
+
+
+Determining if the CXX compiler has C math functions in namespace std passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_1543b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_1543b.dir/build.make CMakeFiles/cmTC_1543b.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_1543b.dir/math_fn_in_namespace_std.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -DHAVE_IEEE_MATH -o CMakeFiles/cmTC_1543b.dir/math_fn_in_namespace_std.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/math_fn_in_namespace_std.cpp
+Linking CXX executable cmTC_1543b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1543b.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_1543b.dir/math_fn_in_namespace_std.cpp.o -o cmTC_1543b 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has C math abs(integer type) in namespace std passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_82d33/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_82d33.dir/build.make CMakeFiles/cmTC_82d33.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_82d33.dir/math_absint_in_namespace_std.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -DHAVE_IEEE_MATH -DHAVE_MATH_FN_IN_NAMESPACE_STD -o CMakeFiles/cmTC_82d33.dir/math_absint_in_namespace_std.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/math_absint_in_namespace_std.cpp
+Linking CXX executable cmTC_82d33
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_82d33.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_82d33.dir/math_absint_in_namespace_std.cpp.o -o cmTC_82d33 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports complex math functions are in namespace std passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_c4846/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c4846.dir/build.make CMakeFiles/cmTC_c4846.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_c4846.dir/complex_math_in_namespace_std.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -DHAVE_IEEE_MATH -DHAVE_MATH_FN_IN_NAMESPACE_STD -DHAVE_MATH_ABSINT_IN_NAMESPACE_STD -o CMakeFiles/cmTC_c4846.dir/complex_math_in_namespace_std.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/complex_math_in_namespace_std.cpp
+Linking CXX executable cmTC_c4846
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c4846.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_c4846.dir/complex_math_in_namespace_std.cpp.o -o cmTC_c4846 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has isnan function in namespace std passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ccbb3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ccbb3.dir/build.make CMakeFiles/cmTC_ccbb3.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ccbb3.dir/isnan_in_namespace_std.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -DHAVE_IEEE_MATH -DHAVE_MATH_FN_IN_NAMESPACE_STD -DHAVE_MATH_ABSINT_IN_NAMESPACE_STD -DHAVE_COMPLEX_MATH_IN_NAMESPACE_STD -o CMakeFiles/cmTC_ccbb3.dir/isnan_in_namespace_std.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/isnan_in_namespace_std.cpp
+Linking CXX executable cmTC_ccbb3
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ccbb3.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_ccbb3.dir/isnan_in_namespace_std.cpp.o -o cmTC_ccbb3 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has isnormal function in namespace std passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_0ec0b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0ec0b.dir/build.make CMakeFiles/cmTC_0ec0b.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_0ec0b.dir/isnormal_in_namespace_std.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -DHAVE_IEEE_MATH -DHAVE_MATH_FN_IN_NAMESPACE_STD -DHAVE_MATH_ABSINT_IN_NAMESPACE_STD -DHAVE_COMPLEX_MATH_IN_NAMESPACE_STD -DHAVE_ISNAN_IN_NAMESPACE_STD -o CMakeFiles/cmTC_0ec0b.dir/isnormal_in_namespace_std.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/isnormal_in_namespace_std.cpp
+Linking CXX executable cmTC_0ec0b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0ec0b.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_0ec0b.dir/isnormal_in_namespace_std.cpp.o -o cmTC_0ec0b 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports ISO C++ standard library passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_13e8b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_13e8b.dir/build.make CMakeFiles/cmTC_13e8b.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_13e8b.dir/have_std.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -DHAVE_IEEE_MATH -DHAVE_MATH_FN_IN_NAMESPACE_STD -DHAVE_MATH_ABSINT_IN_NAMESPACE_STD -DHAVE_COMPLEX_MATH_IN_NAMESPACE_STD -DHAVE_ISNAN_IN_NAMESPACE_STD -DHAVE_ISNORMAL_IN_NAMESPACE_STD -o CMakeFiles/cmTC_13e8b.dir/have_std.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_std.cpp
+Linking CXX executable cmTC_13e8b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_13e8b.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_13e8b.dir/have_std.cpp.o -o cmTC_13e8b 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler supports Standard Template Library passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d859f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d859f.dir/build.make CMakeFiles/cmTC_d859f.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_d859f.dir/have_stl.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -DHAVE_IEEE_MATH -DHAVE_MATH_FN_IN_NAMESPACE_STD -DHAVE_MATH_ABSINT_IN_NAMESPACE_STD -DHAVE_COMPLEX_MATH_IN_NAMESPACE_STD -DHAVE_ISNAN_IN_NAMESPACE_STD -DHAVE_ISNORMAL_IN_NAMESPACE_STD -DHAVE_STD -o CMakeFiles/cmTC_d859f.dir/have_stl.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_stl.cpp
+Linking CXX executable cmTC_d859f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d859f.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_d859f.dir/have_stl.cpp.o -o cmTC_d859f 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler has getrusage() function passed with the following output:
+Change Dir: /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a3101/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a3101.dir/build.make CMakeFiles/cmTC_a3101.dir/build
+gmake[1]: Entering directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_a3101.dir/have_rusage.cpp.o
+/usr/bin/c++   -DHAVE_EXCEPTIONS -DHAVE_RTTI -DHAVE_MEMBER_CONSTANTS -DHAVE_EXPLICIT -DHAVE_MUTABLE -DHAVE_TYPENAME -DHAVE_RESTRICT_EGCS -DHAVE_BOOL -DHAVE_CONST_CAST -DHAVE_STATIC_CAST -DHAVE_REINTERPRET_CAST -DHAVE_DYNAMIC_CAST -DHAVE_TEMPLATES -DHAVE_PARTIAL_SPECIALIZATION -DHAVE_PARTIAL_ORDERING -DHAVE_DEFAULT_TEMPLATE_PARAMETERS -DHAVE_MEMBER_TEMPLATES -DHAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS -DHAVE_FULL_SPECIALIZATION_SYNTAX -DHAVE_FUNCTION_NONTYPE_PARAMETERS -DHAVE_TEMPLATE_QUALIFIED_BASE_CLASS -DHAVE_TEMPLATE_QUALIFIED_RETURN_TYPE -DHAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION -DHAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS -DHAVE_TEMPLATE_KEYWORD_QUALIFIER -DHAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING -DHAVE_TYPE_PROMOTION -DHAVE_USE_NUMTRAIT -DHAVE_ENUM_COMPUTATIONS -DHAVE_ENUM_COMPUTATIONS_WITH_CAST -DHAVE_COMPLEX -DHAVE_COMPLEX_FCNS -DHAVE_NUMERIC_LIMITS -DHAVE_CLIMITS -DHAVE_VALARRAY -DHAVE_COMPLEX_MATH1 -DHAVE_IEEE_MATH -DHAVE_MATH_FN_IN_NAMESPACE_STD -DHAVE_MATH_ABSINT_IN_NAMESPACE_STD -DHAVE_COMPLEX_MATH_IN_NAMESPACE_STD -DHAVE_ISNAN_IN_NAMESPACE_STD -DHAVE_ISNORMAL_IN_NAMESPACE_STD -DHAVE_STD -DHAVE_STL -o CMakeFiles/cmTC_a3101.dir/have_rusage.cpp.o -c /home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-1.0.2/cmake/cxx_tests/have_rusage.cpp
+Linking CXX executable cmTC_a3101
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a3101.dir/link.txt --verbose=1
+/usr/bin/c++ -rdynamic CMakeFiles/cmTC_a3101.dir/have_rusage.cpp.o -o cmTC_a3101 
+gmake[1]: Leaving directory '/home/johannes/uni/msc/uzh/HS21/ahpc/project/blitz-build/CMakeFiles/CMakeTmp'
+
+
+

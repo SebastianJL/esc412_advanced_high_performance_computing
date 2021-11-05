@@ -44,8 +44,3 @@ cmake-build-debug/
 input/
 output/
 run/
-
-# ignore blitz build
-blitz-build/
-lib/
-include/

@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/genmathfunc.dir/genmathfunc.cpp.o -o genmathfunc 

@@ -44,4 +44,9 @@ output/
 cmake-build-debug/
 
 # ignore executables
-run
+run/
+
+# ignore blitz build
+blitz-build/
+lib/
+include/

@@ -11,6 +11,8 @@ cmake -DCMAKE_INSTALL_PREFIX=./ -B ./blitz-build ./blitz-1.0.2
 make -C ./blitz-build
 make -C ./blitz-build install
 ```
+This will create the folders `include`, `lib` and `blitz-build`. They need to be present in order for the
+project to run.
 
 Create the necessary folder
 ```bash

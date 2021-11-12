@@ -7,7 +7,7 @@
 
 using real_t = double;
 
-/**
+/*
  * Return the nearest grid point for a single coordinate.
  *
  * @param coord coordinate.
@@ -17,7 +17,7 @@ real_t ngp(real_t coord, int n_grid) {
     return std::floor(n_grid * (coord + 0.5));
 }
 
-/**
+/*
  * Return the grid coordinate from a euclidean coordinate.
  *
  * @param coord coordinate.
@@ -27,7 +27,7 @@ real_t grid_coordinate(real_t coord, int n_grid) {
     return n_grid * (coord + 0.5);
 }
 
-/**
+/*
  * Return a grid of mass densities given a particle distribution.
  *
  * The algorithm used is nearest grid point.
@@ -50,7 +50,7 @@ blitz::Array<real_t, 3> assign_mass_ngp(blitz::Array<real_t, 2> particles,
     return res;
 }
 
-/**
+/*
  * Wrap the point i on a grid with size n_grid using the % operator.
  *
  * @param i Coordinate to wrap.
@@ -58,7 +58,7 @@ blitz::Array<real_t, 3> assign_mass_ngp(blitz::Array<real_t, 2> particles,
  */
 int wrap_modulo(int i, int n_grid) { return (i + n_grid) % n_grid; }
 
-/**
+/*
  * Wrap the point i on a grid with size n_grid using if else statements.
  *
  * @param i Coordinate to wrap.
@@ -72,7 +72,7 @@ int wrap_if_else(int i, int n_grid) {
     return i;
 }
 
-/**
+/*
  * Return a grid of mass densities given a particle distribution.
  *
  * @param particles Particles to distribute
@@ -111,7 +111,7 @@ blitz::Array<real_t, 3> assign_mass(blitz::Array<real_t, 2> particles,
     return res;
 }
 
-/**
+/*
  * Return a grid of mass densities given a particle distribution.
  *
  * Use a grid bigger with margins instead of using a modulo operation.

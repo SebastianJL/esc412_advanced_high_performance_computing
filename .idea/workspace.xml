@@ -14,7 +14,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Update build information in README.md" />
+    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Replace global definition with templates.&#10;&#10;real_t is now a template typename in the given functions.">
+      <change afterPath="$PROJECT_DIR$/src/mass_assignement.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -217,7 +221,35 @@
       <option name="project" value="LOCAL" />
       <updated>1636138779872</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Change docstring style to start with /* instead of /**">
+      <created>1636721303291</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1636721303291</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Change docstring style to start with /* instead of /**">
+      <created>1636721328307</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1636721328307</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Change docstring style to start with `/*` instead of `/**`.">
+      <created>1636721345585</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1636721345585</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Replace global definition with templates.&#10;&#10;real_t is now a template typename in the given functions.">
+      <created>1636721619489</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1636721619489</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +278,10 @@
     <MESSAGE value="Rebuilt project." />
     <MESSAGE value="Update build information in README.md" />
     <MESSAGE value="Update .clang-format." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update .clang-format." />
+    <MESSAGE value="Change docstring style to start with /* instead of /**" />
+    <MESSAGE value="Change docstring style to start with `/*` instead of `/**`." />
+    <MESSAGE value="Replace global definition with templates.&#10;&#10;real_t is now a template typename in the given functions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Replace global definition with templates.&#10;&#10;real_t is now a template typename in the given functions." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

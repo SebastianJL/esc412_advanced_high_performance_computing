@@ -5,6 +5,7 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
+      <config projectName="project" targetName="project" />
       <config projectName="project" targetName="test_mass_assignement" />
     </generated>
   </component>
@@ -14,16 +15,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Rename my_io.h to io_utils.h and remove cpp file.&#10;&#10;Also remove unused imports.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/test_mass_assignement.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Add new main.cpp file." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -68,7 +66,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -82,9 +80,9 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.test_mass_assignement">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="project" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="project" TARGET_NAME="project" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="project" RUN_TARGET_NAME="project">
@@ -148,7 +146,8 @@
       <workItem from="1636054257247" duration="169000" />
       <workItem from="1636054446000" duration="324000" />
       <workItem from="1636054967760" duration="10858000" />
-      <workItem from="1636722711991" duration="6000" />
+      <workItem from="1636722711991" duration="1099000" />
+      <workItem from="1636726754326" duration="1103000" />
     </task>
     <task id="LOCAL-00001" summary="Removed binaries from src folder and added idea project metadata.">
       <created>1636055251662</created>
@@ -276,7 +275,21 @@
       <option name="project" value="LOCAL" />
       <updated>1636722514387</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Rename main.cpp to test_mass_assignement.cpp.">
+      <created>1636722834303</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1636722834303</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Add new main.cpp file.">
+      <created>1636727789268</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1636727789268</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,7 +324,9 @@
     <MESSAGE value="Move mass assignement functions into own file." />
     <MESSAGE value="Move function to my_io.h." />
     <MESSAGE value="Rename my_io.h to io_utils.h and remove cpp file.&#10;&#10;Also remove unused imports." />
-    <option name="LAST_COMMIT_MESSAGE" value="Rename my_io.h to io_utils.h and remove cpp file.&#10;&#10;Also remove unused imports." />
+    <MESSAGE value="Rename main.cpp to test_mass_assignement.cpp." />
+    <MESSAGE value="Add new main.cpp file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add new main.cpp file." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -5,7 +5,7 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="project" targetName="project" />
+      <config projectName="project" targetName="test_mass_assignement" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -14,19 +14,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Move function to my_io.h.">
+    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Rename my_io.h to io_utils.h and remove cpp file.&#10;&#10;Also remove unused imports.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mass_assignement.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/mass_assignement.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/my_io.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/my_io.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/io_utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/test_mass_assignement.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -84,13 +81,18 @@
       <recent name="$PROJECT_DIR$/input/" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.project">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+  <component name="RunManager" selected="CMake Application.test_mass_assignement">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="project" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="project" TARGET_NAME="project" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="project" RUN_TARGET_NAME="project">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="project" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="project" TARGET_NAME="project" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="project" RUN_TARGET_NAME="project">
+    <configuration name="test_mass_assignement" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="project" TARGET_NAME="test_mass_assignement" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="project" RUN_TARGET_NAME="test_mass_assignement">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -123,6 +125,7 @@
     </configuration>
     <list>
       <item itemvalue="CMake Application.project" />
+      <item itemvalue="CMake Application.test_mass_assignement" />
       <item itemvalue="Python.density_map" />
     </list>
     <recent_temporary>
@@ -145,6 +148,7 @@
       <workItem from="1636054257247" duration="169000" />
       <workItem from="1636054446000" duration="324000" />
       <workItem from="1636054967760" duration="10858000" />
+      <workItem from="1636722711991" duration="6000" />
     </task>
     <task id="LOCAL-00001" summary="Removed binaries from src folder and added idea project metadata.">
       <created>1636055251662</created>
@@ -265,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636722222837</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Rename my_io.h to io_utils.h and remove cpp file.&#10;&#10;Also remove unused imports.">
+      <created>1636722514387</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1636722514387</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,7 +310,8 @@
     <MESSAGE value="Replace global definition with templates.&#10;&#10;real_t is now a template typename in the given functions." />
     <MESSAGE value="Move mass assignement functions into own file." />
     <MESSAGE value="Move function to my_io.h." />
-    <option name="LAST_COMMIT_MESSAGE" value="Move function to my_io.h." />
+    <MESSAGE value="Rename my_io.h to io_utils.h and remove cpp file.&#10;&#10;Also remove unused imports." />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename my_io.h to io_utils.h and remove cpp file.&#10;&#10;Also remove unused imports." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

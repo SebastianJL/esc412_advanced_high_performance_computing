@@ -10,6 +10,10 @@ include_directories(include/blitz/meta)
 include_directories(include/random)
 include_directories(src)
 
-add_executable(project
-        src/main.cpp
+add_executable(test_mass_assignement
+        src/test_mass_assignement.cpp
         src/tipsy.cpp)
+
+#add_executable(project
+#        src/test_mass_assignement.cpp
+#        src/tipsy.cpp)

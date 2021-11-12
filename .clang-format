@@ -4,5 +4,6 @@ IndentWidth: '4'
 Standard: Auto
 TabWidth: '4'
 UseTab: Never
+MaxEmptyLinesToKeep: 2
 
 ...

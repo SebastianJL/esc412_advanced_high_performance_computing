@@ -5,14 +5,13 @@
 #include "my_io.h"
 #include "tipsy.h"
 
-using real_t = double;
-
 /*
  * Return the nearest grid point for a single coordinate.
  *
  * @param coord coordinate.
  * @param n_grid size of the grid.
  */
+template<typename real_t>
 real_t ngp(real_t coord, int n_grid) {
     return std::floor(n_grid * (coord + 0.5));
 }
@@ -23,6 +22,7 @@ real_t ngp(real_t coord, int n_grid) {
  * @param coord coordinate.
  * @param n_grid size of the grid.
  */
+template<typename real_t>
 real_t grid_coordinate(real_t coord, int n_grid) {
     return n_grid * (coord + 0.5);
 }
@@ -35,6 +35,7 @@ real_t grid_coordinate(real_t coord, int n_grid) {
  * @param particles Particles to distribute
  * @param n_grid Grid size in 3d.
  */
+template<typename real_t>
 blitz::Array<real_t, 3> assign_mass_ngp(blitz::Array<real_t, 2> particles,
                                         int n_grid) {
     blitz::Array<real_t, 3> res(n_grid, n_grid, n_grid);
@@ -79,7 +80,7 @@ int wrap_if_else(int i, int n_grid) {
  * @param n_grid Grid size in 3d.
  * @param order Order of the mass assignment weights.
  */
-template <int Order>
+template <typename real_t, int Order>
 blitz::Array<real_t, 3> assign_mass(blitz::Array<real_t, 2> particles,
                                     int n_grid, int (*wrap)(int, int)) {
     blitz::Array<real_t, 3> res(n_grid, n_grid, n_grid);
@@ -120,7 +121,7 @@ blitz::Array<real_t, 3> assign_mass(blitz::Array<real_t, 2> particles,
  * @param n_grid Grid size in 3d.
  * @param order Order of the mass assignment weights.
  */
-template <int Order>
+template <typename real_t, int Order>
 blitz::Array<real_t, 3>
 assign_mass_with_margins(blitz::Array<real_t, 2> particles, int n_grid) {
     using blitz::Array;
@@ -179,6 +180,7 @@ assign_mass_with_margins(blitz::Array<real_t, 2> particles, int n_grid) {
     return res;
 }
 
+template<typename real_t>
 blitz::Array<real_t, 2>
 project_3d_to_2d(const blitz::Array<real_t, 3> &grid_3d) {
     int n_grid = grid_3d.extent(blitz::firstDim);
@@ -193,7 +195,7 @@ int main() {
     using std::cout, std::endl, std::cerr;
     using namespace blitz;
     using namespace std::chrono;
-
+    using real_t = double;
     // Load data.
     TipsyIO io;
 
@@ -233,7 +235,7 @@ int main() {
 
     // 2nd order modulo
     auto start = chrono::high_resolution_clock::now();
-    auto mass_grid_modulo = assign_mass<2>(r, n_grid, &wrap_modulo);
+    auto mass_grid_modulo = assign_mass<real_t, 2>(r, n_grid, &wrap_modulo);
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "2nd order wrap_modulo: " << duration.count() << " milliseconds"
@@ -243,7 +245,7 @@ int main() {
 
     // 2nd order if-else
     start = chrono::high_resolution_clock::now();
-    auto mass_grid_if_else = assign_mass<2>(r, n_grid, &wrap_if_else);
+    auto mass_grid_if_else = assign_mass<real_t, 2>(r, n_grid, &wrap_if_else);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "2nd order if-else: " << duration.count() << " milliseconds"
@@ -253,7 +255,7 @@ int main() {
 
     // 2nd order with margins
     start = chrono::high_resolution_clock::now();
-    auto mass_grid_with_margins = assign_mass_with_margins<2>(r, n_grid);
+    auto mass_grid_with_margins = assign_mass_with_margins<real_t, 2>(r, n_grid);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "2nd order with margins: " << duration.count() << " milliseconds"
@@ -272,7 +274,7 @@ int main() {
 
     // 3nd order modulo
     start = chrono::high_resolution_clock::now();
-    mass_grid_modulo = assign_mass<3>(r, n_grid, &wrap_modulo);
+    mass_grid_modulo = assign_mass<real_t, 3>(r, n_grid, &wrap_modulo);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "3nd order wrap_modulo: " << duration.count() << " milliseconds"
@@ -280,7 +282,7 @@ int main() {
 
     // 3nd order if-else
     start = chrono::high_resolution_clock::now();
-    mass_grid_if_else = assign_mass<3>(r, n_grid, &wrap_if_else);
+    mass_grid_if_else = assign_mass<real_t, 3>(r, n_grid, &wrap_if_else);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "3nd order if-else: " << duration.count() << " milliseconds"
@@ -288,7 +290,7 @@ int main() {
 
     // 3rd order with margins
     start = chrono::high_resolution_clock::now();
-    mass_grid_with_margins = assign_mass_with_margins<3>(r, n_grid);
+    mass_grid_with_margins = assign_mass_with_margins<real_t, 3>(r, n_grid);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "3rd order with margins: " << duration.count() << " milliseconds"
@@ -302,7 +304,7 @@ int main() {
 
     // 4nd order modulo
     start = chrono::high_resolution_clock::now();
-    mass_grid_modulo = assign_mass<4>(r, n_grid, &wrap_modulo);
+    mass_grid_modulo = assign_mass<real_t, 4>(r, n_grid, &wrap_modulo);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "4nd order wrap_modulo: " << duration.count() << " milliseconds"
@@ -310,7 +312,7 @@ int main() {
 
     // 4nd order if-else
     start = chrono::high_resolution_clock::now();
-    mass_grid_if_else = assign_mass<4>(r, n_grid, &wrap_if_else);
+    mass_grid_if_else = assign_mass<real_t, 4>(r, n_grid, &wrap_if_else);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "4nd order if-else: " << duration.count() << " milliseconds"
@@ -318,7 +320,7 @@ int main() {
 
     // 4th order with margins
     start = chrono::high_resolution_clock::now();
-    mass_grid_with_margins = assign_mass_with_margins<4>(r, n_grid);
+    mass_grid_with_margins = assign_mass_with_margins<real_t, 4>(r, n_grid);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "4th order with margins: " << duration.count() << " milliseconds"

@@ -14,9 +14,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Move mass assignement functions into own file.">
-      <change afterPath="$PROJECT_DIR$/src/util.h" afterDir="false" />
+    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Move function to my_io.h.">
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mass_assignement.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/mass_assignement.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/my_io.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/my_io.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/io_utils.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636721970701</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Move function to my_io.h.">
+      <created>1636722222837</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1636722222837</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,7 +298,8 @@
     <MESSAGE value="Change docstring style to start with `/*` instead of `/**`." />
     <MESSAGE value="Replace global definition with templates.&#10;&#10;real_t is now a template typename in the given functions." />
     <MESSAGE value="Move mass assignement functions into own file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Move mass assignement functions into own file." />
+    <MESSAGE value="Move function to my_io.h." />
+    <option name="LAST_COMMIT_MESSAGE" value="Move function to my_io.h." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

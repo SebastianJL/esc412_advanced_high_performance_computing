@@ -2,8 +2,8 @@
 
 #include "aweights.h"
 #include "blitz/array.h"
+#include "io_utils.h"
 #include "mass_assignement.h"
-#include "my_io.h"
 #include "tipsy.h"
 
 /*

@@ -12,5 +12,4 @@ include_directories(src)
 
 add_executable(project
         src/main.cpp
-        src/tipsy.cpp
-        src/my_io.cpp)
+        src/tipsy.cpp)

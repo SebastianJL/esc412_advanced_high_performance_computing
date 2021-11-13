@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-mass_grid_modulo = np.genfromtxt('../output/mass_grid_modulo_2d.csv', delimiter=',')
-mass_grid_if_else = np.genfromtxt('../output/mass_grid_if_else_2d.csv', delimiter=',')
-mass_grid_margins = np.genfromtxt('../output/mass_grid_with_margins_2d.csv', delimiter=',')
+mass_grid_modulo = np.genfromtxt('output/mass_grid_modulo_2d.csv', delimiter=',')
+mass_grid_if_else = np.genfromtxt('output/mass_grid_if_else_2d.csv', delimiter=',')
+mass_grid_margins = np.genfromtxt('output/mass_grid_with_margins_2d.csv', delimiter=',')
 
 datas = [np.log(mass_grid_modulo + 1),
          np.log(mass_grid_if_else + 1),

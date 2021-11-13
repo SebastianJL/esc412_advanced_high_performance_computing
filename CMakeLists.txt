@@ -17,3 +17,5 @@ add_executable(test_mass_assignement
 add_executable(project
         src/main.cpp
         src/tipsy.cpp)
+target_link_libraries(project fftw3)
+

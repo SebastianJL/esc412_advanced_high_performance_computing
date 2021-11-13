@@ -55,15 +55,17 @@ blitz::Array<real_t, 3> assign_mass_ngp(blitz::Array<real_t, 2> particles,
 /*
  * Return a grid of mass densities given a particle distribution.
  *
- * @param particles Particles to distribute
+ * @param particles Particles to distribute.
  * @param n_grid Grid size in 3d.
+ * @param wrap Wrapping function to map values from [-n_grid, 2*n_grid) to the
+ * range [0, n_grid). It should be equivalent to (i + n_grid) % n_grid.
+ * @param out Grid for assigning the masses.
  * @param order Order of the mass assignment weights.
  */
 template <typename real_t, int Order>
-blitz::Array<real_t, 3> assign_mass(blitz::Array<real_t, 2> particles,
-                                    int n_grid, int (*wrap)(int, int)) {
-    blitz::Array<real_t, 3> res(n_grid, n_grid, n_grid);
-    res = 0;
+void assign_mass(blitz::Array<real_t, 2> particles, int n_grid,
+                 int (*wrap)(int, int), blitz::Array<real_t, 3> out) {
+    out = 0;
     for (auto row = 0; row < particles.extent(blitz::firstDim); ++row) {
         real_t p = particles(row, 0);
         real_t p_grid = grid_coordinate(p, n_grid);
@@ -83,12 +85,11 @@ blitz::Array<real_t, 3> assign_mass(blitz::Array<real_t, 2> particles,
                     int x = wrap(wx.i + i, n_grid);
                     int y = wrap(wy.i + j, n_grid);
                     int z = wrap(wz.i + k, n_grid);
-                    res(x, y, z) += wx.H[i] * wy.H[j] * wz.H[k];
+                    out(x, y, z) += wx.H[i] * wy.H[j] * wz.H[k];
                 }
             }
         }
     }
-    return res;
 }
 /*
  * Return a grid of mass densities given a particle distribution.

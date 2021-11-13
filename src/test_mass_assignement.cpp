@@ -72,7 +72,8 @@ int main() {
 
     // 2nd order modulo
     auto start = chrono::high_resolution_clock::now();
-    auto mass_grid_modulo = assign_mass<real_t, 2>(r, n_grid, &wrap_modulo);
+    Array<real_t, 3> mass_grid_modulo(n_grid, n_grid, n_grid);
+    assign_mass<real_t, 2>(r, n_grid, &wrap_modulo, mass_grid_modulo);
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "2nd order wrap_modulo: " << duration.count() << " milliseconds"
@@ -82,7 +83,8 @@ int main() {
 
     // 2nd order if-else
     start = chrono::high_resolution_clock::now();
-    auto mass_grid_if_else = assign_mass<real_t, 2>(r, n_grid, &wrap_if_else);
+    Array<real_t, 3> mass_grid_if_else(n_grid, n_grid, n_grid);
+    assign_mass<real_t, 2>(r, n_grid, &wrap_if_else, mass_grid_if_else);
     stop = chrono::high_resolution_clock::now();
     duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
     cout << "2nd order if-else: " << duration.count() << " milliseconds"
@@ -109,61 +111,61 @@ int main() {
 
     cout << endl;
 
-    // 3nd order modulo
-    start = chrono::high_resolution_clock::now();
-    mass_grid_modulo = assign_mass<real_t, 3>(r, n_grid, &wrap_modulo);
-    stop = chrono::high_resolution_clock::now();
-    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    cout << "3nd order wrap_modulo: " << duration.count() << " milliseconds"
-         << endl;
-
-    // 3nd order if-else
-    start = chrono::high_resolution_clock::now();
-    mass_grid_if_else = assign_mass<real_t, 3>(r, n_grid, &wrap_if_else);
-    stop = chrono::high_resolution_clock::now();
-    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    cout << "3nd order if-else: " << duration.count() << " milliseconds"
-         << endl;
-
-    // 3rd order with margins
-    start = chrono::high_resolution_clock::now();
-    mass_grid_with_margins = assign_mass_with_margins<real_t, 3>(r, n_grid);
-    stop = chrono::high_resolution_clock::now();
-    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    cout << "3rd order with margins: " << duration.count() << " milliseconds"
-         << endl;
-    cout << "modulo == if-else: " << all(mass_grid_modulo == mass_grid_if_else)
-         << endl;
-    cout << "modulo == margins: "
-         << all(mass_grid_modulo == mass_grid_with_margins) << endl;
-
-    cout << endl;
-
-    // 4nd order modulo
-    start = chrono::high_resolution_clock::now();
-    mass_grid_modulo = assign_mass<real_t, 4>(r, n_grid, &wrap_modulo);
-    stop = chrono::high_resolution_clock::now();
-    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    cout << "4nd order wrap_modulo: " << duration.count() << " milliseconds"
-         << endl;
-
-    // 4nd order if-else
-    start = chrono::high_resolution_clock::now();
-    mass_grid_if_else = assign_mass<real_t, 4>(r, n_grid, &wrap_if_else);
-    stop = chrono::high_resolution_clock::now();
-    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    cout << "4nd order if-else: " << duration.count() << " milliseconds"
-         << endl;
-
-    // 4th order with margins
-    start = chrono::high_resolution_clock::now();
-    mass_grid_with_margins = assign_mass_with_margins<real_t, 4>(r, n_grid);
-    stop = chrono::high_resolution_clock::now();
-    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    cout << "4th order with margins: " << duration.count() << " milliseconds"
-         << endl;
-    cout << "modulo == if-else: " << all(mass_grid_modulo == mass_grid_if_else)
-         << endl;
-    cout << "modulo == margins: "
-         << all(mass_grid_modulo == mass_grid_with_margins) << endl;
+//    // 3nd order modulo
+//    start = chrono::high_resolution_clock::now();
+//    mass_grid_modulo = assign_mass<real_t, 3>(r, n_grid, &wrap_modulo);
+//    stop = chrono::high_resolution_clock::now();
+//    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+//    cout << "3nd order wrap_modulo: " << duration.count() << " milliseconds"
+//         << endl;
+//
+//    // 3nd order if-else
+//    start = chrono::high_resolution_clock::now();
+//    mass_grid_if_else = assign_mass<real_t, 3>(r, n_grid, &wrap_if_else);
+//    stop = chrono::high_resolution_clock::now();
+//    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+//    cout << "3nd order if-else: " << duration.count() << " milliseconds"
+//         << endl;
+//
+//    // 3rd order with margins
+//    start = chrono::high_resolution_clock::now();
+//    mass_grid_with_margins = assign_mass_with_margins<real_t, 3>(r, n_grid);
+//    stop = chrono::high_resolution_clock::now();
+//    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+//    cout << "3rd order with margins: " << duration.count() << " milliseconds"
+//         << endl;
+//    cout << "modulo == if-else: " << all(mass_grid_modulo == mass_grid_if_else)
+//         << endl;
+//    cout << "modulo == margins: "
+//         << all(mass_grid_modulo == mass_grid_with_margins) << endl;
+//
+//    cout << endl;
+//
+//    // 4nd order modulo
+//    start = chrono::high_resolution_clock::now();
+//    mass_grid_modulo = assign_mass<real_t, 4>(r, n_grid, &wrap_modulo);
+//    stop = chrono::high_resolution_clock::now();
+//    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+//    cout << "4nd order wrap_modulo: " << duration.count() << " milliseconds"
+//         << endl;
+//
+//    // 4nd order if-else
+//    start = chrono::high_resolution_clock::now();
+//    mass_grid_if_else = assign_mass<real_t, 4>(r, n_grid, &wrap_if_else);
+//    stop = chrono::high_resolution_clock::now();
+//    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+//    cout << "4nd order if-else: " << duration.count() << " milliseconds"
+//         << endl;
+//
+//    // 4th order with margins
+//    start = chrono::high_resolution_clock::now();
+//    mass_grid_with_margins = assign_mass_with_margins<real_t, 4>(r, n_grid);
+//    stop = chrono::high_resolution_clock::now();
+//    duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+//    cout << "4th order with margins: " << duration.count() << " milliseconds"
+//         << endl;
+//    cout << "modulo == if-else: " << all(mass_grid_modulo == mass_grid_if_else)
+//         << endl;
+//    cout << "modulo == margins: "
+//         << all(mass_grid_modulo == mass_grid_with_margins) << endl;
 }

@@ -5,8 +5,8 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="project" targetName="project" />
-      <config projectName="project" targetName="test_mass_assignement" />
+      <config projectName="power_spectrum" targetName="power_spectrum" />
+      <config projectName="power_spectrum" targetName="test_mass_assignement" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -15,14 +15,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Add new main.cpp file.">
-      <change afterPath="$PROJECT_DIR$/scripts/show_grid.py" afterDir="false" />
+    <list default="true" id="b9db3a27-281a-442d-b064-6d15bcce7170" name="Default Changelist" comment="Prepare project for fft.&#10;&#10;- Link fftw3 in CMakeLists.txt&#10;- Adapt main.cpp&#10;- Create python script show_grid.py.">
+      <change afterPath="$PROJECT_DIR$/src/fourier_transform.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io_utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/io_utils.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mass_assignement.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/mass_assignement.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test_mass_assignement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/test_mass_assignement.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +65,7 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -88,18 +85,18 @@
       <recent name="$PROJECT_DIR$/input/" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.project">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="project" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="project" TARGET_NAME="project" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="project" RUN_TARGET_NAME="project">
+  <component name="RunManager" selected="CMake Application.power_spectrum">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="test_mass_assignement" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="project" TARGET_NAME="test_mass_assignement" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="project" RUN_TARGET_NAME="test_mass_assignement">
+    <configuration name="power_spectrum" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="power_spectrum" TARGET_NAME="power_spectrum" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="power_spectrum" RUN_TARGET_NAME="power_spectrum">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test_mass_assignement" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="power_spectrum" TARGET_NAME="test_mass_assignement" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="power_spectrum" RUN_TARGET_NAME="test_mass_assignement">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -152,7 +149,7 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="CMake Application.project" />
+      <item itemvalue="CMake Application.power_spectrum" />
       <item itemvalue="CMake Application.test_mass_assignement" />
       <item itemvalue="Python.density_map" />
       <item itemvalue="Python.show_grid" />
@@ -181,6 +178,9 @@
       <workItem from="1636722711991" duration="1099000" />
       <workItem from="1636726754326" duration="4670000" />
       <workItem from="1636819917137" duration="1747000" />
+      <workItem from="1637233678537" duration="81000" />
+      <workItem from="1637233797101" duration="579000" />
+      <workItem from="1637237028619" duration="1420000" />
     </task>
     <task id="LOCAL-00001" summary="Removed binaries from src folder and added idea project metadata.">
       <created>1636055251662</created>
@@ -329,7 +329,21 @@
       <option name="project" value="LOCAL" />
       <updated>1636728036415</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Change signature of assign_mass.&#10;&#10;Assign_mass now takes the grid as an argument and doesn't create it anymore.">
+      <created>1636825555963</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1636825555963</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Prepare project for fft.&#10;&#10;- Link fftw3 in CMakeLists.txt&#10;- Adapt main.cpp&#10;- Create python script show_grid.py.">
+      <created>1636825672714</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1636825672714</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,7 +380,9 @@
     <MESSAGE value="Rename my_io.h to io_utils.h and remove cpp file.&#10;&#10;Also remove unused imports." />
     <MESSAGE value="Rename main.cpp to test_mass_assignement.cpp." />
     <MESSAGE value="Add new main.cpp file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add new main.cpp file." />
+    <MESSAGE value="Change signature of assign_mass.&#10;&#10;assign_mass() now takes the grid as an argument and doesn't create it anymore.&#10;assign_mass_with_margins() has not been adapted, as well as some calls in&#10;test_mass_assignement.cpp. I was to lazy to do it." />
+    <MESSAGE value="Prepare project for fft.&#10;&#10;- Link fftw3 in CMakeLists.txt&#10;- Adapt main.cpp&#10;- Create python script show_grid.py." />
+    <option name="LAST_COMMIT_MESSAGE" value="Prepare project for fft.&#10;&#10;- Link fftw3 in CMakeLists.txt&#10;- Adapt main.cpp&#10;- Create python script show_grid.py." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -3,6 +3,7 @@
 
 #include "aweights.h"
 #include "blitz/array.h"
+#include "fourier_transform.h"
 #include "io_utils.h"
 #include "mass_assignement.h"
 #include "tipsy.h"
@@ -25,7 +26,8 @@ int main() {
     using std::cout, std::endl, std::cerr;
     using namespace blitz;
     using namespace std::chrono;
-    using real_t = float;
+    using real_t = double;
+    using complex_t = std::complex<real_t>;
 
     // Load data.
     TipsyIO io;
@@ -52,6 +54,9 @@ int main() {
     assign_mass<real_t, 3>(r, n_grid, wrap_if_else, grid);
 
     grid = grid / mean(grid) - 1;  // Overdensity
+
+    Array<complex_t, 3> fft_grid(n_grid,n_grid,n_grid/2+1);
+    compute_fft(grid, fft_grid, n_grid);
 
     // Stop clock
     auto stop = chrono::high_resolution_clock::now();

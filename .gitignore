@@ -34,6 +34,9 @@
 # Swap files
 *.swp
 
+# Ignore ide files
+.idea/
+
 # Jupter notebook cache
 *.ipynb_checkpoints/
 

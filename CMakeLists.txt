@@ -18,3 +18,11 @@ add_executable(power_spectrum
         src/io_utils.h)
 target_link_libraries(power_spectrum blitz)
 target_link_libraries(power_spectrum fftw3)
+
+
+add_executable(main_ex9
+        src/main_ex9.cpp
+        src/tipsy.cpp
+        )
+target_link_libraries(main_ex9 blitz)
+target_link_libraries(main_ex9 fftw3-mpi)

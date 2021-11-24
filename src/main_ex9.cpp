@@ -272,6 +272,13 @@ int main(int argc, char *argv[]) {
     // Compute local sizes
     alloc_local = fftw_mpi_local_size_3d(N, N, N, dummy_comm,
                                          &local_n0, &local_0_start);
+    
+    // Exchange particles after reading.
+    // Communicate domain decomposition with MPI_Allgather()
+    // counts = count_by_rank(p);
+    // count_sort(p);
+    // Communicate counts with MPI_Alltoall()
+    // Exchange particles with MPI_Alltoallv()
 
     // FFTW-MPI requires the padding even for out-of-place FFT
     array3D_r grid(local_n0,N,N+2);

@@ -41,6 +41,20 @@ project_3d_to_2d(const blitz::Array<real_t, 3> &grid_3d) {
     return grid_2d;
 }
 
+template<typename t>
+void print_vector(std::vector<t>& vec){
+    std::cout << '[';
+    for (int i = 0; i < vec.size(); i++)
+        std::cout << vec[i] << " ";
+    std::cout << ']' << std::endl;
+}
 
+template<typename t>
+void print_array(t* arr, int length){
+    std::cout << '{';
+    for (int i = 0; i < length; i++)
+        std::cout << arr[i] << " ";
+    std::cout << '}' << std::endl;
+}
 
 #endif // PROJECT_IO_UTILS_H

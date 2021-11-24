@@ -8,6 +8,7 @@
 #include <mpi.h>
 
 #include "aweights.h"
+#include "io_utils.h"
 #include "tipsy.h"
 
 using namespace std;
@@ -50,7 +51,7 @@ array2D_r read_particles(string fname, int rank, int size){
 
     // Allocate the particle buffer
     array2D_r p(blitz::Range(iStart, iEnd), blitz::Range(0, 2));
-    
+
     t0 = getTime();
     // Read the particles
     io.load(p);
@@ -72,7 +73,7 @@ void write_array(T A, const char* filename){
 
     ofs << A << endl;
 
-    ofs.close(); 
+    ofs.close();
     return;
 }
 
@@ -101,7 +102,7 @@ void _assign_mass(real_type x, real_type y, real_type z, array3D_r& grid){
             for(int kk=0; kk<o; kk++){
                 k = (wz.i+kk+shape[2])%shape[2];
                 #pragma omp atomic
-                grid(i,j,k) += wx.H[ii]*wy.H[jj]*wz.H[kk];            
+                grid(i,j,k) += wx.H[ii]*wy.H[jj]*wz.H[kk];
             }
         }
     }
@@ -115,7 +116,7 @@ void assign_mass(int o, real_type x, real_type y, real_type z, array3D_r& grid){
         case 2: _assign_mass<2>(x,y,z,grid); break;
         case 3: _assign_mass<3>(x,y,z,grid); break;
         case 4: _assign_mass<4>(x,y,z,grid); break;
-        default: 
+        default:
             cerr << "Incorrect mass assignment order: " << o << endl;
             abort();
     }
@@ -136,16 +137,16 @@ void assign_masses(int o, array2D_r p, array3D_r &grid, int rank, int size){
     #pragma omp parallel for
     for(auto i=p.lbound(0); i<=p.ubound(0); ++i){
         assign_mass(o, p(i,0), p(i,1), p(i,2), grid_nopad);
-    }     
+    }
 
     // In-place reduction with MPI (calls from rank 0 are different from others)
     if(rank==0){
-        MPI_Reduce(MPI_IN_PLACE, grid.data(), grid.size(), 
-                   MPI_DOUBLE, MPI_SUM, 0,  MPI_COMM_WORLD); 
+        MPI_Reduce(MPI_IN_PLACE, grid.data(), grid.size(),
+                   MPI_DOUBLE, MPI_SUM, 0,  MPI_COMM_WORLD);
     }
     else{
-        MPI_Reduce(grid.data(), NULL, grid.size(), 
-                   MPI_DOUBLE, MPI_SUM, 0,  MPI_COMM_WORLD); 
+        MPI_Reduce(grid.data(), NULL, grid.size(),
+                   MPI_DOUBLE, MPI_SUM, 0,  MPI_COMM_WORLD);
     }
     // Compute the average density per grid cell
     real_type avg = blitz::sum(grid_nopad) / (grid_nopad.size());
@@ -260,7 +261,7 @@ int main(int argc, char *argv[]) {
     fftw_plan_with_nthreads(omp_get_max_threads());
 
     int N = 64;
-    string fname = "../b0-final.std"; 
+    string fname = "../b0-final.std";
     array2D_r p = read_particles(fname, rank, size);
 
     // Dummy communicator for FFTW-MPI calls (only rank 0 performs FFT)
@@ -268,11 +269,11 @@ int main(int argc, char *argv[]) {
     MPI_Comm_split(MPI_COMM_WORLD, rank, rank, &dummy_comm);
 
     ptrdiff_t alloc_local, local_n0, local_0_start;
-    
+
     // Compute local sizes
     alloc_local = fftw_mpi_local_size_3d(N, N, N, dummy_comm,
                                          &local_n0, &local_0_start);
-    
+
     // Exchange particles after reading.
     // Communicate domain decomposition with MPI_Allgather()
     // counts = count_by_rank(p);
@@ -288,16 +289,16 @@ int main(int argc, char *argv[]) {
     if(rank==0){
         // Allocate the output buffer for the fft
         array3D_c fft_grid(local_n0,N,N/2+1);
-        
+
         // Compute the fft of the over-density field
         // The results are stored in fft_grid (out-of-place method)
         compute_fft(grid, fft_grid, N, dummy_comm);
-        
+
         // Compute the power spectrum
         compute_pk(fft_grid, N);
     }
 
     fftw_mpi_cleanup();
     MPI_Finalize();
-    
+
 }

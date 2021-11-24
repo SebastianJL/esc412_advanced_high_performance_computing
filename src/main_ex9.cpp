@@ -244,6 +244,28 @@ void compute_pk(array3D_c fft_grid, int N){
     }
 }
 
+void count_sort(vector<double> &arr, vector<int> idx, int max_idx){
+    vector<int> count(max_idx + 1);
+    vector<double> out(arr.size());
+
+    for (int i = 0; i < arr.size(); i++)
+        count[idx[i]]++;
+
+    for (int i = 1; i < count.size(); i++)
+        count[i] += count[i - 1];
+
+    for (int i = arr.size() - 1; i >= 0; i--){
+        out[count[idx[i]] - 1] = arr[i];
+        count[idx[i]]--;
+    }
+
+    for (int i = 0; i < arr.size(); i++)
+        arr[i] = out[i];
+}
+
+
+
+
 int main(int argc, char *argv[]) {
     int thread_support;
     int rank, size;
@@ -276,8 +298,11 @@ int main(int argc, char *argv[]) {
 
     // Exchange particles after reading.
     // Communicate domain decomposition with MPI_Allgather()
-    // counts = count_by_rank(p);
-    // count_sort(p);
+    ptrdiff_t starting_indices[size];
+    MPI_Allgather(&local_0_start, 1, MPI_INT, starting_indices, size, MPI_INT);
+    print_array(starting_indices, size);
+    // counts = count_by_rank(p, starting_indices);
+    // count_sort(p, counts);
     // Communicate counts with MPI_Alltoall()
     // Exchange particles with MPI_Alltoallv()
 

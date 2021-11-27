@@ -10,10 +10,14 @@ include_directories(include/blitz/meta)
 include_directories(include/random)
 include_directories(src)
 
+
+# test_mass_assignement
 add_executable(test_mass_assignement
         src/test_mass_assignement.cpp
         src/tipsy.cpp)
 
+
+# power spectrum
 add_executable(power_spectrum
         src/main.cpp
         src/tipsy.cpp
@@ -23,8 +27,12 @@ add_executable(power_spectrum
 target_link_libraries(power_spectrum fftw3)
 
 
+# main_ex9
+find_package(MPI REQUIRED)
 add_executable(main_ex9
         src/main_ex9.cpp
         src/tipsy.cpp
         )
+target_include_directories(main_ex9 PUBLIC ${MPI_CXX_INCLUDE_PATH})
+target_link_libraries(main_ex9 ${MPI_CXX_LIBRARIES})
 target_link_libraries(main_ex9 fftw3-mpi)

@@ -50,11 +50,13 @@ void print_vector(std::vector<t>& vec){
 }
 
 template<typename t>
-void print_array(t* arr, int length){
-    std::cout << '{';
+std::string sprint_array(t* arr, int length){
+    std::stringstream buffer;
+    buffer << "{ ";
     for (int i = 0; i < length; i++)
-        std::cout << arr[i] << " ";
-    std::cout << '}' << std::endl;
+        buffer << arr[i] << " ";
+    buffer << '}' << std::flush;
+    return buffer.str();
 }
 
 #endif // PROJECT_IO_UTILS_H

@@ -283,7 +283,7 @@ int main(int argc, char *argv[]) {
     fftw_plan_with_nthreads(omp_get_max_threads());
 
     int N = 64;
-    string fname = "../input/b0-final.std";
+    string fname = "input/b0-final.std";
     array2D_r p = read_particles(fname, rank, size);
 
     // Dummy communicator for FFTW-MPI calls (only rank 0 performs FFT)
@@ -299,7 +299,7 @@ int main(int argc, char *argv[]) {
     // Exchange particles after reading.
     // Communicate domain decomposition with MPI_Allgather()
     ptrdiff_t starting_indices[size];
-    MPI_Allgather(&local_0_start, 1, MPI_INT, starting_indices, size, MPI_INT);
+    MPI_Allgather(&local_0_start, 1, MPI_INT, starting_indices, size, MPI_INT, MPI_COMM_WORLD);
     print_array(starting_indices, size);
     return 0;
     // counts = count_by_rank(p, starting_indices);

@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.19)
 project(power_spectrum)
+include(CMakePrintHelpers)
 
 set(CMAKE_CXX_STANDARD 17)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
+
 
 include_directories(include)
 include_directories(include/blitz)
@@ -29,10 +32,16 @@ target_link_libraries(power_spectrum fftw3)
 
 # main_ex9
 find_package(MPI REQUIRED)
+find_package(FFTW REQUIRED)
+#set(MDL_FFTW ${FFTW_FOUND})
+
 add_executable(main_ex9
         src/main_ex9.cpp
         src/tipsy.cpp
         )
-target_include_directories(main_ex9 PUBLIC ${MPI_CXX_INCLUDE_PATH})
-target_link_libraries(main_ex9 ${MPI_CXX_LIBRARIES})
-target_link_libraries(main_ex9 fftw3-mpi)
+cmake_print_variables(FFTW_INCLUDES)
+cmake_print_variables(FFTW_LIBRARIES)
+target_link_libraries(main_ex9 ${MPI_C_LIBRARIES})
+target_link_libraries(main_ex9 ${FFTW_LIBRARIES})
+target_include_directories(main_ex9 PUBLIC ${MPI_C_INCLUDE_PATH})
+target_include_directories(main_ex9 PUBLIC ${FFTW_INCLUDES})

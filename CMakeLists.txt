@@ -34,6 +34,8 @@ target_link_libraries(power_spectrum fftw3)
 find_package(MPI REQUIRED)
 find_package(FFTW REQUIRED)
 #set(MDL_FFTW ${FFTW_FOUND})
+find_package(OpenMP REQUIRED)
+
 
 add_executable(main_ex9
         src/main_ex9.cpp
@@ -41,7 +43,10 @@ add_executable(main_ex9
         )
 cmake_print_variables(FFTW_INCLUDES)
 cmake_print_variables(FFTW_LIBRARIES)
-target_link_libraries(main_ex9 ${MPI_C_LIBRARIES})
-target_link_libraries(main_ex9 ${FFTW_LIBRARIES})
+target_link_libraries(main_ex9 PUBLIC ${MPI_C_LIBRARIES})
+target_link_libraries(main_ex9 PUBLIC ${FFTW_LIBRARIES})
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(main_ex9 PUBLIC OpenMP::OpenMP_CXX)
+endif()
 target_include_directories(main_ex9 PUBLIC ${MPI_C_INCLUDE_PATH})
 target_include_directories(main_ex9 PUBLIC ${FFTW_INCLUDES})

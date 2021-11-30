@@ -37,7 +37,7 @@ array2D_r read_particles(string fname, int rank, int size){
     TipsyIO io;
 
     io.open(fname);
-    cout << "Found "<<io.count() << " particles."<<endl;
+    cout << "(rank:" << rank << ") " << "Found "<<io.count() << " particles."  << endl;
 
     if (io.fail()) {
         cerr << "Unable to open file" << endl;
@@ -57,7 +57,8 @@ array2D_r read_particles(string fname, int rank, int size){
     io.load(p);
     elapsed = getTime() - t0;
 
-    cout << "particle reading: " << elapsed << " s" << endl;
+    cout << "(rank:" << rank << ") " << "Particles read: " << p.length(0) << endl;
+    cout << "(rank:" << rank << ") " << "particle reading: " << elapsed << " s" << endl;
     return p;
 }
 
@@ -263,7 +264,10 @@ void count_sort(vector<double> &arr, vector<int> idx, int max_idx){
         arr[i] = out[i];
 }
 
-
+void finalize() {
+    fftw_mpi_cleanup();
+    MPI_Finalize();
+}
 
 
 int main(int argc, char *argv[]) {
@@ -293,14 +297,14 @@ int main(int argc, char *argv[]) {
     ptrdiff_t alloc_local, local_n0, local_0_start;
 
     // Compute local sizes
-    alloc_local = fftw_mpi_local_size_3d(N, N, N, dummy_comm,
+    alloc_local = fftw_mpi_local_size_3d(N, N, N, MPI_COMM_WORLD,
                                          &local_n0, &local_0_start);
-
     // Exchange particles after reading.
     // Communicate domain decomposition with MPI_Allgather()
     ptrdiff_t starting_indices[size];
-    MPI_Allgather(&local_0_start, 1, MPI_INT, starting_indices, size, MPI_INT, MPI_COMM_WORLD);
-    print_array(starting_indices, size);
+    MPI_Allgather(&local_0_start, 1, MPI_AINT, starting_indices, 1, MPI_AINT, MPI_COMM_WORLD);
+    cout << "(rank:" << rank << ") " << sprint_array(starting_indices, size) << endl;
+    finalize();
     return 0;
     // counts = count_by_rank(p, starting_indices);
     // count_sort(p, counts);

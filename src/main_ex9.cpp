@@ -9,6 +9,7 @@
 
 #include "aweights.h"
 #include "io_utils.h"
+#include "mass_assignement.h"
 #include "tipsy.h"
 
 using namespace std;
@@ -264,6 +265,19 @@ void count_sort(vector<double> &arr, vector<int> idx, int max_idx){
         arr[i] = out[i];
 }
 
+template<int Order>
+int slab_index(real_type x_coordinate, int n_grid, ptrdiff_t* starting_indices, int size_starting_indices) {
+    auto w = AssignmentWeights<Order>(grid_coordinate(x_coordinate, n_grid));
+    int rank_index = 0;
+    for (auto i=0; i<size_starting_indices; i++) {
+        if (w.i < starting_indices[i]) {
+            rank_index = i - 1;
+            break;
+        }
+    }
+    return rank_index;
+}
+
 void finalize() {
     fftw_mpi_cleanup();
     MPI_Finalize();
@@ -304,9 +318,9 @@ int main(int argc, char *argv[]) {
     ptrdiff_t starting_indices[size];
     MPI_Allgather(&local_0_start, 1, MPI_AINT, starting_indices, 1, MPI_AINT, MPI_COMM_WORLD);
     cout << "(rank:" << rank << ") " << sprint_array(starting_indices, size) << endl;
+    // counts = count_by_rank(p, starting_indices);
     finalize();
     return 0;
-    // counts = count_by_rank(p, starting_indices);
     // count_sort(p, counts);
     // Communicate counts with MPI_Alltoall()
     // Exchange particles with MPI_Alltoallv()

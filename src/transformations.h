@@ -8,11 +8,12 @@
 #include "aweights.h"
 #include "blitz/array.h"
 
-/*
- * Return the grid coordinate from a euclidean coordinate.
+/**
+ * Return the grid coordinate for a euclidean coordinate in the interval
+ * [-0.5, 0.5].
  *
- * @param coord coordinate.
- * @param n_grid size of the grid.
+ * @param coord: Coordinate.
+ * @param n_grid: Size of the grid.
  */
 template <typename real_t> real_t grid_coordinate(real_t coord, int n_grid) {
     return n_grid * (coord + 0.5);

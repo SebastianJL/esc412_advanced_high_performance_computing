@@ -49,3 +49,9 @@ if(OpenMP_CXX_FOUND)
 endif()
 target_include_directories(main_ex9 PUBLIC ${MPI_C_INCLUDE_PATH})
 target_include_directories(main_ex9 PUBLIC ${FFTW_INCLUDES})
+
+
+# Test transformations.h
+add_executable(test_transformations
+        src/test_transformations.cpp
+        )

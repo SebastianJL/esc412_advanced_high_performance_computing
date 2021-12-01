@@ -8,7 +8,7 @@
 #include "aweights.h"
 #include "blitz/array.h"
 
-/*
+/**
  * Wrap the point i on a grid with size n_grid using if else statements.
  *
  * @param i Coordinate to wrap.
@@ -21,7 +21,9 @@ int wrap_if_else(int i, int n_grid) {
         return i + n_grid;
     return i;
 }
-/*
+
+
+/**
  * Wrap the point i on a grid with size n_grid using the % operator.
  *
  * @param i Coordinate to wrap.
@@ -41,6 +43,7 @@ int wrap_modulo(int i, int n_grid) { return (i + n_grid) % n_grid; }
 template <typename real_t> real_t grid_coordinate(real_t coord, int n_grid) {
     return n_grid * (coord + 0.5);
 }
+
 
 /**
  * Return the rank that a particle belongs to in the mass grid.
@@ -64,6 +67,7 @@ int particle_rank(real_t grid_coordinate, std::ptrdiff_t *starting_indices,
     }
     return wrap_if_else(rank_index, size_starting_indices);
 }
+
 
 template <typename real_t>
 blitz::Array<real_t, 2>

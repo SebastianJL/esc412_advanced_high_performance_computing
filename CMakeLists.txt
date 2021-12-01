@@ -24,9 +24,7 @@ add_executable(test_mass_assignement
 add_executable(power_spectrum
         src/main.cpp
         src/tipsy.cpp
-        src/mass_assignement.h
-        src/fourier_transform.h
-        src/io_utils.h)
+)
 target_link_libraries(power_spectrum fftw3)
 
 

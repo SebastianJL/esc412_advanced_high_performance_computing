@@ -7,28 +7,6 @@
 #include "tipsy.h"
 #include "transformations.h"
 
-/*
- * Wrap the point i on a grid with size n_grid using the % operator.
- *
- * @param i Coordinate to wrap.
- * @param n_grid Wrap modulo n_grid.
- */
-int wrap_modulo(int i, int n_grid) { return (i + n_grid) % n_grid; }
-
-/*
- * Wrap the point i on a grid with size n_grid using if else statements.
- *
- * @param i Coordinate to wrap.
- * @param n_grid Wrap modulo n_grid.
- */
-int wrap_if_else(int i, int n_grid) {
-    if (i >= n_grid)
-        return i - n_grid;
-    if (i < 0)
-        return i + n_grid;
-    return i;
-}
-
 int main() {
     using std::cout, std::endl, std::cerr;
     using namespace blitz;

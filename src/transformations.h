@@ -8,6 +8,29 @@
 #include "aweights.h"
 #include "blitz/array.h"
 
+/*
+ * Wrap the point i on a grid with size n_grid using if else statements.
+ *
+ * @param i Coordinate to wrap.
+ * @param n_grid Wrap modulo n_grid.
+ */
+int wrap_if_else(int i, int n_grid) {
+    if (i >= n_grid)
+        return i - n_grid;
+    if (i < 0)
+        return i + n_grid;
+    return i;
+}
+/*
+ * Wrap the point i on a grid with size n_grid using the % operator.
+ *
+ * @param i Coordinate to wrap.
+ * @param n_grid Wrap modulo n_grid.
+ */
+int wrap_modulo(int i, int n_grid) { return (i + n_grid) % n_grid; }
+#endif // POWER_SPECTRUM_TRANSFORMATIONS_H
+
+
 /**
  * Return the grid coordinate for a euclidean coordinate in the interval
  * [-0.5, 0.5].
@@ -40,7 +63,7 @@ int particle_rank(real_t x_coordinate, int n_grid,
             break;
         }
     }
-    return rank_index;
+    return wrap_if_else(rank_index, size_starting_indices);
 }
 
 template <typename real_t>
@@ -53,4 +76,3 @@ project_3d_to_2d(const blitz::Array<real_t, 3> &grid_3d) {
     grid_2d = max(grid_3d, k);
     return grid_2d;
 }
-#endif // POWER_SPECTRUM_TRANSFORMATIONS_H

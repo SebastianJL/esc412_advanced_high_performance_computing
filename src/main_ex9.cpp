@@ -9,7 +9,6 @@
 
 #include "aweights.h"
 #include "io_utils.h"
-#include "mass_assignement.h"
 #include "tipsy.h"
 
 using namespace std;
@@ -263,19 +262,6 @@ void count_sort(vector<double> &arr, vector<int> idx, int max_idx){
 
     for (int i = 0; i < arr.size(); i++)
         arr[i] = out[i];
-}
-
-template<int Order>
-int slab_index(real_type x_coordinate, int n_grid, ptrdiff_t* starting_indices, int size_starting_indices) {
-    auto w = AssignmentWeights<Order>(grid_coordinate(x_coordinate, n_grid));
-    int rank_index = 0;
-    for (auto i=0; i<size_starting_indices; i++) {
-        if (w.i < starting_indices[i]) {
-            rank_index = i - 1;
-            break;
-        }
-    }
-    return rank_index;
 }
 
 void finalize() {

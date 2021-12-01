@@ -8,6 +8,7 @@
 #include "aweights.h"
 #include "blitz/array.h"
 #include "io_utils.h"
+#include "transformations.h"
 
 /*
  * Return the nearest grid point for a single coordinate.
@@ -18,16 +19,6 @@
 template<typename real_t>
 real_t ngp(real_t coord, int n_grid) {
     return std::floor(n_grid * (coord + 0.5));
-}
-/*
- * Return the grid coordinate from a euclidean coordinate.
- *
- * @param coord coordinate.
- * @param n_grid size of the grid.
- */
-template<typename real_t>
-real_t grid_coordinate(real_t coord, int n_grid) {
-    return n_grid * (coord + 0.5);
 }
 /*
  * Return a grid of mass densities given a particle distribution.

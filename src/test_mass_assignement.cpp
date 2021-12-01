@@ -5,6 +5,7 @@
 #include "io_utils.h"
 #include "mass_assignement.h"
 #include "tipsy.h"
+#include "transformations.h"
 
 /*
  * Wrap the point i on a grid with size n_grid using the % operator.

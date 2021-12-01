@@ -40,6 +40,7 @@ find_package(OpenMP REQUIRED)
 add_executable(main_ex9
         src/main_ex9.cpp
         src/tipsy.cpp
+        src/transformations.h
         )
 cmake_print_variables(FFTW_INCLUDES)
 cmake_print_variables(FFTW_LIBRARIES)

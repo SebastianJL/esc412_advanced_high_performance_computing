@@ -272,13 +272,13 @@ void finalize() {
 
 int main(int argc, char *argv[]) {
     int thread_support;
-    int rank, size;
+    int rank, mpi_size;
 
     MPI_Init_thread(&argc, &argv,
         MPI_THREAD_FUNNELED,
         &thread_support);
 
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     fftw_mpi_init();
@@ -288,7 +288,7 @@ int main(int argc, char *argv[]) {
 
     int N_grid = 64;
     string fname = "input/b0-final.std";
-    array2D_r p = read_particles(fname, rank, size);
+    array2D_r p = read_particles(fname, rank, mpi_size);
 
     // Dummy communicator for FFTW-MPI calls (only rank 0 performs FFT)
     MPI_Comm dummy_comm;
@@ -301,7 +301,7 @@ int main(int argc, char *argv[]) {
                                          &local_n0, &local_0_start);
     // Exchange particles after reading.
     // Communicate domain decomposition with MPI_Allgather()
-    ptrdiff_t starting_indices[size];
+    ptrdiff_t starting_indices[mpi_size];
     MPI_Allgather(&local_0_start, 1, MPI_AINT, starting_indices, 1, MPI_AINT, MPI_COMM_WORLD);
     cout << "(rank:" << rank << ") " << sprint_array(starting_indices, size) << endl;
     // counts = count_by_rank(p, starting_indices);
@@ -314,7 +314,7 @@ int main(int argc, char *argv[]) {
     // FFTW-MPI requires the padding even for out-of-place FFT
     array3D_r grid(local_n0, N_grid, N_grid +2);
 
-    assign_masses(4, p, grid, rank, size);
+    assign_masses(4, p, grid, rank, mpi_size);
 
     if(rank==0){
         // Allocate the output buffer for the fft

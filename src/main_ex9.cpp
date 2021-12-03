@@ -286,7 +286,7 @@ int main(int argc, char *argv[]) {
     fftw_init_threads();
     fftw_plan_with_nthreads(omp_get_max_threads());
 
-    int N = 64;
+    int N_grid = 64;
     string fname = "input/b0-final.std";
     array2D_r p = read_particles(fname, rank, size);
 
@@ -297,7 +297,7 @@ int main(int argc, char *argv[]) {
     ptrdiff_t alloc_local, local_n0, local_0_start;
 
     // Compute local sizes
-    alloc_local = fftw_mpi_local_size_3d(N, N, N, MPI_COMM_WORLD,
+    alloc_local = fftw_mpi_local_size_3d(N_grid, N_grid, N_grid, MPI_COMM_WORLD,
                                          &local_n0, &local_0_start);
     // Exchange particles after reading.
     // Communicate domain decomposition with MPI_Allgather()
@@ -312,20 +312,20 @@ int main(int argc, char *argv[]) {
     // Exchange particles with MPI_Alltoallv()
 
     // FFTW-MPI requires the padding even for out-of-place FFT
-    array3D_r grid(local_n0,N,N+2);
+    array3D_r grid(local_n0, N_grid, N_grid +2);
 
     assign_masses(4, p, grid, rank, size);
 
     if(rank==0){
         // Allocate the output buffer for the fft
-        array3D_c fft_grid(local_n0,N,N/2+1);
+        array3D_c fft_grid(local_n0, N_grid, N_grid /2+1);
 
         // Compute the fft of the over-density field
         // The results are stored in fft_grid (out-of-place method)
-        compute_fft(grid, fft_grid, N, dummy_comm);
+        compute_fft(grid, fft_grid, N_grid, dummy_comm);
 
         // Compute the power spectrum
-        compute_pk(fft_grid, N);
+        compute_pk(fft_grid, N_grid);
     }
 
     fftw_mpi_cleanup();

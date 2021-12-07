@@ -38,12 +38,22 @@ void print_vector(std::vector<t>& vec){
     std::cout << ']' << std::endl;
 }
 
-template<typename t>
-std::string sprint_array(t* arr, int length){
+template<typename T>
+std::string sprint_array(T* arr, int length){
     std::stringstream buffer;
     buffer << "{ ";
     for (int i = 0; i < length; i++)
         buffer << arr[i] << " ";
+    buffer << '}' << std::flush;
+    return buffer.str();
+}
+
+template<typename T>
+std::string sprint_array(blitz::Array<T, 1> arr){
+    std::stringstream buffer;
+    buffer << "{ ";
+    for (int i = arr.lbound(0); i <= arr.ubound(0); i++)
+        buffer << arr(i) << " ";
     buffer << '}' << std::flush;
     return buffer.str();
 }

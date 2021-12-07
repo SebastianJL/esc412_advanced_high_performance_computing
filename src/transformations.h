@@ -14,7 +14,8 @@
  * @param i Coordinate to wrap.
  * @param n_grid Wrap modulo n_grid.
  */
-int wrap_if_else(int i, int n_grid) {
+template<typename T>
+int wrap_if_else(int i, T n_grid) {
     if (i >= n_grid)
         return i - n_grid;
     if (i < 0)

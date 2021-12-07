@@ -1,5 +1,4 @@
 #include <fstream>
-#include <typeinfo>
 #include <complex>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -10,6 +9,7 @@
 #include "aweights.h"
 #include "io_utils.h"
 #include "tipsy.h"
+#include "transformations.h"
 
 using namespace std;
 
@@ -37,7 +37,7 @@ array2D_r read_particles(string fname, int rank, int size){
     TipsyIO io;
 
     io.open(fname);
-    cout << "(rank:" << rank << ") " << "Found "<<io.count() << " particles."  << endl;
+//    cout << "(rank:" << rank << ") " << "Found "<<io.count() << " particles."  << endl;
 
     if (io.fail()) {
         cerr << "Unable to open file" << endl;
@@ -57,8 +57,8 @@ array2D_r read_particles(string fname, int rank, int size){
     io.load(p);
     elapsed = getTime() - t0;
 
-    cout << "(rank:" << rank << ") " << "Particles read: " << p.length(0) << endl;
-    cout << "(rank:" << rank << ") " << "particle reading: " << elapsed << " s" << endl;
+//    cout << "(rank:" << rank << ") " << "Particles read: " << p.length(0) << endl;
+//    cout << "(rank:" << rank << ") " << "particle reading: " << elapsed << " s" << endl;
     return p;
 }
 
@@ -269,8 +269,114 @@ void finalize() {
     MPI_Finalize();
 }
 
+/** Exchange particles such that each process only has the particles that fit
+ * within its own part of the grid.
+ * @param particles
+ * @param N_grid: Total size of the particle grid.
+ * @param start: Local starting index in the grid. I.e. grid(i, 0, 0) is the
+ * first element of the local grid.
+ */
+template<int Order, typename real_t>
+void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_t start) {
+    using blitz::Range;
+    using blitz::Array;
+    int rank, mpi_size;
+
+    MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+
+    // Communicate domain decomposition with MPI_Allgather().
+    blitz::Array<ptrdiff_t, 1> domain_boundaries(mpi_size + 1);
+    domain_boundaries(mpi_size) = N_grid;
+    MPI_Allgather(&start, 1, MPI_AINT, domain_boundaries.data(), 1, MPI_AINT, MPI_COMM_WORLD);
+
+
+    // Count number of particles per slab.
+    Array<int , 1> counts(N_grid); // Number of particles per slab.
+    Array<int, 1> idx(Range(particles.lbound(0), particles.ubound(0))); // Slab index per particle.
+    counts = 0u;
+    for (auto i = particles.lbound(0); i <= particles.ubound(0); ++i) {
+        auto x_grid = grid_coordinate(particles(i, 0), N_grid);
+        auto w = AssignmentWeights<Order>(x_grid);
+        auto slab_index = wrap_if_else(w.i, N_grid);
+        counts(slab_index) += 1;
+        if (!idx.isInRange(i)) {
+            cout << i << endl;
+            cout << particles.length() << endl;
+            break;
+        }
+        idx(i) = slab_index;
+    }
+
+    // DEBUG Check that each particle has been assigned exactly to one slab.
+    assert(sum(counts) == particles.length(0));
+
+
+    // Order particles by slab (out-of-place).
+    Array<real_t, 2> p_out(particles.extent());
+    Array<int, 1> counts_total(counts.extent());
+
+    counts_total(0) = counts(0);
+    for (int i = counts.lbound(0) + 1; i <= counts.ubound(0); ++i)
+        counts_total(i) = counts(i) + counts_total(i - 1);
+
+    // DEBUG Check that counts have been correctly summed.
+    assert(counts_total(counts_total.ubound(0)) == particles.length(0));
+
+    blitz::Array<int , 1> counts_per_rank(mpi_size); // Number of particles per slab.
+    blitz::Array<int , 1> offsets(mpi_size);
+    counts_per_rank = 0;
+    for (auto i = counts_per_rank.lbound(0); i <= counts_per_rank.ubound(0); ++i) {
+        offsets(i) = counts_total(domain_boundaries(i+1) - 1);
+    }
+    for (auto i = counts_per_rank.ubound(0); i > counts_per_rank.lbound(0); --i) {
+        counts_per_rank(i) = counts_per_rank(i-1) + offsets(i);
+    }
+
+    // DEBUG.
+    assert(sum(counts_per_rank) == particles.length(0));
+
+    auto all = blitz::Range::all();
+    for (int i = particles.ubound(0); i >= particles.lbound(0); --i){
+        p_out(counts_total(idx(i)) - 1, all) = particles(i, all);
+        counts_total(idx(i)) -= 1;
+    }
+    particles.reference(p_out);
+
+    // DEBUG Check that particles are in order.
+    auto current_index = 0;
+    for (auto i = particles.lbound(0); i <= particles.ubound(0); ++i) {
+        auto x_grid = grid_coordinate(particles(i, 0), N_grid);
+        auto w = AssignmentWeights<Order>(x_grid);
+        auto slab_index = wrap_if_else(w.i, N_grid);
+//        cout << "(rank:" << rank << ") slab_index: " << slab_index << endl;
+        assert(slab_index >= current_index);
+        current_index = slab_index;
+    }
+
+
+    // Communicate counts_per_rank with MPI_Alltoall()
+    Array<int, 1> counts_from_rank(mpi_size);
+    MPI_Alltoall(counts_per_rank.data(), 1, MPI_UINT32_T,
+                 counts_from_rank.data(), 1, MPI_UINT32_T, MPI_COMM_WORLD);
+
+//    cout << "(rank:" << rank << ") counts_per_rank: " << sprint_array(counts_per_rank) << endl;
+//    cout << "(rank:" << rank << ") counts_from_rank: " << sprint_array(counts_from_rank) << endl;
+
+    // Exchange particles with MPI_Alltoallv()
+    MPI_Datatype dt_particle;
+    MPI_Type_contiguous(3, MPI_DOUBLE, &dt_particle);
+    MPI_Type_commit(&dt_particle);
+
+    MPI_Alltoallv();
+
+    MPI_Type_free(&dt_particle);
+}
 
 int main(int argc, char *argv[]) {
+    using namespace blitz;
+    static const int Order = 4;
     int thread_support;
     int rank, mpi_size;
 
@@ -299,17 +405,11 @@ int main(int argc, char *argv[]) {
     // Compute local sizes
     alloc_local = fftw_mpi_local_size_3d(N_grid, N_grid, N_grid, MPI_COMM_WORLD,
                                          &local_n0, &local_0_start);
-    // Exchange particles after reading.
-    // Communicate domain decomposition with MPI_Allgather()
-    ptrdiff_t starting_indices[mpi_size];
-    MPI_Allgather(&local_0_start, 1, MPI_AINT, starting_indices, 1, MPI_AINT, MPI_COMM_WORLD);
-    cout << "(rank:" << rank << ") " << sprint_array(starting_indices, size) << endl;
-    // counts = count_by_rank(p, starting_indices);
+
+    exchange_particles<Order>(p, N_grid, local_0_start);
+    cout << "yea, we did it" << endl;
     finalize();
     return 0;
-    // count_sort(p, counts);
-    // Communicate counts with MPI_Alltoall()
-    // Exchange particles with MPI_Alltoallv()
 
     // FFTW-MPI requires the padding even for out-of-place FFT
     array3D_r grid(local_n0, N_grid, N_grid +2);

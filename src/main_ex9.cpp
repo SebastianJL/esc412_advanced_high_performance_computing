@@ -324,14 +324,14 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     // DEBUG Check that counts have been correctly summed.
     assert(counts_total(counts_total.ubound(0)) == particles.length(0));
 
-    blitz::Array<int , 1> counts_per_rank(mpi_size); // Number of particles per slab.
-    blitz::Array<int , 1> offsets(mpi_size);
+    blitz::Array<int , 1> counts_per_rank(mpi_size); // Number of particles per rank.
+    blitz::Array<int , 1> offsets_per_rank(mpi_size);
     counts_per_rank = 0;
     for (auto i = counts_per_rank.lbound(0); i <= counts_per_rank.ubound(0); ++i) {
-        offsets(i) = counts_total(domain_boundaries(i+1) - 1);
+        offsets_per_rank(i) = counts_total(domain_boundaries(i+1) - 1);
     }
     for (auto i = counts_per_rank.ubound(0); i > counts_per_rank.lbound(0); --i) {
-        counts_per_rank(i) = counts_per_rank(i-1) + offsets(i);
+        counts_per_rank(i) = counts_per_rank(i-1) + offsets_per_rank(i);
     }
 
     // DEBUG.
@@ -360,18 +360,44 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     Array<int, 1> counts_from_rank(mpi_size);
     MPI_Alltoall(counts_per_rank.data(), 1, MPI_UINT32_T,
                  counts_from_rank.data(), 1, MPI_UINT32_T, MPI_COMM_WORLD);
+    Array<int, 1> offsets_from_rank(mpi_size);
+    offsets_from_rank(0) = 0;
+    for (auto i = counts_from_rank.lbound(0) + 1; i <= counts_from_rank.ubound(0); ++i) {
+        offsets_from_rank(i) = counts_from_rank(i-1) + offsets_from_rank(i);
+    }
 
 //    cout << "(rank:" << rank << ") counts_per_rank: " << sprint_array(counts_per_rank) << endl;
 //    cout << "(rank:" << rank << ") counts_from_rank: " << sprint_array(counts_from_rank) << endl;
 
     // Exchange particles with MPI_Alltoallv()
+    Array<double, 2> particles_balanced(sum(counts_from_rank));
+    particles_balanced = 0;
+
     MPI_Datatype dt_particle;
     MPI_Type_contiguous(3, MPI_DOUBLE, &dt_particle);
     MPI_Type_commit(&dt_particle);
 
-    MPI_Alltoallv();
+
+    MPI_Alltoallv(particles.data(), counts_per_rank.data(),
+                  offsets_per_rank.data(), dt_particle,
+                  particles_balanced.data(), counts_from_rank.data(),
+                  offsets_from_rank.data(), dt_particle,
+                  MPI_COMM_WORLD);
 
     MPI_Type_free(&dt_particle);
+    particles.reference(particles_balanced);
+
+    // DEBUG check that all particles now belong into own rank.
+    for (auto i = particles.lbound(0); i <= particles.ubound(0); ++i) {
+        auto x_grid = grid_coordinate(particles(i, 0), N_grid);
+        auto w = AssignmentWeights<Order>(x_grid);
+        auto slab_index = wrap_if_else(w.i, N_grid);
+        //        cout << "(rank:" << rank << ") slab_index: " << slab_index << endl;
+        assert(slab_index > domain_boundaries(rank));
+        current_index = slab_index;
+    }
+
+
 }
 
 int main(int argc, char *argv[]) {

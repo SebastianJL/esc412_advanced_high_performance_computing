@@ -280,10 +280,10 @@ template<int Order, typename real_t>
 void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_t start) {
     using blitz::Range;
     using blitz::Array;
-    int rank, mpi_size;
+    int mpi_rank, mpi_size;
 
     MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
 
 
     // Communicate domain decomposition with MPI_Allgather().
@@ -324,18 +324,32 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     // DEBUG Check that counts have been correctly summed.
     assert(counts_total(counts_total.ubound(0)) == particles.length(0));
 
+    blitz::Array<int , 1> offsets_per_rank(mpi_size); // Offset of each rank in particles array.
     blitz::Array<int , 1> counts_per_rank(mpi_size); // Number of particles per rank.
-    blitz::Array<int , 1> offsets_per_rank(mpi_size);
     counts_per_rank = 0;
-    for (auto i = counts_per_rank.lbound(0); i <= counts_per_rank.ubound(0); ++i) {
-        offsets_per_rank(i) = counts_total(domain_boundaries(i+1) - 1);
+    offsets_per_rank = 0;
+    for (auto i = offsets_per_rank.lbound(0) + 1; i <= offsets_per_rank.ubound(0); ++i) {
+        offsets_per_rank(i) = counts_total(domain_boundaries(i));
     }
-    for (auto i = counts_per_rank.ubound(0); i > counts_per_rank.lbound(0); --i) {
-        counts_per_rank(i) = counts_per_rank(i-1) + offsets_per_rank(i);
+    for (auto i = offsets_per_rank.lbound(0); i < offsets_per_rank.ubound(0); ++i) {
+        counts_per_rank(i) = offsets_per_rank(i+1) - offsets_per_rank(i);
     }
-
+    {
+        auto _last = offsets_per_rank.ubound(0);
+        counts_per_rank(_last) = particles.length(0) - offsets_per_rank(_last);
+    }
     // DEBUG.
+    if (mpi_rank == 3) {
+    cout << "(rank:" << mpi_rank << ") particles.length(0): " << particles.length(0) << endl;
+    cout << "(rank:" << mpi_rank << ") domain_boundaries: " << sprint_array(domain_boundaries) << endl;
+    cout << "(rank:" << mpi_rank << ") counts: " << sprint_array(counts) << endl;
+    cout << "(rank:" << mpi_rank << ") counts_total: " << sprint_array(counts_total) << endl;
+    cout << "(rank:" << mpi_rank << ") offsets_per_rank: " << sprint_array(offsets_per_rank) << endl;
+    cout << "(rank:" << mpi_rank << ") counts_per_rank: " << sprint_array(counts_per_rank) << endl;
+//    cout << "(rank:" << mpi_rank << ") sum(counts_per_rank): " << sum(counts_per_rank) << endl;
+    }
     assert(sum(counts_per_rank) == particles.length(0));
+    return;
 
     auto all = blitz::Range::all();
     for (int i = particles.ubound(0); i >= particles.lbound(0); --i){
@@ -350,7 +364,7 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
         auto x_grid = grid_coordinate(particles(i, 0), N_grid);
         auto w = AssignmentWeights<Order>(x_grid);
         auto slab_index = wrap_if_else(w.i, N_grid);
-//        cout << "(rank:" << rank << ") slab_index: " << slab_index << endl;
+//        cout << "(rank:" << mpi_rank << ") slab_index: " << slab_index << endl;
         assert(slab_index >= current_index);
         current_index = slab_index;
     }
@@ -366,8 +380,8 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
         offsets_from_rank(i) = counts_from_rank(i-1) + offsets_from_rank(i);
     }
 
-//    cout << "(rank:" << rank << ") counts_per_rank: " << sprint_array(counts_per_rank) << endl;
-//    cout << "(rank:" << rank << ") counts_from_rank: " << sprint_array(counts_from_rank) << endl;
+//    cout << "(rank:" << mpi_rank << ") counts_per_rank: " << sprint_array(counts_per_rank) << endl;
+//    cout << "(rank:" << mpi_rank << ") counts_from_rank: " << sprint_array(counts_from_rank) << endl;
 
     // Exchange particles with MPI_Alltoallv()
     Array<double, 2> particles_balanced(sum(counts_from_rank));
@@ -393,7 +407,7 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
         auto w = AssignmentWeights<Order>(x_grid);
         auto slab_index = wrap_if_else(w.i, N_grid);
         //        cout << "(rank:" << rank << ") slab_index: " << slab_index << endl;
-        assert(slab_index > domain_boundaries(rank));
+        assert(slab_index > domain_boundaries(mpi_rank));
         current_index = slab_index;
     }
 
@@ -404,14 +418,14 @@ int main(int argc, char *argv[]) {
     using namespace blitz;
     static const int Order = 4;
     int thread_support;
-    int rank, mpi_size;
+    int mpi_rank, mpi_size;
 
     MPI_Init_thread(&argc, &argv,
         MPI_THREAD_FUNNELED,
         &thread_support);
 
     MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
 
     fftw_mpi_init();
 
@@ -420,29 +434,32 @@ int main(int argc, char *argv[]) {
 
     int N_grid = 64;
     string fname = "input/b0-final.std";
-    array2D_r p = read_particles(fname, rank, mpi_size);
+    array2D_r p = read_particles(fname, mpi_rank, mpi_size);
 
     // Dummy communicator for FFTW-MPI calls (only rank 0 performs FFT)
     MPI_Comm dummy_comm;
-    MPI_Comm_split(MPI_COMM_WORLD, rank, rank, &dummy_comm);
+    MPI_Comm_split(MPI_COMM_WORLD, mpi_rank, mpi_rank, &dummy_comm);
 
     ptrdiff_t alloc_local, local_n0, local_0_start;
 
     // Compute local sizes
     alloc_local = fftw_mpi_local_size_3d(N_grid, N_grid, N_grid, MPI_COMM_WORLD,
                                          &local_n0, &local_0_start);
-
-    exchange_particles<Order>(p, N_grid, local_0_start);
-    cout << "yea, we did it" << endl;
+    if (mpi_size > 1) {
+        exchange_particles<Order>(p, N_grid, local_0_start);
+    } else {
+        assert(mpi_size == 1);
+    }
+    cout << "yes, we did it!" << endl;
     finalize();
     return 0;
 
     // FFTW-MPI requires the padding even for out-of-place FFT
     array3D_r grid(local_n0, N_grid, N_grid +2);
 
-    assign_masses(4, p, grid, rank, mpi_size);
+    assign_masses(4, p, grid, mpi_rank, mpi_size);
 
-    if(rank==0){
+    if(mpi_rank ==0){
         // Allocate the output buffer for the fft
         array3D_c fft_grid(local_n0, N_grid, N_grid /2+1);
 

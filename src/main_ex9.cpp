@@ -37,8 +37,10 @@ array2D_r read_particles(string fname, int rank, int size){
     TipsyIO io;
 
     io.open(fname);
-//    cout << "(rank:" << rank << ") " << "Found "<<io.count() << " particles."  << endl;
-
+    if (rank == 0) {
+        cout << "(rank:" << rank << ") "
+             << "Found " << io.count() << " particles." << endl;
+    }
     if (io.fail()) {
         cerr << "Unable to open file" << endl;
         abort();
@@ -313,13 +315,13 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     assert(sum(counts) == particles.length(0));
 
 
-    // Order particles by slab (out-of-place).
-    Array<real_t, 2> p_out(particles.extent());
+    // Prepare counts and offsets necessary to sort and send the particles.
     Array<int, 1> counts_total(counts.extent());
 
     counts_total(0) = counts(0);
-    for (int i = counts.lbound(0) + 1; i <= counts.ubound(0); ++i)
+    for (int i = counts.lbound(0) + 1; i <= counts.ubound(0); ++i) {
         counts_total(i) = counts(i) + counts_total(i - 1);
+    }
 
     // DEBUG Check that counts have been correctly summed.
     assert(counts_total(counts_total.ubound(0)) == particles.length(0));
@@ -339,18 +341,21 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
         counts_per_rank(_last) = particles.length(0) - offsets_per_rank(_last);
     }
     // DEBUG.
-    if (mpi_rank == 3) {
-    cout << "(rank:" << mpi_rank << ") particles.length(0): " << particles.length(0) << endl;
-    cout << "(rank:" << mpi_rank << ") domain_boundaries: " << sprint_array(domain_boundaries) << endl;
-    cout << "(rank:" << mpi_rank << ") counts: " << sprint_array(counts) << endl;
-    cout << "(rank:" << mpi_rank << ") counts_total: " << sprint_array(counts_total) << endl;
-    cout << "(rank:" << mpi_rank << ") offsets_per_rank: " << sprint_array(offsets_per_rank) << endl;
-    cout << "(rank:" << mpi_rank << ") counts_per_rank: " << sprint_array(counts_per_rank) << endl;
+//    if (mpi_rank == 3) {
+//    cout << "(rank:" << mpi_rank << ") particles.length(0): " << particles.length(0) << endl;
+//    cout << "(rank:" << mpi_rank << ") domain_boundaries: " << sprint_array(domain_boundaries) << endl;
+//    cout << "(rank:" << mpi_rank << ") counts: " << sprint_array(counts) << endl;
+//    cout << "(rank:" << mpi_rank << ") counts_total: " << sprint_array(counts_total) << endl;
+//    cout << "(rank:" << mpi_rank << ") offsets_per_rank: " << sprint_array(offsets_per_rank) << endl;
+//    cout << "(rank:" << mpi_rank << ") counts_per_rank: " << sprint_array(counts_per_rank) << endl;
 //    cout << "(rank:" << mpi_rank << ") sum(counts_per_rank): " << sum(counts_per_rank) << endl;
-    }
+//    }
+    assert(offsets_per_rank(offsets_per_rank.lbound(0)) == 0);
     assert(sum(counts_per_rank) == particles.length(0));
-    return;
 
+
+    // Order particles by slab (out-of-place).
+    Array<real_t, 2> p_out(particles.extent());
     auto all = blitz::Range::all();
     for (int i = particles.ubound(0); i >= particles.lbound(0); --i){
         p_out(counts_total(idx(i)) - 1, all) = particles(i, all);
@@ -372,19 +377,23 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
 
     // Communicate counts_per_rank with MPI_Alltoall()
     Array<int, 1> counts_from_rank(mpi_size);
-    MPI_Alltoall(counts_per_rank.data(), 1, MPI_UINT32_T,
-                 counts_from_rank.data(), 1, MPI_UINT32_T, MPI_COMM_WORLD);
+    MPI_Alltoall(counts_per_rank.data(), 1, MPI_INT,
+                 counts_from_rank.data(), 1, MPI_INT, MPI_COMM_WORLD);
     Array<int, 1> offsets_from_rank(mpi_size);
     offsets_from_rank(0) = 0;
     for (auto i = counts_from_rank.lbound(0) + 1; i <= counts_from_rank.ubound(0); ++i) {
-        offsets_from_rank(i) = counts_from_rank(i-1) + offsets_from_rank(i);
+        offsets_from_rank(i) = counts_from_rank(i-1) + offsets_from_rank(i-1);
     }
-
+//    cout << "(rank:" << mpi_rank << ") particles.length(0): " << particles.length(0) << endl;
+//    cout << "(rank:" << mpi_rank << ") offsets_per_rank: " << sprint_array(offsets_per_rank) << endl;
+//    cout << "(rank:" << mpi_rank << ") offsets_from_rank: " << sprint_array(offsets_from_rank) << endl;
 //    cout << "(rank:" << mpi_rank << ") counts_per_rank: " << sprint_array(counts_per_rank) << endl;
 //    cout << "(rank:" << mpi_rank << ") counts_from_rank: " << sprint_array(counts_from_rank) << endl;
+//    cout << "(rank:" << mpi_rank << ") sum(counts_from_rank): "  << sum(counts_from_rank) << endl;
 
-    // Exchange particles with MPI_Alltoallv()
-    Array<double, 2> particles_balanced(sum(counts_from_rank));
+//    return;
+    // Exchange particles with MPI_Alltoallv().
+    Array<double, 2> particles_balanced(sum(counts_from_rank), 3);
     particles_balanced = 0;
 
     MPI_Datatype dt_particle;
@@ -402,16 +411,22 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     particles.reference(particles_balanced);
 
     // DEBUG check that all particles now belong into own rank.
-    for (auto i = particles.lbound(0); i <= particles.ubound(0); ++i) {
-        auto x_grid = grid_coordinate(particles(i, 0), N_grid);
-        auto w = AssignmentWeights<Order>(x_grid);
-        auto slab_index = wrap_if_else(w.i, N_grid);
-        //        cout << "(rank:" << rank << ") slab_index: " << slab_index << endl;
-        assert(slab_index > domain_boundaries(mpi_rank));
-        current_index = slab_index;
+    if (mpi_rank == 0) {
+
+        for (auto i = particles.lbound(0); i <= particles.ubound(0); ++i) {
+            auto x_grid = grid_coordinate(particles(i, 0), N_grid);
+            auto w = AssignmentWeights<Order>(x_grid);
+            auto slab_index = wrap_if_else(w.i, N_grid);
+            if (!(slab_index < domain_boundaries(mpi_rank+1))) {
+                cout << "(rank:" << mpi_rank << ") domain_boundaries(mpi_rank): " << domain_boundaries(mpi_rank)  << endl;
+                cout << "(rank:" << mpi_rank << ") slab_index: " << slab_index  << endl;
+            }
+            assert(slab_index >= domain_boundaries(mpi_rank));
+//            assert(slab_index < domain_boundaries(mpi_rank+1));
+            current_index = slab_index;
+        }
+        cout << "(rank:" << mpi_rank << ") domain_boundaries: " << sprint_array(domain_boundaries) << endl;
     }
-
-
 }
 
 int main(int argc, char *argv[]) {

@@ -124,13 +124,18 @@ void assign_mass(int o, real_type x, real_type y, real_type z, array3D_r& grid){
 }
 
 // Mass assignment for a list of particles
-void assign_masses(int o, array2D_r p, array3D_r &grid, int rank, int size){
+void assign_masses(int o, array2D_r p, array3D_r &grid, int N_grid){
+    int mpi_rank, mpi_size;
+
+    MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
+
     double t0, elapsed;
     t0 = getTime();
 
     auto shape = grid.shape();
 
-    // Use a view of the grid without the padding
+    // Use a view of the grid without the fft padding
     array3D_r grid_nopad = grid(blitz::Range::all(),
                                 blitz::Range::all(),
                                 blitz::Range(0,shape[2]-3));
@@ -140,18 +145,17 @@ void assign_masses(int o, array2D_r p, array3D_r &grid, int rank, int size){
         assign_mass(o, p(i,0), p(i,1), p(i,2), grid_nopad);
     }
 
-    // In-place reduction with MPI (calls from rank 0 are different from others)
-    if(rank==0){
-        MPI_Reduce(MPI_IN_PLACE, grid.data(), grid.size(),
-                   MPI_DOUBLE, MPI_SUM, 0,  MPI_COMM_WORLD);
-    }
-    else{
-        MPI_Reduce(grid.data(), nullptr, grid.size(),
-                   MPI_DOUBLE, MPI_SUM, 0,  MPI_COMM_WORLD);
-    }
+    // Exchange masses in margins.
+    // TODO
+
     // Compute the average density per grid cell
-    real_type avg = blitz::sum(grid_nopad) / (grid_nopad.size());
-    // Turn the density into the over-density
+    real_type local_mass = blitz::sum(grid_nopad);
+    real_type total_mass = 0;
+
+    MPI_Allreduce(&local_mass, &total_mass, 1, MPI_DOUBLE, MPI_SUM,
+                  MPI_COMM_WORLD);
+    real_type avg = total_mass / (N_grid*N_grid*N_grid);
+    // Turn the density into the over-density.
     grid = (grid - avg) / avg;
 
     elapsed = getTime()-t0;
@@ -478,11 +482,12 @@ int main(int argc, char *argv[]) {
         neverDeleteData,
         storage);
 
+
+    assign_masses(4, p, raw_grid, N_grid);
+
     cout << "yes, we did it!" << endl;
     finalize();
     return 0;
-
-    assign_masses(4, p, raw_grid, mpi_rank, mpi_size);
 
     if(mpi_rank ==0){
         // Allocate the output buffer for the fft

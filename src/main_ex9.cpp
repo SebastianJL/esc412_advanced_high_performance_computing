@@ -459,7 +459,7 @@ int main(int argc, char *argv[]) {
     ptrdiff_t alloc_local, local_n0, local_0_start;
 
     // Compute local sizes
-    alloc_local = fftw_mpi_local_size_3d(N_grid, N_grid, N_grid, MPI_COMM_WORLD,
+    alloc_local = fftw_mpi_local_size_3d(N_grid, N_grid, N_grid/2 + 1, MPI_COMM_WORLD,
                                          &local_n0, &local_0_start);
     assert(local_n0 >= Order - 1); // Check that particles cannot be spread over more then two ranks.
 
@@ -473,14 +473,36 @@ int main(int argc, char *argv[]) {
     } else {
         assert(mpi_size == 1);
     }
+
+    // Allocate overlapping grids for mass assignment and fft.
+    alloc_local += (Order - 1) * N_grid * (N_grid/2 + 1);  // Add margin for overhanging particles to alloc local.
+    auto buffer = fftw_alloc_real(2 * alloc_local);
+    GeneralArrayStorage<3> storage;
+    storage.base() = local_0_start, 0, 0;
+    // Grid containing all margins.
+    array3D_r raw_grid(
+        buffer,
+        shape(local_n0 + Order - 1, N_grid, 2 * (N_grid / 2 + 1)),
+        neverDeleteData,
+        storage);
+    // Grid for real fft input.
+    array3D_r grid_r(
+        buffer,
+        shape(local_n0, N_grid, 2 * (N_grid / 2 + 1)),
+        neverDeleteData,
+        storage);
+    // Grid for complex fft output.
+    array3D_c grid_c(
+        reinterpret_cast<complex_type*> (buffer),
+        shape(local_n0, N_grid, (N_grid / 2 + 1)),
+        neverDeleteData,
+        storage);
+
     cout << "yes, we did it!" << endl;
     finalize();
     return 0;
 
-    // FFTW-MPI requires the padding even for out-of-place FFT
-    array3D_r grid(local_n0, N_grid, N_grid +2);
-
-    assign_masses(4, p, grid, mpi_rank, mpi_size);
+    assign_masses(4, p, raw_grid, mpi_rank, mpi_size);
 
     if(mpi_rank ==0){
         // Allocate the output buffer for the fft
@@ -488,7 +510,7 @@ int main(int argc, char *argv[]) {
 
         // Compute the fft of the over-density field
         // The results are stored in fft_grid (out-of-place method)
-        compute_fft(grid, fft_grid, N_grid, dummy_comm);
+        compute_fft(grid_r, fft_grid, N_grid, dummy_comm);
 
         // Compute the power spectrum
         compute_pk(fft_grid, N_grid);

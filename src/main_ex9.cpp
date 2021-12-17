@@ -273,6 +273,9 @@ void finalize() {
 
 /** Exchange particles such that each process only has the particles that fit
  * within its own part of the grid.
+ *
+ * This function assumes that each rank get's at least some part of the grid.
+ * Meaning start != 0 iff rank != 0
  * @param particles
  * @param N_grid: Total size of the particle grid.
  * @param start: Local starting index in the grid. I.e. grid(i, 0, 0) is the
@@ -293,6 +296,8 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     blitz::Array<ptrdiff_t, 1> domain_boundaries(mpi_size + 1);
     domain_boundaries(mpi_size) = N_grid;
     MPI_Allgather(&start, 1, MPI_AINT, domain_boundaries.data(), 1, MPI_AINT, MPI_COMM_WORLD);
+
+    // DEBUG. Check that the domain boundaries are strictly ascending.
     for (auto i=domain_boundaries.lbound(0) + 1; i<=domain_boundaries.ubound(0); ++i) {
         assert(domain_boundaries(i) > domain_boundaries(i-1));
     }
@@ -307,16 +312,11 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
         auto w = AssignmentWeights<Order>(x_grid);
         auto slab_index = wrap_if_else(w.i, N_grid);
         counts(slab_index) += 1;
-        if (!idx.isInRange(i)) {
-            cout << i << endl;
-            cout << particles.length() << endl;
-            break;
-        }
         assert(idx.isInRange(i));
         idx(i) = slab_index;
     }
 
-    // DEBUG Check that each particle has been assigned exactly to one slab.
+    // DEBUG Check that each particle has been assigned to exactly one slab.
     assert(sum(counts) == particles.length(0));
     for (auto i = counts.lbound(0); i <= counts.ubound(0); ++i) {
         assert(counts(i) >= 0);
@@ -328,12 +328,11 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     // so counts "cannot be used afterwards".
     counts_t.reference(counts);
     counts.free();
-//    counts_t = counts;
     for (int i = counts_t.lbound(0) + 1; i <= counts_t.ubound(0); ++i) {
         counts_t(i) += counts_t(i-1);
     }
 
-    // DEBUG Check that counts have been correctly summed.
+    // DEBUG Check that counts_t have been correctly summed and are ascending.
     assert(counts_t(counts_t.ubound(0)) == particles.length(0));
     for (auto i = counts_t.lbound(0); i <= counts_t.ubound(0); ++i) {
         assert(counts_t(i) >= 0);
@@ -353,15 +352,8 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     for (auto i = 1; i < mpi_size; ++i) {
         offsets_per_rank(i) = offsets_per_rank(i-1) + counts_per_rank(i-1);
     }
+
     // DEBUG.
-//    if (mpi_rank == 3) {
-//    cout << "(rank:" << mpi_rank << ") particles.length(0): " << particles.length(0) << endl;
-//    cout << "(rank:" << mpi_rank << ") domain_boundaries: " << sprint_array(domain_boundaries) << endl;
-//    cout << "(rank:" << mpi_rank << ") counts_t: " << sprint_array(counts_t) << endl;
-//    cout << "(rank:" << mpi_rank << ") counts_per_rank: " << sprint_array(counts_per_rank) << endl;
-//    cout << "(rank:" << mpi_rank << ") offsets_per_rank: " << sprint_array(offsets_per_rank) << endl;
-//    cout << "(rank:" << mpi_rank << ") sum(counts_per_rank): " << sum(counts_per_rank) << endl;
-//    }
     assert(offsets_per_rank(offsets_per_rank.lbound(0)) == 0);
     assert(offsets_per_rank(offsets_per_rank.ubound(0)) <= particles.length(0));
     assert(sum(counts_per_rank) == particles.length(0));
@@ -369,14 +361,13 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
         assert(counts_per_rank(i) >= 0);
     }
 
+
     // Order particles by slab (out-of-place).
     // p_out does only have the extent() of particles but not the lbound().
     // The reason is, that counts_t only counts the offset from the start of the
     // particle array and doesn't consider the lbound().
     Array<real_t, 2> p_out(particles.extent());
     auto all = blitz::Range::all();
-//    cout << "(rank:" << mpi_rank << ") particles.extent() " << particles.extent() << endl;
-//    cout << "(rank:" << mpi_rank << ") particles.lbound() " << particles.lbound() << endl;
 
     for (int i = particles.ubound(0); i >= particles.lbound(0); --i){
         assert(p_out.isInRange(counts_t(idx(i)) - 1));
@@ -387,8 +378,7 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     // lbound() when it references p_out.
     p_out.reindexSelf(particles.lbound());
     particles.reference(p_out);
-//    cout << "(rank:" << mpi_rank << ") particles.extent() " << particles.extent() << endl;
-//    cout << "(rank:" << mpi_rank << ") particles.lbound() " << particles.lbound() << endl;
+
 
     // DEBUG Check that particles are in order.
     auto current_index = 0;
@@ -396,7 +386,6 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
         auto x_grid = grid_coordinate(particles(i, 0), N_grid);
         auto w = AssignmentWeights<Order>(x_grid);
         auto slab_index = wrap_if_else(w.i, N_grid);
-//        cout << "(rank:" << mpi_rank << ") slab_index: " << slab_index << endl;
         assert(slab_index >= current_index);
         current_index = slab_index;
     }
@@ -412,12 +401,6 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     for (auto i = counts_from_rank.lbound(0) + 1; i <= counts_from_rank.ubound(0); ++i) {
         offsets_from_rank(i) = counts_from_rank(i-1) + offsets_from_rank(i-1);
     }
-//    cout << "(rank:" << mpi_rank << ") particles.length(0): " << particles.length(0) << endl;
-//    cout << "(rank:" << mpi_rank << ") offsets_per_rank: " << sprint_array(offsets_per_rank) << endl;
-//    cout << "(rank:" << mpi_rank << ") offsets_from_rank: " << sprint_array(offsets_from_rank) << endl;
-//    cout << "(rank:" << mpi_rank << ") counts_per_rank: " << sprint_array(counts_per_rank) << endl;
-//    cout << "(rank:" << mpi_rank << ") counts_from_rank: " << sprint_array(counts_from_rank) << endl;
-//    cout << "(rank:" << mpi_rank << ") sum(counts_from_rank): "  << sum(counts_from_rank) << endl;
 
 
     // Exchange particles with MPI_Alltoallv().
@@ -438,22 +421,12 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     particles.reference(particles_balanced);
 
     // DEBUG check that all particles now belong into own rank.
-    if (mpi_rank >= 0) {
-
-        for (auto i = particles.lbound(0); i <= particles.ubound(0); ++i) {
-            auto x_grid = grid_coordinate(particles(i, 0), N_grid);
-            auto w = AssignmentWeights<Order>(x_grid);
-            auto slab_index = wrap_if_else(w.i, N_grid);
-            if (!(slab_index < domain_boundaries(mpi_rank+1))) {
-                cout << "(rank:" << mpi_rank << ") domain_boundaries(mpi_rank): " << domain_boundaries(mpi_rank)  << endl;
-                cout << "(rank:" << mpi_rank << ") slab_index: " << slab_index  << endl;
-                break;
-            }
-            assert(slab_index >= domain_boundaries(mpi_rank));
-            assert(slab_index < domain_boundaries(mpi_rank+1));
-            current_index = slab_index;
-        }
-//        cout << "(rank:" << mpi_rank << ") domain_boundaries: " << sprint_array(domain_boundaries) << endl;
+    for (auto i = particles.lbound(0); i <= particles.ubound(0); ++i) {
+        auto x_grid = grid_coordinate(particles(i, 0), N_grid);
+        auto w = AssignmentWeights<Order>(x_grid);
+        auto slab_index = wrap_if_else(w.i, N_grid);
+        assert(slab_index >= domain_boundaries(mpi_rank));
+        assert(slab_index < domain_boundaries(mpi_rank+1));
     }
 }
 
@@ -488,8 +461,14 @@ int main(int argc, char *argv[]) {
     // Compute local sizes
     alloc_local = fftw_mpi_local_size_3d(N_grid, N_grid, N_grid, MPI_COMM_WORLD,
                                          &local_n0, &local_0_start);
+    assert(local_n0 >= Order - 1); // Check that particles cannot be spread over more then two ranks.
+
+    // Exchange particles
     if (mpi_size > 1) {
-        cout << "(rank:" << mpi_rank << ") local_0_start:" << local_0_start << endl;
+        if (local_n0 == 0) {
+            cout << "(rank: " << mpi_rank << ") local_n0: " << local_n0 << endl;
+        }
+        assert(local_n0 != 0);
         exchange_particles<Order>(p, N_grid, local_0_start);
     } else {
         assert(mpi_size == 1);

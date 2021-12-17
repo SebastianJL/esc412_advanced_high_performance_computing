@@ -71,17 +71,16 @@ void write_array(T A, const char* filename){
     ofstream ofs(filename);
     if (ofs.bad()){
         cerr << "Unable to write to file: " << filename << endl;
-        abort();;
+        abort();
     }
 
     ofs << A << endl;
 
     ofs.close();
-    return;
 }
 
 // Projection of a 3D grid into a 2D grid (max pooling)
-array2D_r project(array3D_r grid){
+array2D_r project(const array3D_r& grid){
     auto shape = grid.shape();
     array2D_r ret(shape[0], shape[1]);
     blitz::thirdIndex k;
@@ -109,7 +108,6 @@ void _assign_mass(real_type x, real_type y, real_type z, array3D_r& grid){
             }
         }
     }
-    return;
 }
 
 // Wrapper for templated mass assignment
@@ -137,7 +135,7 @@ void assign_masses(int o, array2D_r p, array3D_r &grid, int rank, int size){
                                 blitz::Range::all(),
                                 blitz::Range(0,shape[2]-3));
 
-    #pragma omp parallel for
+    #pragma omp parallel for  // NOLINT(openmp-use-default-none)
     for(auto i=p.lbound(0); i<=p.ubound(0); ++i){
         assign_mass(o, p(i,0), p(i,1), p(i,2), grid_nopad);
     }
@@ -148,7 +146,7 @@ void assign_masses(int o, array2D_r p, array3D_r &grid, int rank, int size){
                    MPI_DOUBLE, MPI_SUM, 0,  MPI_COMM_WORLD);
     }
     else{
-        MPI_Reduce(grid.data(), NULL, grid.size(),
+        MPI_Reduce(grid.data(), nullptr, grid.size(),
                    MPI_DOUBLE, MPI_SUM, 0,  MPI_COMM_WORLD);
     }
     // Compute the average density per grid cell
@@ -247,24 +245,6 @@ void compute_pk(array3D_c fft_grid, int N){
     }
 }
 
-void count_sort(vector<double> &arr, vector<int> idx, int max_idx){
-    vector<int> count(max_idx + 1);
-    vector<double> out(arr.size());
-
-    for (int i = 0; i < arr.size(); i++)
-        count[idx[i]]++;
-
-    for (int i = 1; i < count.size(); i++)
-        count[i] += count[i - 1];
-
-    for (int i = arr.size() - 1; i >= 0; i--){
-        out[count[idx[i]] - 1] = arr[i];
-        count[idx[i]]--;
-    }
-
-    for (int i = 0; i < arr.size(); i++)
-        arr[i] = out[i];
-}
 
 void finalize() {
     fftw_mpi_cleanup();

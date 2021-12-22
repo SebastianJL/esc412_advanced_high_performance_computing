@@ -20,12 +20,12 @@ add_executable(test_mass_assignement
         src/tipsy.cpp)
 
 
-# power spectrum
-add_executable(power_spectrum
-        src/main.cpp
+# serial version (unfinished)
+add_executable(main_serial
+        src/main_serial.cpp
         src/tipsy.cpp
 )
-target_link_libraries(power_spectrum fftw3)
+target_link_libraries(main_serial fftw3)
 
 
 # MPI + OpenMP

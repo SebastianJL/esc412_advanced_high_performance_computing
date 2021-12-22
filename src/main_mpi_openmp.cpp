@@ -189,20 +189,36 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, MPI_Comm comm){
             comm,
             FFTW_ESTIMATE);
     elapsed = getTime()-t0;
-    cout << "fftw_plan creation: " << elapsed << " s" << endl;
+//    cout << "fftw_plan creation: " << elapsed << " s" << endl;
 
 
     // Execute FFTW plan
     t0 = getTime();
     fftw_execute(plan);
     elapsed = getTime()-t0;
-    cout << "fftw_plan execution: " << elapsed << " s" << endl;
+//    cout << "fftw_plan execution: " << elapsed << " s" << endl;
 
     // Destroy FFTW plan
     fftw_destroy_plan(plan);
 }
 
+void reduce_in_place(int rank, int root, void * buff, int size,
+                     MPI_Datatype dtype, MPI_Op op, MPI_Comm comm){
+    // In-place reduction with MPI (calls from rank 0 are different from others)
+    if(rank==root){
+        MPI_Reduce(MPI_IN_PLACE, buff, size,
+                   dtype, op, root, comm);
+    }
+    else{
+        MPI_Reduce(buff, NULL, size,
+                   dtype, op, root, comm);
+    }
+
+}
+
 void compute_pk(array3D_c fft_grid, int N){
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     double t0, elapsed;
     int iNyquist = N / 2;
     int nBins = iNyquist;
@@ -239,6 +255,8 @@ void compute_pk(array3D_c fft_grid, int N){
         int ky = pos[1]>iNyquist ? N - pos[1] : pos[1];
         int kz = pos[2];
 
+        if(kx==0 && ky==0 && kz==0) continue;
+
         int mult = (kz == 0) || (kz == iNyquist) ? 1 : 2;
 
         complex_type cplx_amplitude = *index;
@@ -253,13 +271,27 @@ void compute_pk(array3D_c fft_grid, int N){
         power(bin_idx)   += mult*norm(cplx_amplitude);
         n_power(bin_idx) += mult;
     }
+
+
+    reduce_in_place(rank, 0, log_k.data(), nBins,
+                     MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+
+    reduce_in_place(rank, 0, power.data(), nBins,
+                     MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+
+    reduce_in_place(rank, 0, n_power.data(), nBins,
+                     MPI_INT64_T, MPI_SUM, MPI_COMM_WORLD);
+
     elapsed = getTime() - t0;
 
-    cout << "P(k) measurement: " << elapsed << " s" << endl;
+//    cout << "P(k) measurement: " << elapsed << " s" << endl;
 
-    for(int i=0; i<nBins; ++i) {
-        if (n_power(i)>0) {
-            cout << exp(log_k(i)/n_power(i)) << " " << power(i)/n_power(i) << endl;
+    if (rank == 0) {
+        for (int i = 0; i < nBins; ++i) {
+            if (n_power(i) > 0) {
+                cout << exp(log_k(i) / n_power(i)) << " "
+                     << power(i) / n_power(i) << endl;
+            }
         }
     }
 }
@@ -377,6 +409,7 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     // lbound() when it references p_out.
     p_out.reindexSelf(particles.lbound());
     particles.reference(p_out);
+    p_out.free();
 
 
     // DEBUG Check that particles are in order.
@@ -418,6 +451,7 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
 
     MPI_Type_free(&dt_particle);
     particles.reference(particles_balanced);
+    particles_balanced.free();
 
     // DEBUG check that all particles now belong into their own rank.
     for (auto i = particles.lbound(0); i <= particles.ubound(0); ++i) {
@@ -451,13 +485,8 @@ int main(int argc, char *argv[]) {
     string fname = "input/b0-final.std";
     array2D_r p = read_particles(fname, mpi_rank, mpi_size);
 
-    // Dummy communicator for FFTW-MPI calls (only rank 0 performs FFT)
-    MPI_Comm dummy_comm;
-    MPI_Comm_split(MPI_COMM_WORLD, mpi_rank, mpi_rank, &dummy_comm);
-
-    ptrdiff_t alloc_local, local_n0, local_0_start;
-
     // Compute local sizes
+    ptrdiff_t alloc_local, local_n0, local_0_start;
     alloc_local = fftw_mpi_local_size_3d(N_grid, N_grid, N_grid/2 + 1, MPI_COMM_WORLD,
                                          &local_n0, &local_0_start);
     assert(local_n0 >= Order - 1); // Check that particles cannot be spread over more then two ranks.
@@ -499,22 +528,14 @@ int main(int argc, char *argv[]) {
 
 
     assign_masses<Order>(p, raw_grid, N_grid);
+    p.free();
+
+    // Compute the fft of the over-density field
+    compute_fft(grid_r, grid_c, N_grid, MPI_COMM_WORLD);
+
+    // Compute the power spectrum
+    compute_pk(grid_c, N_grid);
+
     finalize();
     return 0;
-
-    if(mpi_rank ==0){
-        // Allocate the output buffer for the fft
-        array3D_c fft_grid(local_n0, N_grid, N_grid /2+1);
-
-        // Compute the fft of the over-density field
-        // The results are stored in fft_grid (out-of-place method)
-        compute_fft(grid_r, fft_grid, N_grid, dummy_comm);
-
-        // Compute the power spectrum
-        compute_pk(fft_grid, N_grid);
-    }
-
-    fftw_mpi_cleanup();
-    MPI_Finalize();
-
 }

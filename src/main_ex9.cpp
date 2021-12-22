@@ -91,7 +91,7 @@ array2D_r project(const array3D_r& grid){
 
 // Mass assignment for a single particle with order given by o
 template<int Order>
-void _assign_mass(real_type x, real_type y, real_type z, array3D_r& grid){
+void assign_mass(real_type x, real_type y, real_type z, array3D_r& grid){
     auto shape = grid.shape();
     auto N = shape[1];
     int i, j, k;
@@ -118,21 +118,9 @@ void _assign_mass(real_type x, real_type y, real_type z, array3D_r& grid){
     }
 }
 
-// Wrapper for templated mass assignment
-void assign_mass(int o, real_type x, real_type y, real_type z, array3D_r& grid){
-    switch(o){
-        case 1: _assign_mass<1>(x,y,z,grid); break;
-        case 2: _assign_mass<2>(x,y,z,grid); break;
-        case 3: _assign_mass<3>(x,y,z,grid); break;
-        case 4: _assign_mass<4>(x,y,z,grid); break;
-        default:
-            cerr << "Incorrect mass assignment order: " << o << endl;
-            abort();
-    }
-}
-
 // Mass assignment for a list of particles
-void assign_masses(int order, array2D_r p, array3D_r &grid, int N_grid){
+template<int Order>
+void assign_masses(array2D_r p, array3D_r &grid, int N_grid){
     int mpi_rank, mpi_size;
 
     MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
@@ -147,7 +135,7 @@ void assign_masses(int order, array2D_r p, array3D_r &grid, int N_grid){
                                 blitz::Range(0,N_grid - 1));
     #pragma omp parallel for  // NOLINT(openmp-use-default-none)
     for(auto i=p.lbound(0); i<=p.ubound(0); ++i){
-        assign_mass(order, p(i,0), p(i,1), p(i,2), grid_nopad);
+        assign_mass<Order>(p(i, 0), p(i, 1), p(i, 2), grid_nopad);
     }
 
     // Exchange masses in margins.
@@ -186,7 +174,7 @@ void assign_masses(int order, array2D_r p, array3D_r &grid, int N_grid){
     grid = (grid - avg) / avg;
 
     elapsed = getTime()-t0;
-    cout << "mass assignment: " << elapsed << " s" << endl;
+//    cout << "mass assignment: " << elapsed << " s" << endl;
 }
 
 void compute_fft(array3D_r grid, array3D_c fft_grid, int N, MPI_Comm comm){
@@ -510,8 +498,7 @@ int main(int argc, char *argv[]) {
         storage);
 
 
-    assign_masses(Order, p, raw_grid, N_grid);
-    cout << "yes, we did it!" << endl;
+    assign_masses<Order>(p, raw_grid, N_grid);
     finalize();
     return 0;
 

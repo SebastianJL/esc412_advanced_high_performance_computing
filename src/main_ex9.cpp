@@ -90,21 +90,29 @@ array2D_r project(const array3D_r& grid){
 
 
 // Mass assignment for a single particle with order given by o
-template<int o>
+template<int Order>
 void _assign_mass(real_type x, real_type y, real_type z, array3D_r& grid){
     auto shape = grid.shape();
+    auto N = shape[1];
     int i, j, k;
-    AssignmentWeights<o> wx((x + 0.5)*shape[0]);
-    AssignmentWeights<o> wy((y + 0.5)*shape[1]);
-    AssignmentWeights<o> wz((z + 0.5)*shape[2]);
-    for(int ii=0; ii<o; ii++){
-        i = (wx.i+ii+shape[0])%shape[0];
-        for(int jj=0; jj<o; jj++){
-            j = (wy.i+jj+shape[1])%shape[1];
-            for(int kk=0; kk<o; kk++){
-                k = (wz.i+kk+shape[2])%shape[2];
+    AssignmentWeights<Order> wx((x + 0.5)*N);
+    AssignmentWeights<Order> wy((y + 0.5)*N);
+    AssignmentWeights<Order> wz((z + 0.5)*N);
+
+    for (int ii = 0; ii < Order; ii++) {
+        // In the x-direction the index has to be wrapped differently due to the margin.
+        i = (wx.i+ii+N)%N;  // For max mpi_rank i in {grid.lbound(0)..N, 0 .. Order - 2}
+        if (i < grid.lbound(0)) {
+            i += N;
+        }
+
+        for (int jj = 0; jj < Order; jj++) {
+            j = (wy.i + jj + N) % N;
+            for (int kk = 0; kk < Order; kk++) {
+                k = (wz.i + kk + N) % N;
+
                 #pragma omp atomic
-                grid(i,j,k) += wx.H[ii]*wy.H[jj]*wz.H[kk];
+                grid(i, j, k) += wx.H[ii] * wy.H[jj] * wz.H[kk];
             }
         }
     }
@@ -124,7 +132,7 @@ void assign_mass(int o, real_type x, real_type y, real_type z, array3D_r& grid){
 }
 
 // Mass assignment for a list of particles
-void assign_masses(int o, array2D_r p, array3D_r &grid, int N_grid){
+void assign_masses(int order, array2D_r p, array3D_r &grid, int N_grid){
     int mpi_rank, mpi_size;
 
     MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
@@ -133,20 +141,39 @@ void assign_masses(int o, array2D_r p, array3D_r &grid, int N_grid){
     double t0, elapsed;
     t0 = getTime();
 
-    auto shape = grid.shape();
-
     // Use a view of the grid without the fft padding
     array3D_r grid_nopad = grid(blitz::Range::all(),
                                 blitz::Range::all(),
-                                blitz::Range(0,shape[2]-3));
-
+                                blitz::Range(0,N_grid - 1));
     #pragma omp parallel for  // NOLINT(openmp-use-default-none)
     for(auto i=p.lbound(0); i<=p.ubound(0); ++i){
-        assign_mass(o, p(i,0), p(i,1), p(i,2), grid_nopad);
+        assign_mass(order, p(i,0), p(i,1), p(i,2), grid_nopad);
     }
 
     // Exchange masses in margins.
-    // TODO
+    int dst = (mpi_rank + 1 + mpi_size) % mpi_size;
+    int src = (mpi_rank - 1 + mpi_size) % mpi_size;
+
+    if (dst != src){
+        // Compute count and offset of the mass assignment margin in grid.
+        auto shape = grid.shape();
+        int count = 3*shape[1]*shape[2];
+        int offset = (shape[0]-3)*shape[1]*shape[2];
+
+        MPI_Request req;
+        real_type *margin_recv = new real_type[count];
+        MPI_Irecv(margin_recv, count, MPI_DOUBLE,
+                  src, 0, MPI_COMM_WORLD, &req);
+
+        MPI_Send(grid.dataFirst() + offset, count, MPI_DOUBLE,
+                 dst, 0, MPI_COMM_WORLD);
+        MPI_Wait(&req, MPI_STATUS_IGNORE);
+
+        for(auto i=0; i<count; i++){
+            grid.dataFirst()[i] += margin_recv[i]+1;
+        }
+        MPI_Barrier(MPI_COMM_WORLD); // Barrier just for time measurement
+    }
 
     // Compute the average density per grid cell
     real_type local_mass = blitz::sum(grid_nopad);
@@ -404,11 +431,11 @@ void exchange_particles(blitz::Array<real_t, 2> &particles, int N_grid, ptrdiff_
     MPI_Type_free(&dt_particle);
     particles.reference(particles_balanced);
 
-    // DEBUG check that all particles now belong into own rank.
+    // DEBUG check that all particles now belong into their own rank.
     for (auto i = particles.lbound(0); i <= particles.ubound(0); ++i) {
         auto x_grid = grid_coordinate(particles(i, 0), N_grid);
         auto w = AssignmentWeights<Order>(x_grid);
-        auto slab_index = wrap_if_else(w.i, N_grid);
+        auto slab_index = wrap_modulo(w.i, N_grid);
         assert(slab_index >= domain_boundaries(mpi_rank));
         assert(slab_index < domain_boundaries(mpi_rank+1));
     }
@@ -463,7 +490,7 @@ int main(int argc, char *argv[]) {
     auto buffer = fftw_alloc_real(2 * alloc_local);
     GeneralArrayStorage<3> storage;
     storage.base() = local_0_start, 0, 0;
-    // Grid containing all margins.
+    // Grid containing mass assignment margin and fft padding.
     array3D_r raw_grid(
         buffer,
         shape(local_n0 + Order - 1, N_grid, 2 * (N_grid / 2 + 1)),
@@ -483,8 +510,7 @@ int main(int argc, char *argv[]) {
         storage);
 
 
-    assign_masses(4, p, raw_grid, N_grid);
-
+    assign_masses(Order, p, raw_grid, N_grid);
     cout << "yes, we did it!" << endl;
     finalize();
     return 0;

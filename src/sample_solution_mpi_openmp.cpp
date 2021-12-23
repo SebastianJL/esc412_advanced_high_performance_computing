@@ -7,7 +7,7 @@
 #include <omp.h>
 #include <mpi.h>
 
-#include "aweights.hpp"
+#include "aweights.h"
 #include "tipsy.h"
 
 using namespace std;
@@ -439,8 +439,11 @@ int main(int argc, char *argv[]) {
     fftw_init_threads();
     fftw_plan_with_nthreads(omp_get_max_threads());
 
-    int N = 512;
-    string fname = "/store/uzh/uzh8/ESC412/ic_512.std";
+//    int N = 512;
+//    string fname = "/store/uzh/uzh8/ESC412/ic_512.std";
+
+    int N = 64;
+    string fname = "input/b0-final.std";
 
     array2D_r p = read_particles(fname, rank, size);
 

@@ -111,6 +111,7 @@ void assign_mass(real_type x, real_type y, real_type z, array3D_r& grid){
             for (int kk = 0; kk < Order; kk++) {
                 k = (wz.i + kk + N) % N;
 
+                assert(grid.isInRange(i, j, k));
                 #pragma omp atomic
                 grid(i, j, k) += wx.H[ii] * wy.H[jj] * wz.H[kk];
             }
@@ -118,9 +119,27 @@ void assign_mass(real_type x, real_type y, real_type z, array3D_r& grid){
     }
 }
 
-// Mass assignment for a list of particles
+/** Mass assignment for a list of particles.
+ *
+ * @param p List of particles to be assigned to the local grid.
+ * @param grid Local grid of shape (local_n_0 + Order - 1, N, 2*(N/2 + 1)).
+ * The extension in the first dimension is due to the mass assignement scheme
+ * and is called the 'margin'. The extension in the third dimension is due to
+ * the fourier transform and is called the 'padding'. The assumption is, that
+ * grid==0.
+ * @param N The grid size of the physical system (N, N, N).
+ *
+ * Assumptions:
+ * - All particles are contained in grid.
+ * - grid == 0.
+ */
 template<int Order>
-void assign_masses(array2D_r p, array3D_r &grid, int N_grid){
+void assign_masses(array2D_r p, array3D_r &grid, int N){
+    // DEBUG - Test assumptions.
+    for (auto i=grid.begin(); i!=grid.end(); ++i) {
+        assert(grid(i.position()) == 0);
+    }
+
     int mpi_rank, mpi_size;
 
     MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
@@ -132,29 +151,37 @@ void assign_masses(array2D_r p, array3D_r &grid, int N_grid){
     // Use a view of the grid without the fft padding
     array3D_r grid_nopad = grid(blitz::Range::all(),
                                 blitz::Range::all(),
-                                blitz::Range(0,N_grid - 1));
+                                blitz::Range(0, N - 1));
     #pragma omp parallel for  // NOLINT(openmp-use-default-none)
     for(auto i=p.lbound(0); i<=p.ubound(0); ++i){
         assign_mass<Order>(p(i, 0), p(i, 1), p(i, 2), grid_nopad);
     }
 
-    // Exchange masses in margins.
-    int dst = (mpi_rank + 1 + mpi_size) % mpi_size;
-    int src = (mpi_rank - 1 + mpi_size) % mpi_size;
+    // Compute the average density per grid cell. The cells in the fft padding
+    // are all 0, so they don't need to be included.
+    real_type avg = blitz::sum(grid_nopad) / (N*N*N);
+    MPI_Allreduce(MPI_IN_PLACE, &avg, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 
-    if (dst != src){
+    // Turn the density into the over-density.
+    grid_nopad = (grid_nopad - avg) / avg;
+
+    // Exchange over-densities in margins.
+    if (mpi_size > 1) {
+        int dst = (mpi_rank + 1 + mpi_size) % mpi_size;
+        int src = (mpi_rank - 1 + mpi_size) % mpi_size;
         // Compute count and offset of the mass assignment margin in grid.
         auto shape = grid.shape();
-        int count = 3*shape[1]*shape[2];
-        int offset = (shape[0]-3)*shape[1]*shape[2];
+        const auto margin = Order - 1;
+        int count = margin*shape[1]*shape[2];
+        int offset = (shape[0]-margin)*shape[1]*shape[2];
 
         MPI_Request req;
         real_type *margin_recv = new real_type[count];
         MPI_Irecv(margin_recv, count, MPI_DOUBLE,
-                  src, 0, MPI_COMM_WORLD, &req);
+            src, 0, MPI_COMM_WORLD, &req);
 
         MPI_Send(grid.dataFirst() + offset, count, MPI_DOUBLE,
-                 dst, 0, MPI_COMM_WORLD);
+            dst, 0, MPI_COMM_WORLD);
         MPI_Wait(&req, MPI_STATUS_IGNORE);
 
         for(auto i=0; i<count; i++){
@@ -163,15 +190,6 @@ void assign_masses(array2D_r p, array3D_r &grid, int N_grid){
         MPI_Barrier(MPI_COMM_WORLD); // Barrier just for time measurement
     }
 
-    // Compute the average density per grid cell
-    real_type local_mass = blitz::sum(grid_nopad);
-    real_type total_mass = 0;
-
-    MPI_Allreduce(&local_mass, &total_mass, 1, MPI_DOUBLE, MPI_SUM,
-                  MPI_COMM_WORLD);
-    real_type avg = total_mass / (N_grid*N_grid*N_grid);
-    // Turn the density into the over-density.
-    grid = (grid - avg) / avg;
 
     elapsed = getTime()-t0;
 //    cout << "mass assignment: " << elapsed << " s" << endl;
@@ -512,6 +530,7 @@ int main(int argc, char *argv[]) {
         shape(local_n0 + Order - 1, N_grid, 2 * (N_grid / 2 + 1)),
         neverDeleteData,
         storage);
+    raw_grid = 0;
     // Grid for real fft input.
     array3D_r grid_r(
         buffer,

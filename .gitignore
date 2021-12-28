@@ -40,10 +40,8 @@
 # Jupter notebook cache
 *.ipynb_checkpoints/
 
-# Platform specific build files.
+# Platform specific cmake build files.
 cmake-build-debug/
-make-build/
-Makefile
 
 # ignore input, output and executables
 input/

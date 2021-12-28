@@ -3,3 +3,7 @@ mpi_openmp: src/main_mpi_openmp.cpp
 
 mpi_openmp_sample: src/main_mpi_openmp.cpp
 	mpiCC -std=c++17 -I include/ -L /usr/lib/x86_64-linux-gnu/ -O2 src/sample_solution_mpi_openmp.cpp src/tipsy.cpp -o make-build/main_mpi_openmp_sample -lfftw3_mpi -lfftw3_omp -lfftw3 -lm -lstdc++ -fopenmp
+
+cuda: src/main.cu
+	nvcc -std=c++17 -I include/  -O2 src/main.cu src/tipsy.cpp -o make-build/main_cuda -lcudart -lcufft -lcufftw -lm -lstdc++
+

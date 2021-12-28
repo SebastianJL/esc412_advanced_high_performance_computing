@@ -31,7 +31,6 @@ target_link_libraries(main_serial fftw3)
 # MPI + OpenMP
 find_package(MPI REQUIRED)
 find_package(FFTW REQUIRED)
-#set(MDL_FFTW ${FFTW_FOUND})
 find_package(OpenMP REQUIRED)
 add_executable(main_mpi_openmp
         src/main_mpi_openmp.cpp
@@ -52,4 +51,10 @@ target_include_directories(main_mpi_openmp PUBLIC ${FFTW_INCLUDES})
 # Test transformations.h
 add_executable(test_transformations
         src/test_transformations.cpp
+        )
+
+# cuda version
+add_executable(main_cuda
+        src/main_cuda.cpp
+        src/tipsy.cpp
         )

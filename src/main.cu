@@ -6,7 +6,7 @@
 //#include <fftw3.h>
 #include "cufftw.h"
 
-#include "aweights.hpp"
+#include "aweights.h"
 #include "tipsy.h"
 
 using namespace std;

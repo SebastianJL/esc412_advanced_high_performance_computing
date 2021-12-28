@@ -48,3 +48,6 @@ make-build/
 input/
 output/
 run/
+
+# slurm
+slurm/

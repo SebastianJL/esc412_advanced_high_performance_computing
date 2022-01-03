@@ -17,4 +17,4 @@
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
-srun make-build/main_mpi_openmp /store/uzh/uzh8/ESC412/ic_512.std 512
+srun make-build/mpi_openmp /store/uzh/uzh8/ESC412/ic_512.std 512

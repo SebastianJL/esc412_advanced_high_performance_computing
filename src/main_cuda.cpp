@@ -261,8 +261,8 @@ void compute_fft_2D_R2C(array3D_r &grid, array3D_c &fft_grid, int N){
     int howmany = N;
     int odist = N*(N/2+1); // Output distance is in "complex"
     int idist = 2*odist;   // Input distance is in "real"
-    int istride = 1,       // Elements of each FFT are adjacent
-	ostride = 1;
+    int istride = 1;       // Elements of each FFT are adjacent
+	int ostride = 1;
     auto plan1 = fftw_plan_many_dft_r2c(
     	sizeof(n)/sizeof(n[0]), n, howmany,
     	grid.dataFirst(),
@@ -378,6 +378,10 @@ int main(int argc, char *argv[]) {
     array3D_c fft_grid(reinterpret_cast<complex_type*>(grid.data()),shape(N,N,N/2+1),neverDeleteData);
 
     // Compute the fft of the over-density field
+    auto all = Range::all();
+    compute_fft_2D_R2C(raw_grid, fft_grid, N);
+    compute_fft_1D_C2C(fft_grid, N);
+
 
     // Compute the power spectrum
     compute_pk(fft_grid, N);

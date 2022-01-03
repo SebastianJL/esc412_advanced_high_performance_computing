@@ -6,16 +6,15 @@
 #SBATCH --time=00:05:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-core=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1
+#SBATCH --ntasks-per-node=6
+#SBATCH --cpus-per-task=2
 #SBATCH --partition=debug
 #SBATCH --constraint=gpu
 #SBATCH --hint=nomultithread
-#SBATCH -o slurm/%j-cuda.out
-#SBATCH -e slurm/%j-cuda.err
+#SBATCH -o slurm/%j-mpi-openmp.out
+#SBATCH -e slurm/%j-mpi-openmp.err
 
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-export CRAY_CUDA_MPS=1
 
-srun make-build/main_cuda /store/uzh/uzh8/ESC412/ic_512.std 512
+srun make-build/main_mpi_openmp /store/uzh/uzh8/ESC412/ic_512.std 512

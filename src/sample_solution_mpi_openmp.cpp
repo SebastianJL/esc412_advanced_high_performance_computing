@@ -52,7 +52,7 @@ array2D_r read_particles(string fname, int rank, int size){
     io.open(fname);
 
     if(rank==0)
-        cout << "Found "<<io.count() << " particles."<<endl;
+        cerr << "Found "<<io.count() << " particles."<<endl;
 
     if (io.fail()) {
         cerr << "Unable to open file" << endl;
@@ -74,7 +74,7 @@ array2D_r read_particles(string fname, int rank, int size){
     MPI_Barrier(MPI_COMM_WORLD); // Barrier just for time measurement
     elapsed = getTime() - t0;
     if(rank==0){
-        cout << "particle reading: " << elapsed << " s" << endl;
+        cerr << "particle reading: " << elapsed << " s" << endl;
     }
     return p;
 }
@@ -83,7 +83,7 @@ array2D_r read_particles(string fname, int rank, int size){
 // Write a blitz array in a csv file format
 template<typename T>
 void write_array(T A, const char* filename){
-    cout << "Writing to " << filename << endl;
+    cerr << "Writing to " << filename << endl;
     ofstream ofs(filename);
     if (ofs.bad()){
         cerr << "Unable to write to file: " << filename << endl;
@@ -197,7 +197,7 @@ void assign_masses(int o, array2D_r p, array3D_r &grid, int rank, int size){
 
     elapsed = getTime()-t0;
     if(rank==0){
-        cout << "mass assignment: " << elapsed << " s" << endl;
+        cerr << "mass assignment: " << elapsed << " s" << endl;
     }
 }
 
@@ -218,7 +218,7 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, MPI_Comm comm){
     elapsed = getTime()-t0;
 
     if(rank==0){
-        cout << "fftw_plan creation: " << elapsed << " s" << endl;
+        cerr << "fftw_plan creation: " << elapsed << " s" << endl;
     }
 
 
@@ -228,7 +228,7 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, MPI_Comm comm){
 
     elapsed = getTime()-t0;
     if(rank==0){
-        cout << "fftw_plan execution: " << elapsed << " s" << endl;
+        cerr << "fftw_plan execution: " << elapsed << " s" << endl;
     }
 
     // Destroy FFTW plan
@@ -301,7 +301,7 @@ void compute_pk(array3D_c fft_grid, int N, int rank){
 
     elapsed = getTime() - t0;
     if(rank==0){
-        cout << "P(k) measurement: " << elapsed << " s" << endl;
+        cerr << "P(k) measurement: " << elapsed << " s" << endl;
 
         for(int i=0; i<nBins; ++i) {
             if (n_power(i)>0) {
@@ -416,7 +416,7 @@ array2D_r balance_particles(array2D_r p, ptrdiff_t local_0_start,
 
     elapsed = getTime() - t0;
     if(rank==0)
-        cout << "load balancing: " << elapsed << " s" << endl;
+        cerr << "load balancing: " << elapsed << " s" << endl;
 
     return p_balanced;
 }

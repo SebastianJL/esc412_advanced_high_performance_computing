@@ -509,7 +509,7 @@ int main(int argc, char *argv[]) {
 
     // Compute local sizes
     ptrdiff_t alloc_local, local_n0, local_0_start;
-    alloc_local = fftw_mpi_local_size_3d(N_grid, N_grid, N_grid/2 + 1, MPI_COMM_WORLD,
+    alloc_local = fftw_mpi_local_size_3d(N, N, N/2 + 1, MPI_COMM_WORLD,
                                          &local_n0, &local_0_start);
     assert(local_n0 >= Order - 1); // Check that particles cannot be spread over more then two ranks.
 
@@ -519,45 +519,45 @@ int main(int argc, char *argv[]) {
             cout << "(rank: " << mpi_rank << ") local_n0: " << local_n0 << endl;
         }
         assert(local_n0 != 0);
-        exchange_particles<Order>(p, N_grid, local_0_start);
+        exchange_particles<Order>(p, N, local_0_start);
     } else {
         assert(mpi_size == 1);
     }
 
     // Allocate overlapping grids for mass assignment and fft.
-    alloc_local += (Order - 1) * N_grid * (N_grid/2 + 1);  // Add margin for overhanging particles to alloc local.
+    alloc_local += (Order - 1) * N * (N/2 + 1);  // Add margin for overhanging particles to alloc local.
     auto buffer = fftw_alloc_real(2 * alloc_local);
     GeneralArrayStorage<3> storage;
     storage.base() = local_0_start, 0, 0;
     // Grid containing mass assignment margin and fft padding.
     array3D_r raw_grid(
         buffer,
-        shape(local_n0 + Order - 1, N_grid, 2 * (N_grid / 2 + 1)),
+        shape(local_n0 + Order - 1, N, 2 * (N / 2 + 1)),
         neverDeleteData,
         storage);
     raw_grid = 0;
     // Grid for real fft input.
     array3D_r grid_r(
         buffer,
-        shape(local_n0, N_grid, 2 * (N_grid / 2 + 1)),
+        shape(local_n0, N, 2 * (N / 2 + 1)),
         neverDeleteData,
         storage);
     // Grid for complex fft output.
     array3D_c grid_c(
         reinterpret_cast<complex_type*> (buffer),
-        shape(local_n0, N_grid, (N_grid / 2 + 1)),
+        shape(local_n0, N, (N / 2 + 1)),
         neverDeleteData,
         storage);
 
 
-    assign_masses<Order>(p, raw_grid, N_grid);
+    assign_masses<Order>(p, raw_grid, N);
     p.free();
 
     // Compute the fft of the over-density field
-    compute_fft(grid_r, grid_c, N_grid, MPI_COMM_WORLD);
+    compute_fft(grid_r, grid_c, N, MPI_COMM_WORLD);
 
     // Compute the power spectrum
-    compute_pk(grid_c, N_grid);
+    compute_pk(grid_c, N);
 
     finalize();
     return 0;

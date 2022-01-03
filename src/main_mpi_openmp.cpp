@@ -486,6 +486,13 @@ int main(int argc, char *argv[]) {
     int thread_support;
     int mpi_rank, mpi_size;
 
+    if (argc!=3) {
+        cerr << "Usage: " << argv[0] << " <input> <grid" << endl;
+        return 1;
+    }
+    string fname = argv[1];
+    int N = atoi(argv[2]);
+
     MPI_Init_thread(&argc, &argv,
         MPI_THREAD_FUNNELED,
         &thread_support);
@@ -498,8 +505,6 @@ int main(int argc, char *argv[]) {
     fftw_init_threads();
     fftw_plan_with_nthreads(omp_get_max_threads());
 
-    int N_grid = 64;
-    string fname = "input/b0-final.std";
     array2D_r p = read_particles(fname, mpi_rank, mpi_size);
 
     // Compute local sizes

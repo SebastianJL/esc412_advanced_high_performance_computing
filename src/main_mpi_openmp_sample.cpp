@@ -451,25 +451,25 @@ int main(int argc, char *argv[]) {
     ptrdiff_t alloc_local, local_n0, local_0_start;
 
     // Compute local sizes
-    alloc_local = fftw_mpi_local_size_3d(N, N, N, MPI_COMM_WORLD,
+    alloc_local = fftw_mpi_local_size_3d(N, N, N/2+1, MPI_COMM_WORLD,
                                          &local_n0, &local_0_start);
-
     array2D_r p_balanced = balance_particles(p, local_0_start, N, rank, size);
     p.free();
 
-    real_type* local_slab_real = fftw_alloc_real((local_n0+3)*N*2*(N/2+1));
+    real_type* local_slab_real = fftw_alloc_real(2*alloc_local + 3*N*2*(N/2+1));
     blitz::GeneralArrayStorage<3> storage;
     storage.base() = local_0_start, 0, 0;
-    array3D_r grid(local_slab_real, blitz::shape(local_n0+3,N,2*(N/2+1)), storage);
+    array3D_r grid(local_slab_real, blitz::shape(local_n0+3,N,2*(N/2+1)), blitz::neverDeleteData, storage);
     grid = 0;
 
     assign_masses(4, p_balanced, grid, rank, size);
     p_balanced.free();
 
     // Allocate the output buffer for the fft
-    fftw_complex* local_slab_cplx = fftw_alloc_complex((local_n0)*N*(N/2+1));
+    fftw_complex* local_slab_cplx = fftw_alloc_complex(alloc_local);
     array3D_c fft_grid(reinterpret_cast<complex_type*>(local_slab_cplx),
-                       blitz::shape(local_n0,N,N/2+1), storage);
+                       blitz::shape(local_n0,N,N/2+1),
+                       blitz::neverDeleteData,storage);
     fft_grid = 0;
 
     // Compute the fft of the over-density field

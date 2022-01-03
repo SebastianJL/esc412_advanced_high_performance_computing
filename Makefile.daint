@@ -1,0 +1,10 @@
+SHELL:=/bin/bash
+
+mpi_openmp: src/main_mpi_openmp.cpp
+	mpiCC -std=c++17 -I include/ -L /usr/lib/x86_64-linux-gnu/ -O2 src/main_mpi_openmp.cpp src/tipsy.cpp -o make-build/main_mpi_openmp -lfftw3_mpi -lfftw3_omp -lfftw3 -lm -lstdc++ -fopenmp
+
+cuda: src/main_cuda.cpp
+	module load daint-gpu; \
+	module load cudatoolkit; \
+	module load cray-fftw; \
+	nvcc -std=c++17 -I include/  -O2 src/main_cuda.cpp src/tipsy.cpp -o make-build/main_cuda -lcudart -lcufft -lcufftw -lm -lstdc++

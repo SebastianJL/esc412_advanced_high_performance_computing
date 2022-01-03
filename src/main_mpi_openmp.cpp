@@ -32,23 +32,23 @@ double getTime() {
 
 // Read the particle file,
 // return a 2d blitz array containing particle positions
-array2D_r read_particles(string fname, int rank, int size){
+array2D_r read_particles(string fname, int mpi_rank, int size){
     double t0, elapsed;
     TipsyIO io;
 
     io.open(fname);
-    if (rank == 0) {
-        cout << "(rank:" << rank << ") "
+    if (mpi_rank == 0) {
+        cerr << "(rank:" << mpi_rank << ") "
              << "Found " << io.count() << " particles." << endl;
     }
     if (io.fail()) {
-        cerr << "Unable to open file" << endl;
+        cerr << "(rank: " << mpi_rank << ") " << "Unable to open file" << endl;
         abort();
     }
 
     int N = io.count();                                  //Total particle number
     int n = (N+size-1) / size;                           //Particles per rank
-    int iStart = rank*n;                                 //Start index
+    int iStart = mpi_rank*n;                                 //Start index
     int iEnd = iStart + n-1 < N ? iStart + n-1 : N-1;    //End index
 
     // Allocate the particle buffer
@@ -59,8 +59,13 @@ array2D_r read_particles(string fname, int rank, int size){
     io.load(p);
     elapsed = getTime() - t0;
 
-//    cout << "(rank:" << rank << ") " << "Particles read: " << p.length(0) << endl;
-//    cout << "(rank:" << rank << ") " << "particle reading: " << elapsed << " s" << endl;
+    if (mpi_rank == 0) {
+        cerr << "(rank:" << mpi_rank << ") "
+             << "Particles read: " << p.length(0) << endl;
+        cerr << "(rank:" << mpi_rank << ") "
+             << "particle reading: " << elapsed << " s" << endl;
+    }
+
     return p;
 }
 
@@ -192,10 +197,14 @@ void assign_masses(array2D_r p, array3D_r &grid, int N){
 
 
     elapsed = getTime()-t0;
-//    cout << "mass assignment: " << elapsed << " s" << endl;
+    if (mpi_rank == 0) {
+        cerr << "(rank:" << mpi_rank << ") mass assignment: " << elapsed << " s" << endl;
+    }
 }
 
 void compute_fft(array3D_r grid, array3D_c fft_grid, int N, MPI_Comm comm){
+    int mpi_rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
 
     double t0, elapsed;
 
@@ -207,14 +216,18 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, MPI_Comm comm){
             comm,
             FFTW_ESTIMATE);
     elapsed = getTime()-t0;
-//    cout << "fftw_plan creation: " << elapsed << " s" << endl;
+    if (mpi_rank == 0) {
+        cerr << "(rank:" << mpi_rank << ") fftw_plan creation: " << elapsed << " s" << endl;
+    }
 
 
     // Execute FFTW plan
     t0 = getTime();
     fftw_execute(plan);
     elapsed = getTime()-t0;
-//    cout << "fftw_plan execution: " << elapsed << " s" << endl;
+    if (mpi_rank == 0) {
+        cerr << "(rank:" << mpi_rank << ") fftw_plan execution: " << elapsed << " s" << endl;
+    }
 
     // Destroy FFTW plan
     fftw_destroy_plan(plan);
@@ -235,8 +248,8 @@ void reduce_in_place(int rank, int root, void * buff, int size,
 }
 
 void compute_pk(array3D_c fft_grid, int N){
-    int rank;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    int mpi_rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
     double t0, elapsed;
     int iNyquist = N / 2;
     int nBins = iNyquist;
@@ -291,20 +304,22 @@ void compute_pk(array3D_c fft_grid, int N){
     }
 
 
-    reduce_in_place(rank, 0, log_k.data(), nBins,
+    reduce_in_place(mpi_rank, 0, log_k.data(), nBins,
                      MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 
-    reduce_in_place(rank, 0, power.data(), nBins,
+    reduce_in_place(mpi_rank, 0, power.data(), nBins,
                      MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 
-    reduce_in_place(rank, 0, n_power.data(), nBins,
+    reduce_in_place(mpi_rank, 0, n_power.data(), nBins,
                      MPI_INT64_T, MPI_SUM, MPI_COMM_WORLD);
 
     elapsed = getTime() - t0;
 
-//    cout << "P(k) measurement: " << elapsed << " s" << endl;
+    if (mpi_rank == 0) {
+        cerr << "(rank:" << mpi_rank << ") P(k) measurement: " << elapsed << " s" << endl;
+    }
 
-    if (rank == 0) {
+    if (mpi_rank == 0) {
         for (int i = 0; i < nBins; ++i) {
             if (n_power(i) > 0) {
                 cout << exp(log_k(i)/n_power(i)) << " " << power(i)/n_power(i) <<" "<< n_power(i)<< endl;
@@ -516,7 +531,7 @@ int main(int argc, char *argv[]) {
     // Exchange particles
     if (mpi_size > 1) {
         if (local_n0 == 0) {
-            cout << "(rank: " << mpi_rank << ") local_n0: " << local_n0 << endl;
+            cerr << "(rank:" << mpi_rank << ") local_n0: " << local_n0 << endl;
         }
         assert(local_n0 != 0);
         exchange_particles<Order>(p, N, local_0_start);

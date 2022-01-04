@@ -1,11 +1,19 @@
 import numpy as np
-import matplotlib.pyplot as plt
+from itertools import takewhile, dropwhile
+
+
+def read_file(file):
+    with open(file) as f:
+        lines = dropwhile(lambda line: line == '\n', f)
+        lines = takewhile(lambda line: line != '\n', lines)
+        lines = (line.strip().split(' ') for line in lines)
+        lines = list(lines)
+        return np.array(list(lines), dtype=float)
 
 
 def read(file1, file2):
-    with open(file1) as f1, open(file2) as f2:
-        data1 = np.genfromtxt(f1)
-        data2 = np.genfromtxt(f2)
+    data1 = read_file(file1)
+    data2 = read_file(file2)
 
     return data1, data2
 
@@ -38,10 +46,13 @@ if __name__ == "__main__":
 
     try:
         if argv[3] == 'd':
+            import matplotlib.pyplot as plt
             fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
             draw(data1, ax1)
             draw(data2, ax2)
             draw_relative(data1, data2, ax3)
             plt.show()
     except IndexError:
-        print("Not drawing")
+        print("Not drawing.")
+    except ModuleNotFoundError:
+        print("Couldn't draw, matplotlib not available.")

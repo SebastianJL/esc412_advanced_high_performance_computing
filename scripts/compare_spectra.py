@@ -2,18 +2,19 @@ import numpy as np
 from itertools import takewhile, dropwhile
 
 
-def read_file(file):
+def read_slurm_file(file):
+    """Reads slurm output file and skips initial newlines and the info text at the bottom."""
     with open(file) as f:
         lines = dropwhile(lambda line: line == '\n', f)
         lines = takewhile(lambda line: line != '\n', lines)
         lines = (line.strip().split(' ') for line in lines)
         lines = list(lines)
-        return np.array(list(lines), dtype=float)
+        return np.array(lines, dtype=float)
 
 
 def read(file1, file2):
-    data1 = read_file(file1)
-    data2 = read_file(file2)
+    data1 = read_slurm_file(file1)
+    data2 = read_slurm_file(file2)
 
     return data1, data2
 
@@ -50,6 +51,9 @@ if __name__ == "__main__":
     print()
     print(file1 + ' div ' + file2)
     print(data1/data2)
+    print(f'{(data1==data2).all() = }')
+    print(f'{(data1!=data2).sum()/3 = }')
+    print(f'{(data1[data1!=data2]) = }')
 
     try:
         if argv[3] == 'd':

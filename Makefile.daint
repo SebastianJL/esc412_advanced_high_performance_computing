@@ -9,3 +9,8 @@ cuda: src/main_cuda.cpp src/tipsy.cpp
 	module load cudatoolkit; \
 	module load cray-fftw; \
 	nvcc -std=c++17 -I include/  -O2 $^ -o make-build/$@ -lcudart -lcufft -lcufftw -lm -lstdc++
+
+ex13-1: src/Exercise13-1.cu
+	module load daint-gpu; \
+	module load cudatoolkit; \
+	nvcc -std=c++17 -I include/  -O2 $^ -o make-build/$@ -lcudart -lcufft -lcufftw -lm -lstdc++

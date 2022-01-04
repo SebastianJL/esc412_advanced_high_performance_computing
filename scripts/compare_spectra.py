@@ -42,6 +42,13 @@ if __name__ == "__main__":
     from sys import argv
     file1, file2 = argv[1:3]
     data1, data2 = read(file1, file2)
+    print(file1)
+    print(data1)
+    print()
+    print(file2)
+    print(data2)
+    print()
+    print(file1 + ' div ' + file2)
     print(data1/data2)
 
     try:

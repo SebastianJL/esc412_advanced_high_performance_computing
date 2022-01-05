@@ -11,9 +11,12 @@ void random_ints(int *array, unsigned int num) {
         array[k] = rand() % 100;
 }
 
-int main() {
-    unsigned int inputSize = 17;
-    unsigned int threadsPerBlock = 3;  // Number of threads in each block
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        std::cerr << "Usage: " << argv[0] << " <inputSize> <threadsPerBlock>" << std::endl;
+    }
+    unsigned int inputSize = atoi(argv[1]);
+    unsigned int threadsPerBlock = atoi(argv[2]);
     unsigned int memorySize = inputSize * sizeof(int);
 
     int *host_ptr1, *host_ptr2, *host_ptr3; // CPU pointers declared in host

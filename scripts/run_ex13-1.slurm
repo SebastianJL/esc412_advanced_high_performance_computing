@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH --job-name="main_cuda"
+#SBATCH --job-name="ex13-1"
 #SBATCH --account="uzg2"
 #SBATCH --mail-type=None
 #SBATCH --mail-user=johannes.lade@uzh.ch
@@ -11,11 +11,12 @@
 #SBATCH --partition=debug
 #SBATCH --constraint=gpu
 #SBATCH --hint=nomultithread
-#SBATCH -o slurm/%j-ex13-1.out
-#SBATCH -e slurm/%j-ex13-1.err
+#SBATCH -o slurm/ex13-1-out-%j
 
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export CRAY_CUDA_MPS=1
 
-srun make-build/ex13-1
+srun make-build/ex13-1 17 3
+srun make-build/ex13-1 2  3
+srun make-build/ex13-1 17 8

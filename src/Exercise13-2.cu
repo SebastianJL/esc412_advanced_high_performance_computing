@@ -3,10 +3,10 @@
 #include <complex>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <fftw3.h>
 #include "cufft.h"
+#include "cufftw.h"
 
-#include "aweights.hpp"
+#include "aweights.h"
 #include "tipsy.h"
 
 using namespace std;

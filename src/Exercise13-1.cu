@@ -13,7 +13,7 @@ void random_ints(int *array, unsigned int num) {
 
 int main() {
     unsigned int inputSize = 17;
-    unsigned int blockSize = 3;  // Number of threads in each block
+    unsigned int threadsPerBlock = 3;  // Number of threads in each block
     unsigned int memorySize = inputSize * sizeof(int);
 
     int *host_ptr1, *host_ptr2, *host_ptr3; // CPU pointers declared in host
@@ -38,10 +38,9 @@ int main() {
     cudaMemcpy(device_ptr2, host_ptr2, memorySize, cudaMemcpyHostToDevice);
 
     // Evaluating on GPU
-    unsigned int numBlocks = (inputSize + blockSize - 1) / blockSize;
-    unsigned int numThreads = blockSize;
-    std::cout << "#Blocks: " << numBlocks << "\t#Threads: " << numThreads << std::endl;
-    gpu_function<<<numBlocks,numThreads>>>(device_ptr1, device_ptr2, device_ptr3, inputSize);
+    unsigned int numBlocks = (inputSize + threadsPerBlock - 1) / threadsPerBlock;
+    std::cout << "#Blocks: " << numBlocks << "\t#Threads per block: " << threadsPerBlock << std::endl;
+    gpu_function<<<numBlocks,threadsPerBlock>>>(device_ptr1, device_ptr2, device_ptr3, inputSize);
 
     // Moving result to CPU for printing
     cudaMemcpy(host_ptr3, device_ptr3, memorySize, cudaMemcpyDeviceToHost);

@@ -14,18 +14,10 @@ make -C ./blitz-build install
 This will create the folders `include`, `lib` and `blitz-build`. They need to be present in order for the
 project to run.
 
-Create the necessary folder
-```bash
-mkdir input
-mkdir output
-mkdir run
-```
-Put the particle file in input.
+The project can be built with one of the targets in `Makefile` or `Makefile.daint`. The binaries are built into
+`make-build`.
+Slurm scripts to run the compiled code on daint (or eiger) can be found in scripts/. They are named
+`run_<name_of_executable>`.
 
-Then either run the project with clion and the provide CMakeLists.txt in the root folder or
-compile and run from the root folder in the command line with `g++` or other c++ compiler. 
-```bash
- g++ -Wall -O2 -I include -std=c++17 -o run/main src/main.cpp src/tipsy.cpp src/my_io.cpp && ./run/main 
-```
-
-You might have to adjust the src files.
+The cmake stuff can largely be ignored as it does not work and is only present such that the clion code introspection
+features work.

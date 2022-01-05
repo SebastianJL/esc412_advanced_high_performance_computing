@@ -20,3 +20,5 @@ export CRAY_CUDA_MPS=1
 srun make-build/ex13-1 17 3
 srun make-build/ex13-1 2  3
 srun make-build/ex13-1 17 8
+srun make-build/ex13-1 2000 1
+srun make-build/ex13-1 40000 2048

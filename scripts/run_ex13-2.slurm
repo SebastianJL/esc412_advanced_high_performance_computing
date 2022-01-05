@@ -11,10 +11,8 @@
 #SBATCH --partition=debug
 #SBATCH --constraint=gpu
 #SBATCH --hint=nomultithread
-#SBATCH -o slurm/ex13-1-out-%j
+#SBATCH -o slurm/ex13-2-out-%j
 
-
-export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export CRAY_CUDA_MPS=1
 
 srun make-build/ex13-2 /store/uzh/uzh8/ESC412/ic_512.std 512

@@ -20,11 +20,11 @@ typedef blitz::Array<complex_type,3> array3D_c;
 
 //**********************************************************************
 
-void compute_fft_2D_R2C(array3D_r &grid, array3D_c &fft_grid, int N) {
+void compute_fft_2D_R2C(array3D_r &grid, int N, int Nx) {
     int n[] = {N,N};       // 2D FFT of length NxN
     int inembed[] = {N,2*(N/2+1)};
     int onembed[] = {N,(N/2+1)};
-    int howmany = N;
+    int howmany = Nx;
     int odist = N*(N/2+1); // Output distance is in "complex"
     int idist = 2*odist;   // Input distance is in "real"
     int istride = 1,       // Elements of each FFT are adjacent
@@ -49,7 +49,7 @@ void compute_fft_2D_R2C(array3D_r &grid, array3D_c &fft_grid, int N) {
     cerr << "2D R2C FFT CUDA: " << elapsed << " s" << endl;
 }
 
-void compute_fft_1D_C2C(array3D_c &fft_grid, int N){
+void compute_fft_1D_C2C(array3D_c &fft_grid, int N, int Nx){
     // 2D FFT of the 1st dimensions: C2C
     int n[] = {N};
     int *inembed = n, *onembed = n;

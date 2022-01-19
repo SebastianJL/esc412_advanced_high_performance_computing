@@ -195,13 +195,13 @@ void assign_masses(array2D_r p, array3D_r &grid, int N){
     }
 }
 
-void compute_fft(array3D_r grid, array3D_c fft_grid, int N, MPI_Comm comm){
+void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
     int mpi_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
 
     double t0, elapsed;
 
-//    compute_fft_2D_R2C(array3D_r &grid, array3D_c &fft_grid, int N);
+    compute_fft_2D_R2C(grid, N, Nx);
 //    transpose();
 //    compute_fft_1D_C2C(array3D_c &fft_grid, int N);
 
@@ -543,7 +543,7 @@ int main(int argc, char *argv[]) {
     p.free();
 
     // Compute the fft of the over-density field
-    compute_fft(grid_r, grid_c, N, MPI_COMM_WORLD);
+    compute_fft(grid_r, grid_c, N, local_n0);
 
     // Compute the power spectrum
     compute_pk(grid_c, N);

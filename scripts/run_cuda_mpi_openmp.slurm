@@ -10,10 +10,11 @@
 #SBATCH --cpus-per-task=2
 #SBATCH --partition=debug
 #SBATCH --constraint=gpu
-#SBATCH -o slurm/%j-cuda-mpi-openmp.out
-#SBATCH -e slurm/%j-cuda-mpi-openmp.err
+#SBATCH -o slurm/cuda-mpi-openmp.out
+#SBATCH -e slurm/cuda-mpi-openmp.err
 
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
-srun make-build/cuda_mpi_openmp /store/uzh/uzh8/ESC412/ic_512.std 512
+# srun make-build/cuda_mpi_openmp /store/uzh/uzh8/ESC412/ic_512.std 512
+srun make-build/cuda_mpi_openmp ./input/b0-final.std 64 

@@ -1,7 +1,6 @@
 #include <fstream>
 #include <complex>
 #include <stdlib.h>
-#include <sys/time.h>
 #include <fftw3-mpi.h>
 #include <omp.h>
 #include <mpi.h>
@@ -11,6 +10,7 @@
 #include "tipsy.h"
 #include "transformations.h"
 #include "fft.h"
+#include "get_time.h"
 
 using namespace std;
 
@@ -22,14 +22,6 @@ typedef blitz::Array<real_type,3> array3D_r;
 
 typedef blitz::Array<complex_type,3> array3D_c;
 
-
-// A simple timing function
-double getTime() {
-    struct timeval tv;
-    struct timezone tz;
-    gettimeofday(&tv, &tz);
-    return tv.tv_sec + 1e-6*(double)tv.tv_usec;
-}
 
 // Read the particle file,
 // return a 2d blitz array containing particle positions
@@ -55,10 +47,10 @@ array2D_r read_particles(string fname, int mpi_rank, int size){
     // Allocate the particle buffer
     array2D_r p(blitz::Range(iStart, iEnd), blitz::Range(0, 2));
 
-    t0 = getTime();
+    t0 = get_time();
     // Read the particles
     io.load(p);
-    elapsed = getTime() - t0;
+    elapsed = get_time() - t0;
 
     if (mpi_rank == 0) {
         cerr << "(rank:" << mpi_rank << ") "
@@ -152,7 +144,7 @@ void assign_masses(array2D_r p, array3D_r &grid, int N){
     MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
 
     double t0, elapsed;
-    t0 = getTime();
+    t0 = get_time();
 
     // Use a view of the grid without the fft padding
     array3D_r grid_nopad = grid(blitz::Range::all(),
@@ -197,7 +189,7 @@ void assign_masses(array2D_r p, array3D_r &grid, int N){
     }
 
 
-    elapsed = getTime()-t0;
+    elapsed = get_time()-t0;
     if (mpi_rank == 0) {
         cerr << "(rank:" << mpi_rank << ") mass assignment: " << elapsed << " s" << endl;
     }
@@ -261,7 +253,7 @@ void compute_pk(array3D_c fft_grid, int N){
     // 0, 1, 2, ..., N/2, -(N/2-1), ..., -2, -1
     // 0, 1, 2, ..., N/2
 
-    t0 = getTime();
+    t0 = get_time();
     for( auto index=fft_grid.begin(); index!=fft_grid.end(); ++index ) {
         auto pos = index.position();
         int kx = pos[0]>iNyquist ? N - pos[0] : pos[0];
@@ -295,7 +287,7 @@ void compute_pk(array3D_c fft_grid, int N){
     reduce_in_place(mpi_rank, 0, n_power.data(), nBins,
                      MPI_INT64_T, MPI_SUM, MPI_COMM_WORLD);
 
-    elapsed = getTime() - t0;
+    elapsed = get_time() - t0;
 
     if (mpi_rank == 0) {
         cerr << "(rank:" << mpi_rank << ") P(k) measurement: " << elapsed << " s" << endl;

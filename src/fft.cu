@@ -2,12 +2,12 @@
 #include <typeinfo>
 #include <complex>
 #include <stdlib.h>
-#include <sys/time.h>
 #include "cufft.h"
 #include "blitz/array.h"
 
 #include "aweights.h"
 #include "tipsy.h"
+#include "get_time.h"
 
 using namespace std;
 using namespace blitz;
@@ -16,15 +16,6 @@ typedef double real_type;
 typedef std::complex<real_type> complex_type;
 typedef blitz::Array<real_type,3> array3D_r;
 typedef blitz::Array<complex_type,3> array3D_c;
-
-
-// A simple timing function
-double getTime() {
-    struct timeval tv;
-    struct timezone tz;
-    gettimeofday(&tv, &tz);
-    return tv.tv_sec + 1e-6*(double)tv.tv_usec;
-}
 
 
 //**********************************************************************
@@ -38,7 +29,7 @@ void compute_fft_2D_R2C(array3D_r &grid, array3D_c &fft_grid, int N) {
     int idist = 2*odist;   // Input distance is in "real"
     int istride = 1,       // Elements of each FFT are adjacent
 	ostride = 1;
-    double t0 = getTime();
+    double t0 = get_time();
 
     cufftHandle plan;
     cufftPlanMany(&plan,sizeof(n)/sizeof(n[0]), n,
@@ -54,7 +45,7 @@ void compute_fft_2D_R2C(array3D_r &grid, array3D_c &fft_grid, int N) {
     cudaFree(data);
     cufftDestroy(plan);
 
-    double elapsed = getTime()-t0;
+    double elapsed = get_time()-t0;
     cerr << "2D R2C FFT CUDA: " << elapsed << " s" << endl;
 }
 
@@ -96,7 +87,7 @@ void compute_fft_2D_R2C_stream(array3D_r &grid, array3D_c &fft_grid, int N) {
 	ostride = 1;
     const int nStreams = 4;
 
-    double t0 = getTime();
+    double t0 = get_time();
 
     // Allocate the CUDA streams. Each stream can execute independently
     cudaStream_t stream[nStreams];
@@ -143,7 +134,7 @@ void compute_fft_2D_R2C_stream(array3D_r &grid, array3D_c &fft_grid, int N) {
     cufftDestroy(plan);
     for(auto i=0; i<nStreams; ++i) cudaStreamDestroy(stream[i]);
 
-    double elapsed = getTime()-t0;
+    double elapsed = get_time()-t0;
     cerr << "2D R2C FFT streaming: " << elapsed << " s" << endl;
 }
 

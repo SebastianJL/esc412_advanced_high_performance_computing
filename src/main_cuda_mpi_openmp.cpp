@@ -199,9 +199,16 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
     int mpi_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
 
-    double t0, elapsed;
+    double t0 = get_time();
 
     compute_fft_2D_R2C(grid, N, Nx);
+
+    double elapsed = get_time()-t0;
+
+    if (mpi_rank == 0) {
+        cerr << "(rank 0) 2D R2C FFT CUDA: " << elapsed << " s" << endl;
+    }
+
 //    transpose();
 //    compute_fft_1D_C2C(array3D_c &fft_grid, int N);
 

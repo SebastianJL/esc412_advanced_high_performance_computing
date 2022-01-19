@@ -7,7 +7,6 @@
 
 #include "aweights.h"
 #include "tipsy.h"
-#include "get_time.h"
 
 using namespace std;
 using namespace blitz;
@@ -29,7 +28,6 @@ void compute_fft_2D_R2C(array3D_r &grid, int N, int Nx) {
     int idist = 2*odist;   // Input distance is in "real"
     int istride = 1,       // Elements of each FFT are adjacent
 	ostride = 1;
-    double t0 = get_time();
 
     cufftHandle plan;
     cufftPlanMany(&plan,sizeof(n)/sizeof(n[0]), n,
@@ -45,8 +43,6 @@ void compute_fft_2D_R2C(array3D_r &grid, int N, int Nx) {
     cudaFree(data);
     cufftDestroy(plan);
 
-    double elapsed = get_time()-t0;
-    cerr << "2D R2C FFT CUDA: " << elapsed << " s" << endl;
 }
 
 void compute_fft_1D_C2C(array3D_c &fft_grid, int N, int Nx){
@@ -86,8 +82,6 @@ void compute_fft_2D_R2C_stream(array3D_r &grid, array3D_c &fft_grid, int N) {
     int istride = 1,       // Elements of each FFT are adjacent
 	ostride = 1;
     const int nStreams = 4;
-
-    double t0 = get_time();
 
     // Allocate the CUDA streams. Each stream can execute independently
     cudaStream_t stream[nStreams];
@@ -133,9 +127,6 @@ void compute_fft_2D_R2C_stream(array3D_r &grid, array3D_c &fft_grid, int N) {
     cudaFree(workArea[0]);
     cufftDestroy(plan);
     for(auto i=0; i<nStreams; ++i) cudaStreamDestroy(stream[i]);
-
-    double elapsed = get_time()-t0;
-    cerr << "2D R2C FFT streaming: " << elapsed << " s" << endl;
 }
 
 

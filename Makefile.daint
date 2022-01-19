@@ -1,32 +1,40 @@
 SHELL:=/bin/bash
+CFLAGS=-I include
+BUILD=make-build
 
 all: mpi_openmp cuda ex13-1 ex13-2
 
-mpi_openmp: src/main_mpi_openmp.cpp src/tipsy.cpp
+mpi_openmp: src/main_mpi_openmp.cpp $(BUILD)/tipsy.o
 	module load cray-fftw; \
-	CC -std=c++17 -I include/ -L /usr/lib/x86_64-linux-gnu/ -O2 $^ -o make-build/$@ -lfftw3_mpi -lfftw3_omp -lfftw3 -lm -lstdc++ -fopenmp
+	CC -std=c++17 -I include/ -L /usr/lib/x86_64-linux-gnu/ -O2 $^ -o $(BUILD)/$@ -lfftw3_mpi -lfftw3_omp -lfftw3 -lm -lstdc++ -fopenmp
 
 cuda: src/main_cuda.cpp src/tipsy.cpp
 	module load daint-gpu; \
 	module load cudatoolkit; \
-	nvcc -std=c++17 -I include/  -O2 $^ -o make-build/$@ -lcudart -lcufft -lcufftw -lm -lstdc++
+	nvcc -std=c++17 -I include/ -O2 $^ -o $(BUILD)/$@ -lcudart -lcufft -lcufftw -lm -lstdc++
 
 ex13-1: src/Exercise13-1.cu
 	module load daint-gpu; \
 	module load cudatoolkit; \
-	nvcc -std=c++17 -I include/  -O2 $^ -o make-build/$@ -lcudart -lm -lstdc++
+	nvcc -std=c++17 -I include/ -O2 $^ -o $(BUILD)/$@ -lcudart -lm -lstdc++
 
 ex13-2: src/Exercise13-2.cu src/tipsy.cpp
 	module load daint-gpu; \
 	module load cudatoolkit; \
-	nvcc -std=c++17 -I include/  -O2 $^ -o make-build/$@ -lcudart -lcufft -lcufftw -lm -lstdc++
+	nvcc -std=c++17 -I include/ -O2 $^ -o $(BUILD)/$@ -lcudart -lcufft -lcufftw -lm -lstdc++
 
-cuda_mpi_openmp: main_cuda_mpi_openmp.o tipsy.o fft.o
-	CC -std=c++17 -I include/  -O2 $^ -o make-build/$@ -lcudart -lcufft -lcufftw -lm -lstdc++
+cuda_mpi_openmp: $(BUILD)/main_cuda_mpi_openmp.o $(BUILD)/tipsy.o $(BUILD)/fft.o
+	CC -std=c++17 -I include/  -O2 $^ -o $(BUILD)/$@ -lcudart -lcufft -lcufftw -lm -lstdc++
 
-main_cuda_mpi_openmp.o: src/main_cuda_mpi_openmp.cpp
-tipsy.o: src/tipsy.cpp
-fft.o: src/fft.cu
+$(BUILD)/main_cuda_mpi_openmp.o: src/main_cuda_mpi_openmp.cpp
+	module load cray-fftw; \
+	CC -c -std=c++17 -I include/ -O2 $^ -o $@  
+$(BUILD)/tipsy.o: src/tipsy.cpp
+	CC -c -std=c++17 -I include/ -O2 $^ -o $@  
+$(BUILD)/fft.o: src/fft.cu
+	module load daint-gpu; \
+	module load cudatoolkit; \
+	nvcc -c -std=c++17 -I include/ -O2 $^ -o $@ -lcudart -lcufft -lm -lstdc++
 
 #CC=CC -fopenmp
 #export OMPI_CXX=g++-11

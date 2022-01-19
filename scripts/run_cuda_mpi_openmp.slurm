@@ -1,6 +1,6 @@
 #!/bin/bash -l
-#SBATCH --job-name="main_mpi_openmp"
-#SBATCH --account="uzh8"
+#SBATCH --job-name="main_cuda_mpi_openmp"
+#SBATCH --account="uzg2"
 #SBATCH --mail-type=None
 #SBATCH --mail-user=johannes.lade@uzh.ch
 #SBATCH --time=00:05:00
@@ -9,10 +9,11 @@
 #SBATCH --ntasks-per-node=6
 #SBATCH --cpus-per-task=2
 #SBATCH --partition=debug
-#SBATCH -o slurm/%j-mpi-openmp.out
-#SBATCH -e slurm/%j-mpi-openmp.err
+#SBATCH --constraint=gpu
+#SBATCH -o slurm/%j-cuda-mpi-openmp.out
+#SBATCH -e slurm/%j-cuda-mpi-openmp.err
 
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
-srun make-build/mpi_openmp /store/uzh/uzh8/ESC412/ic_512.std 512
+srun make-build/cuda_mpi_openmp /store/uzh/uzh8/ESC412/ic_512.std 512

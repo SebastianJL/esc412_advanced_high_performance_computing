@@ -19,13 +19,14 @@ def read(file1, file2):
     return data1, data2
 
 
-def draw(data, ax):
+def draw(data, ax, filename):
     x, y = data[:, 0], data[:, 1]
     ax.scatter(x, y)
     ax.set_yscale('log')
     # ax.set_xscale('log')
     ax.set_xlabel('exp(log_k(i)/n_power(i))')
     ax.set_ylabel('power(i)/n_power(i)')
+    ax.title.set_text(filename)
 
 
 def draw_relative(data1, data2, ax):
@@ -49,19 +50,21 @@ if __name__ == "__main__":
     print(file2)
     print(data2)
     print()
-    print(file1 + ' div ' + file2)
+    print(file1 + ' / ' + file2)
     print(data1/data2)
     print(f'{(data1==data2).all() = }')
-    print(f'{(data1!=data2).sum()/3 = }')
-    print(f'{(data1[data1!=data2]) = }')
+    print(f'{(data1==data2) = }')
 
     try:
         if argv[3] == 'd':
             import matplotlib.pyplot as plt
             fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
-            draw(data1, ax1)
-            draw(data2, ax2)
-            draw_relative(data1, data2, ax3)
+            draw(data1, ax1, file1)
+            draw(data2, ax2, file2)
+            try:
+                draw_relative(data1, data2, ax3)
+            except AssertionError:
+                print("Couldn't draw relative data.")
             plt.show()
     except IndexError:
         print("Not drawing.")

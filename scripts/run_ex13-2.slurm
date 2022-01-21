@@ -11,9 +11,10 @@
 #SBATCH --partition=debug
 #SBATCH --constraint=gpu
 #SBATCH --hint=nomultithread
-#SBATCH -o slurm/ex13-2-out-%j
+#SBATCH -o slurm/ex13-2.out
+#SBATCH -e slurm/ex13-2.err
 
 export CRAY_CUDA_MPS=1
 
-srun make-build/ex13-2 /store/uzh/uzh8/ESC412/ic_512.std 512
-
+#srun make-build/ex13-2 /store/uzh/uzh8/ESC412/ic_512.std 512
+srun make-build/ex13-2 ./input/b0-final.std 64 

@@ -11,7 +11,8 @@
 #SBATCH --partition=debug
 #SBATCH --constraint=gpu
 #SBATCH --hint=nomultithread
-#SBATCH -o slurm/ex13-1-out-%j
+#SBATCH -o slurm/ex13-1.out
+#SBATCH -e slurm/ex13-1.err
 
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK

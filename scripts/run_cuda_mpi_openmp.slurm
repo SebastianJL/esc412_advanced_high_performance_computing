@@ -13,7 +13,7 @@
 #SBATCH -o slurm/cuda-mpi-openmp.out
 #SBATCH -e slurm/cuda-mpi-openmp.err
 
-
+export CRAY_CUDA_MPS=1
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 # srun make-build/cuda_mpi_openmp /store/uzh/uzh8/ESC412/ic_512.std 512

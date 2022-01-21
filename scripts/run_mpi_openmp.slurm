@@ -9,10 +9,13 @@
 #SBATCH --ntasks-per-node=6
 #SBATCH --cpus-per-task=2
 #SBATCH --partition=debug
-#SBATCH -o slurm/%j-mpi-openmp.out
-#SBATCH -e slurm/%j-mpi-openmp.err
+#SBATCH --constraint=mc
+#SBATCH --hint=nomultithread
+#SBATCH -o slurm/mpi-openmp.out
+#SBATCH -e slurm/mpi-openmp.err
 
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
-srun make-build/mpi_openmp /store/uzh/uzh8/ESC412/ic_512.std 512
+#srun make-build/mpi_openmp /store/uzh/uzh8/ESC412/ic_512.std 512
+srun make-build/mpi_openmp ./input/b0-final.std 64 

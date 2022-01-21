@@ -322,7 +322,9 @@ void compute_pk(array3D_c fft_grid, int N){
     if (mpi_rank == 0) {
         for (int i = 0; i < nBins; ++i) {
             if (n_power(i) > 0) {
-                cout << exp(log_k(i)/n_power(i)) << " " << power(i)/n_power(i) <<" "<< n_power(i)<< endl;
+                cout << exp(log_k(i) / n_power(i)) << " "
+                     << power(i) / n_power(i) << " "
+                     << n_power(i) << endl;
             }
         }
     }

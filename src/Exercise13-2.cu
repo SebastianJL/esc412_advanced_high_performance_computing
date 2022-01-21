@@ -360,6 +360,8 @@ void compute_pk(array3D_c &fft_grid, int N){
         int ky = pos[1]>iNyquist ? N - pos[1] : pos[1];
         int kz = pos[2];
 
+        if(kx==0 && ky==0 && kz==0) continue;
+
         int mult = (kz == 0) || (kz == iNyquist) ? 1 : 2;
 
         complex_type cplx_amplitude = *index;
@@ -378,9 +380,11 @@ void compute_pk(array3D_c &fft_grid, int N){
 
     cerr << "P(k) measurement: " << elapsed << " s" << endl;
 
-    for(int i=0; i<nBins; ++i) {
-        if (n_power(i)>0) {
-            cout << exp(log_k(i)/n_power(i)) << " " << power(i)/n_power(i) << endl;
+    for (int i = 0; i < nBins; ++i) {
+        if (n_power(i) > 0) {
+            cout << exp(log_k(i) / n_power(i)) << " "
+                 << power(i) / n_power(i) << " "
+                 << n_power(i) << endl;
         }
     }
 }

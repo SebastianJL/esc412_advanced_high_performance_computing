@@ -205,7 +205,7 @@ void transpose(array3D_c fft_grid, int N, int Nx) {
     ptrdiff_t local_n, local_start;
     ptrdiff_t local_n_transposed, local_start_transposed;
     ptrdiff_t alloc_local =
-        fftw_mpi_local_size_3d_transposed(N, N, N, MPI_COMM_WORLD,
+        fftw_mpi_local_size_3d_transposed(N, N, N/2 + 1, MPI_COMM_WORLD,
                                           &local_n, &local_start,
                                           &local_n_transposed, &local_start_transposed);
 
@@ -213,46 +213,33 @@ void transpose(array3D_c fft_grid, int N, int Nx) {
     assert(local_start == local_start_transposed);
 
     // Uncomment to print local sizes.
-    if (mpi_rank == 0) {
-        printf("r, local_start, local_n, alloc_local: %d, %td, %td, %td\n", mpi_rank, local_start, local_n, alloc_local);
-        printf("r, local_start, local_n, alloc_local: %d, %td, %td, %td\n", mpi_rank, local_start_transposed, local_n_transposed, alloc_local);
-    }
+//    if (mpi_rank == 0) {
+//        printf("r, local_start, local_n, alloc_local: %d, %td, %td, %td\n", mpi_rank, local_start, local_n, alloc_local);
+//        printf("r, local_start, local_n, alloc_local: %d, %td, %td, %td\n", mpi_rank, local_start_transposed, local_n_transposed, alloc_local);
+//    }
 
-    // Allocate local_nxNxN grid of doubles.
-    Array<double, 3> grid(Range(local_start, local_start + local_n - 1),
-                          Range(0, N - 1),
-                          Range(0, N - 1));
-
-    // Fill grid with numbers such that grid[x, y, z] = xyz where x, y, z are
-    // the digits of the number, not a multiplication. This is only possible
-    // because N=10 and allows to easily read of which axes where transposed.
-    for (auto i = grid.begin(); i != grid.end(); ++i) {
-        auto pos = i.position();
-        *i = pos[0] * grid.stride(0) + pos[1] * grid.stride(1) + pos[2] * grid.stride(2);
-    }
-
-    // Print rank=0 grid.
-    if (mpi_rank == 0) {
-        cout << grid.stride() << endl;
-        cout << "r=" << mpi_rank << ' ' << grid(Range::all(), Range::all(), Range::all()) << endl;
-    }
+    // Print rank=0 fft_grid.
+//    if (mpi_rank == 0) {
+//        cout << fft_grid.stride() << endl;
+//        cout << "r=" << mpi_rank << ' ' << fft_grid(Range::all(), Range::all(), Range::all()) << endl;
+//    }
 
     // Plan transpose.
     auto plan = fftw_mpi_plan_many_transpose(
-        N, N, N, FFTW_MPI_DEFAULT_BLOCK,
-        FFTW_MPI_DEFAULT_BLOCK, reinterpret_cast<double *>(grid.data()),
-        reinterpret_cast<double *>(grid.data()), MPI_COMM_WORLD, FFTW_ESTIMATE);
+        N, N, 2*(N/2 + 1), FFTW_MPI_DEFAULT_BLOCK,
+        FFTW_MPI_DEFAULT_BLOCK, reinterpret_cast<double *>(fft_grid.data()),
+        reinterpret_cast<double *>(fft_grid.data()), MPI_COMM_WORLD, FFTW_ESTIMATE);
 
     // Transpose and print.
     fftw_execute(plan);
-    if (mpi_rank == 0)
-        cout << grid(Range::all(), Range::all(), Range::all()) << endl;
+//    if (mpi_rank == 0)
+//        cout << fft_grid(Range::all(), Range::all(), Range::all()) << endl;
 
     // Transpose back and print.
-    fftw_execute(plan);
-    if (mpi_rank == 0) {
-        cout << grid(Range::all(), Range::all(), Range::all()) << endl;
-    }
+//    fftw_execute(plan);
+//    if (mpi_rank == 0) {
+//        cout << fft_grid(Range::all(), Range::all(), Range::all()) << endl;
+//    }
 }
 
 void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
@@ -262,6 +249,7 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
     double t0 = get_time();
 
     compute_fft_2D_R2C(grid, N, Nx);
+    transpose(fft_grid, N, Nx);
 
     double elapsed = get_time()-t0;
 
@@ -269,7 +257,6 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
         cerr << "(rank 0) 2D R2C FFT CUDA: " << elapsed << " s" << endl;
     }
 
-//    transpose();
 //    compute_fft_1D_C2C(array3D_c &fft_grid, int N);
 
 }

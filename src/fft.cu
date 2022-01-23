@@ -72,13 +72,14 @@ void compute_fft_1D_C2C(array3D_c &fft_grid, int N, int local_n){
                   onembed,ostride,odist,
                   CUFFT_Z2Z,howmany);
     cufftDoubleComplex *data;
-    cudaMalloc((void**)&data, sizeof(cufftDoubleComplex)*N*N*(N/2+1));
-    cudaMemcpy(data, fft_grid.dataFirst(), sizeof(cufftDoubleComplex)*N*N*(N/2+1), cudaMemcpyHostToDevice);
+    auto data_size = sizeof(cufftDoubleComplex)*local_n*N*(N/2+1);
+    cudaMalloc((void**)&data, data_size);
+    cudaMemcpy(data, fft_grid.dataFirst(), data_size, cudaMemcpyHostToDevice);
     for (int slab=0; slab<local_n; slab++) {
         int index = slab * N*(N/2 + 1);
         cufftExecZ2Z(plan, &data[index], &data[index], CUFFT_FORWARD);
     }
-    cudaMemcpy(fft_grid.dataFirst(), data,sizeof(cufftDoubleComplex)*N*N*(N/2+1), cudaMemcpyDeviceToHost);
+    cudaMemcpy(fft_grid.dataFirst(), data, data_size, cudaMemcpyDeviceToHost);
     cudaDeviceSynchronize();
     cudaFree(data);
     cufftDestroy(plan);

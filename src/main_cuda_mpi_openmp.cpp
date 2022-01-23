@@ -249,7 +249,17 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
     double t0 = get_time();
 
     compute_fft_2D_R2C(grid, N, Nx);
+
+    auto copy = fft_grid.copy();
     transpose(fft_grid, N, Nx);
+    auto r = blitz::Range(0, Nx-1);
+    auto same = (copy(r, 0, 0) == fft_grid(0, r, 0));
+
+    if (mpi_rank == 0) {
+        assert(blitz::all(same));
+    }
+
+    compute_fft_1D_C2C(fft_grid, N, Nx);
 
     double elapsed = get_time()-t0;
 
@@ -257,7 +267,6 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
         cerr << "(rank 0) 2D R2C FFT CUDA: " << elapsed << " s" << endl;
     }
 
-//    compute_fft_1D_C2C(array3D_c &fft_grid, int N);
 
 }
 

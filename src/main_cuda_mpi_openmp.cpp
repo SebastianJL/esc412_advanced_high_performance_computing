@@ -252,9 +252,11 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
 
     auto copy = fft_grid.copy();
     transpose(fft_grid, N, Nx);
-    auto r = blitz::Range(0, Nx-1);
-    auto same = (copy(r, 0, 0) == fft_grid(0, r, 0));
 
+    // DEBUG Check that transpose was correct. Check not exhaustive.
+    auto r = blitz::Range(0, Nx-1);
+    aut r_all = blitz::Range::all();
+    auto same = (copy(r, 0, r_all) == fft_grid(0, r, r_all));
     if (mpi_rank == 0) {
         assert(blitz::all(same));
     }

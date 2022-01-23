@@ -35,10 +35,11 @@ void compute_fft_2D_R2C(array3D_r &grid, int N, int local_n) {
 		    onembed,ostride,odist,
 		    CUFFT_D2Z,howmany);
     cufftDoubleComplex *data;
-    cudaMalloc((void**)&data, sizeof(cufftDoubleComplex)*N*N*(N/2+1));
-    cudaMemcpy(data, grid.dataFirst(), sizeof(cufftDoubleComplex)*N*N*(N/2+1), cudaMemcpyHostToDevice);
+    auto data_size = sizeof(cufftDoubleComplex)*local_n*N*(N/2+1);
+    cudaMalloc((void**)&data, data_size);
+    cudaMemcpy(data, grid.dataFirst(), data_size, cudaMemcpyHostToDevice);
     cufftExecD2Z(plan,reinterpret_cast<cufftDoubleReal*>(data),data);
-    cudaMemcpy(grid.dataFirst(), data,sizeof(cufftDoubleComplex)*N*N*(N/2+1), cudaMemcpyDeviceToHost);
+    cudaMemcpy(grid.dataFirst(), data, data_size, cudaMemcpyDeviceToHost);
     cudaDeviceSynchronize();
     cudaFree(data);
     cufftDestroy(plan);

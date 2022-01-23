@@ -78,7 +78,8 @@ void compute_fft_1D_C2C(array3D_c &fft_grid, int N, int local_n){
     cudaMemcpy(data, fft_grid.dataFirst(), data_size, cudaMemcpyHostToDevice);
     for (int slab=0; slab<local_n; slab++) {
         int index = slab * N*(N/2 + 1);
-        cufftExecZ2Z(plan, &data[index], &data[index], CUFFT_FORWARD);
+        auto res = cufftExecZ2Z(plan, &data[index], &data[index], CUFFT_FORWARD);
+        assert(res == cufftResult_t::CUFFT_SUCCESS);
     }
     cudaMemcpy(fft_grid.dataFirst(), data, data_size, cudaMemcpyDeviceToHost);
     cudaDeviceSynchronize();

@@ -248,20 +248,27 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
 
     double t0 = get_time();
 
-    compute_fft_2D_R2C(grid, N, Nx);
+    // compute_fft_2D_R2C(grid, N, Nx);
 
     auto copy = fft_grid.copy();
     transpose(fft_grid, N, Nx);
 
     // DEBUG Check that transpose was correct. Check not exhaustive.
     auto r = blitz::Range(0, Nx-1);
-    aut r_all = blitz::Range::all();
+    auto r_all = blitz::Range::all();
     auto same = (copy(r, 0, r_all) == fft_grid(0, r, r_all));
     if (mpi_rank == 0) {
         assert(blitz::all(same));
     }
 
+
+    // Transpose back to see if transpose could be correct.
+    // transpose(fft_grid, N, Nx);
+    // auto same2 = (copy == fft_grid);
+    // assert(blitz::all(same2));
+
     compute_fft_1D_C2C(fft_grid, N, Nx);
+
 
     double elapsed = get_time()-t0;
 

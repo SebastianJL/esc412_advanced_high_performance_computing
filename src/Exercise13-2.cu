@@ -411,8 +411,8 @@ int main(int argc, char *argv[]) {
     array3D_c fft_grid(reinterpret_cast<complex_type*>(grid.data()),shape(N,N,N/2+1),neverDeleteData);
     
     // Compute the fft of the over-density field
-    compute_fft_2D_R2C(grid, fft_grid, N);
-    //compute_fft_1D_C2C(fft_grid,N);
+    //compute_fft_2D_R2C(grid, fft_grid, N);
+    compute_fft_1D_C2C(fft_grid,N);
 
 
     // Compute the power spectrum

@@ -19,15 +19,15 @@ typedef blitz::Array<complex_type,3> array3D_c;
 
 //**********************************************************************
 
-void compute_fft_2D_R2C(array3D_r &grid, int N, int Nx) {
+void compute_fft_2D_R2C(array3D_r &grid, int N, int local_n) {
     int n[] = {N,N};       // 2D FFT of length NxN
     int inembed[] = {N,2*(N/2+1)};
     int onembed[] = {N,(N/2+1)};
-    int howmany = Nx;
+    int howmany = local_n;
     int odist = N*(N/2+1); // Output distance is in "complex"
     int idist = 2*odist;   // Input distance is in "real"
-    int istride = 1,       // Elements of each FFT are adjacent
-	ostride = 1;
+    int istride = 1;       // Elements of each FFT are adjacent
+	int ostride = 1;
 
     cufftHandle plan;
     cufftPlanMany(&plan,sizeof(n)/sizeof(n[0]), n,
@@ -45,30 +45,70 @@ void compute_fft_2D_R2C(array3D_r &grid, int N, int Nx) {
 
 }
 
-void compute_fft_1D_C2C(array3D_c &fft_grid, int N, int Nx){
-    // 2D FFT of the 1st dimensions: C2C
+/** 1D complex to complex fft along the second dimension.
+ *
+ * In the complex-space the grid is N*N*(N/2+1). Since the code is parallelized
+ * along the first dimension the actual grid size is local_n*N*(N/2+1).
+ * It is assumed that compute_fft_2D_R2C and transpose() have already been
+ * called on the grid.
+ *
+ * @param fft_grid
+ * @param N Grid parameter.
+ * @param local_n Local size of the first dimension.
+ */
+void compute_fft_1D_C2C(array3D_c &fft_grid, int N, int local_n){
     int n[] = {N};
-    int *inembed = n, *onembed = n;
-    int howmany = N*(N/2+1);
+    int *inembed = n;  // Effectively ignored. See doc for outermost dimension.
+    int *onembed = n;  // Effectively ignored.
+    int howmany = N;
     int idist = 1;
     int odist = 1;
-    int istride = N*(N/2+1), ostride = N*(N/2+1);
+    int istride = (N/2+1);
+    int ostride = (N/2+1);
 
     cufftHandle plan;
     cufftPlanMany(&plan,sizeof(n)/sizeof(n[0]), n,
-                    inembed,istride,idist,
-                    onembed,ostride,odist,
-                    CUFFT_Z2Z,howmany);
+                  inembed,istride,idist,
+                  onembed,ostride,odist,
+                  CUFFT_Z2Z,howmany);
     cufftDoubleComplex *data;
     cudaMalloc((void**)&data, sizeof(cufftDoubleComplex)*N*N*(N/2+1));
     cudaMemcpy(data, fft_grid.dataFirst(), sizeof(cufftDoubleComplex)*N*N*(N/2+1), cudaMemcpyHostToDevice);
-    cufftExecZ2Z(plan,data,data,CUFFT_FORWARD);
+    for (int slab=0; slab<local_n; slab++) {
+        int index = slab * N*(N/2 + 1);
+        cufftExecZ2Z(plan, data[index], data[index], CUFFT_FORWARD);
+    }
     cudaMemcpy(fft_grid.dataFirst(), data,sizeof(cufftDoubleComplex)*N*N*(N/2+1), cudaMemcpyDeviceToHost);
     cudaDeviceSynchronize();
     cudaFree(data);
     cufftDestroy(plan);
 
 }
+
+//void compute_fft_1D_C2C(array3D_c &fft_grid, int N, int local_n){
+//    int n[] = {N};
+//    int *inembed = n, *onembed = n;
+//    int howmany = N*(N/2+1);
+//    int idist = 1;
+//    int odist = 1;
+//    int istride = N*(N/2+1);
+//    int ostride = N*(N/2+1);
+//
+//    cufftHandle plan;
+//    cufftPlanMany(&plan,sizeof(n)/sizeof(n[0]), n,
+//                    inembed,istride,idist,
+//                    onembed,ostride,odist,
+//                    CUFFT_Z2Z,howmany);
+//    cufftDoubleComplex *data;
+//    cudaMalloc((void**)&data, sizeof(cufftDoubleComplex)*N*N*(N/2+1));
+//    cudaMemcpy(data, fft_grid.dataFirst(), sizeof(cufftDoubleComplex)*N*N*(N/2+1), cudaMemcpyHostToDevice);
+//    cufftExecZ2Z(plan,data,data,CUFFT_FORWARD);
+//    cudaMemcpy(fft_grid.dataFirst(), data,sizeof(cufftDoubleComplex)*N*N*(N/2+1), cudaMemcpyDeviceToHost);
+//    cudaDeviceSynchronize();
+//    cudaFree(data);
+//    cufftDestroy(plan);
+//
+//}
 
 //**********************************************************************
 

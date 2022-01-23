@@ -29,16 +29,6 @@ def draw(data, ax, filename):
     ax.title.set_text(filename)
 
 
-def draw_relative(data1, data2, ax):
-    assert((data1[:, 0] == data2[:, 0]).all())
-    x = data1[:, 0]
-    y1 = data1[:, 1]
-    y2 = data2[:, 1]
-
-    ax.scatter(x, y1/y2)
-    ax.set_xlabel('exp(log_k(i)/n_power(i))')
-    ax.set_ylabel('relative power')
-
 
 if __name__ == "__main__":
     from sys import argv
@@ -50,21 +40,19 @@ if __name__ == "__main__":
     print(file2)
     print(data2)
     print()
-    print(file1 + ' / ' + file2)
-    print(data1/data2)
     print(f'{(data1==data2).all() = }')
-    print(f'{(data1==data2) = }')
+    if not (data1==data2).all():
+        print(f'{(data1==data2) = }')
+        print()
+        print(file1 + ' / ' + file2)
+        print(data1/data2)
 
     try:
         if argv[3] == 'd':
             import matplotlib.pyplot as plt
-            fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
+            fig, (ax1, ax2) = plt.subplots(1, 2)
             draw(data1, ax1, file1)
             draw(data2, ax2, file2)
-            try:
-                draw_relative(data1, data2, ax3)
-            except AssertionError:
-                print("Couldn't draw relative data.")
             plt.show()
     except IndexError:
         print("Not drawing.")

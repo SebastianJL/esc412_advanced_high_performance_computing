@@ -33,10 +33,13 @@ that where parallelized using OpenMP, MPI and Cuda. This is refelected in the na
   features work.
 
 ## Run the project on piz daint or eiger
-Slurm scripts to run the compiled code on daint (or eiger) can be found in scripts/. They are named
-`run_<name_of_compilation_target>`. The versions containing cuda code only work on piz daint. 
+Slurm scripts to run the compiled code on daint (or eiger) can be found in scripts/. Run them with
+```bash
+sbatch scripts/run_<name_of_compilation_target>.slurm
+```
+. The versions containing cuda code only work on piz daint. 
 Running the executables this way produces two output files in the folder called `slurm`. 
-`<name_of_compilation_target>.out` and `<name_of_compilation_target>.err`. 
+`<name-of-compilation-target>.out` and `<name-of-compilation-target>.err`. 
 The .out file contains the power spectrum and some information about the job process.
 The .err file contains information about the time each step of the code took plus any errors the code might have thrown.
 

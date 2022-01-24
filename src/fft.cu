@@ -61,7 +61,7 @@ void compute_fft_1D_C2C(array3D_c &fft_grid, int N, int local_n){
     int n[] = {N};
     int *inembed = n;  // Effectively ignored. See doc for outermost dimension.
     int *onembed = n;  // Effectively ignored.
-    int howmany = N;
+    int howmany = N/2 + 1;
     int idist = 1;
     int odist = 1;
     int istride = (N/2+1);

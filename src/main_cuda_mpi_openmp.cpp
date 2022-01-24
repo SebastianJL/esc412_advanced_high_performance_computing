@@ -201,28 +201,15 @@ void transpose(array3D_c fft_grid, int N, int Nx) {
     MPI_Comm_size(MPI_COMM_WORLD, &mpi_size); // Number of ranks
     MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank); // my rank
 
-    // Compute local sizes.
+    // DEBUG Asset that local sizes and transposed local sizes are the same.
     ptrdiff_t local_n, local_start;
     ptrdiff_t local_n_transposed, local_start_transposed;
     ptrdiff_t alloc_local =
         fftw_mpi_local_size_3d_transposed(N, N, N/2 + 1, MPI_COMM_WORLD,
                                           &local_n, &local_start,
                                           &local_n_transposed, &local_start_transposed);
-
     assert(local_n == local_n_transposed);
     assert(local_start == local_start_transposed);
-
-    // Uncomment to print local sizes.
-//    if (mpi_rank == 0) {
-//        printf("r, local_start, local_n, alloc_local: %d, %td, %td, %td\n", mpi_rank, local_start, local_n, alloc_local);
-//        printf("r, local_start, local_n, alloc_local: %d, %td, %td, %td\n", mpi_rank, local_start_transposed, local_n_transposed, alloc_local);
-//    }
-
-    // Print rank=0 fft_grid.
-//    if (mpi_rank == 0) {
-//        cout << fft_grid.stride() << endl;
-//        cout << "r=" << mpi_rank << ' ' << fft_grid(Range::all(), Range::all(), Range::all()) << endl;
-//    }
 
     // Plan transpose.
     auto plan = fftw_mpi_plan_many_transpose(
@@ -230,16 +217,7 @@ void transpose(array3D_c fft_grid, int N, int Nx) {
         FFTW_MPI_DEFAULT_BLOCK, reinterpret_cast<double *>(fft_grid.data()),
         reinterpret_cast<double *>(fft_grid.data()), MPI_COMM_WORLD, FFTW_ESTIMATE);
 
-    // Transpose and print.
     fftw_execute(plan);
-//    if (mpi_rank == 0)
-//        cout << fft_grid(Range::all(), Range::all(), Range::all()) << endl;
-
-    // Transpose back and print.
-//    fftw_execute(plan);
-//    if (mpi_rank == 0) {
-//        cout << fft_grid(Range::all(), Range::all(), Range::all()) << endl;
-//    }
 }
 
 void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
@@ -263,19 +241,10 @@ void compute_fft(array3D_r grid, array3D_c fft_grid, int N, int Nx){
 
     compute_fft_1D_C2C(fft_grid, N, Nx);
 
-    // Transpose back to see if transpose could be correct.
-    // transpose(fft_grid, N, Nx);
-    // auto same2 = (copy == fft_grid);
-    // assert(blitz::all(same2));
-
-
     double elapsed = get_time()-t0;
-
     if (mpi_rank == 0) {
         cerr << "(rank 0) 2D R2C FFT CUDA: " << elapsed << " s" << endl;
     }
-
-
 }
 
 void reduce_in_place(int rank, int root, void * buff, int size,

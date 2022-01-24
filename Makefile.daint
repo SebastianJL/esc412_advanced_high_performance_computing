@@ -2,7 +2,7 @@ SHELL:=/bin/bash
 CFLAGS=-I include
 BUILD=make-build
 
-all: mpi_openmp cuda ex13-1 ex13-2
+all: mpi_openmp cuda ex13-1 cuda_mpi_openmp
 
 mpi_openmp: src/main_mpi_openmp.cpp $(BUILD)/tipsy.o 
 	module load cray-fftw; \
@@ -35,19 +35,3 @@ $(BUILD)/fft.o: src/fft.cu
 	nvcc -c -std=c++17 -I include/ -O2 $^ -o $@ 
 $(BUILD)/get_time.o: src/get_time.cpp
 	CC -c -std=c++17 -I include/ -O2 $^ -o $@  
-
-#CC=CC -fopenmp
-#export OMPI_CXX=g++-11
-#CPPFLAGS=-I$(HOME)/AHPC/include -O3
-#LD=$(CXX)
-#.SUFFIXES: .cxx
-#%.o : %.cxx
-#    CC -c $(CPPFLAGS) -o $@ $<
-#%.o : %.cu
-#    nvcc -c $(CPPFLAGS) -o $@ $<
-#assign  : main.o tipsy.o
-#    CC $(CPPFLAGS) -o assign main.o tipsy.o -lcudart -lcufft -lcufftw
-#transpose : transpose.cxx
-#    CC $(CPPFLAGS) -o transpose transpose.cxx
-#main.o : main.cu
-#tipsy.o : tipsy.cxx

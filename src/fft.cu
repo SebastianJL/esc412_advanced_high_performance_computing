@@ -72,16 +72,36 @@ void compute_fft_1D_C2C(array3D_c &fft_grid, int N, int local_n){
                   inembed,istride,idist,
                   onembed,ostride,odist,
                   CUFFT_Z2Z,howmany);
+    
+    if (cudaGetLastError() != cudaSuccess){
+        fprintf(stderr, "Cuda error: Failed to plan\n");
+    }
+
     cufftDoubleComplex *data;
     auto data_size = sizeof(cufftDoubleComplex)*local_n*N*(N/2+1);
     cudaMalloc((void**)&data, data_size);
+
+    if (cudaGetLastError() != cudaSuccess){
+        fprintf(stderr, "Cuda error: Failed to allocate\n");
+    }
+
     cudaMemcpy(data, fft_grid.dataFirst(), data_size, cudaMemcpyHostToDevice);
+    if (cudaGetLastError() != cudaSuccess){
+        fprintf(stderr, "Cuda error: Failed to copy to device\n");
+    }
+    
     for (int slab=0; slab<local_n; slab++) {
         int index = slab * N*(N/2 + 1);
         auto res = cufftExecZ2Z(plan, &data[index], &data[index], CUFFT_FORWARD);
-        assert(res == cufftResult_t::CUFFT_SUCCESS);
+        if (cudaGetLastError() != cudaSuccess){
+            fprintf(stderr, "Cuda error: Failed to execute plan\n");
+        }
     }
     cudaMemcpy(fft_grid.dataFirst(), data, data_size, cudaMemcpyDeviceToHost);
+    if (cudaGetLastError() != cudaSuccess){
+        fprintf(stderr, "Cuda error: Failed to copyt to host\n");
+    }
+
     cudaDeviceSynchronize();
     cudaFree(data);
     cufftDestroy(plan);

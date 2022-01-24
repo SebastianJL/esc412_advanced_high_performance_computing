@@ -29,7 +29,25 @@ that where parallelized using OpenMP, MPI and Cuda. This is refelected in the na
 
 - The project itself can be built with one of the targets in `Makefile` or `Makefile.daint`. The binaries are built into
   `make-build`.
-  Slurm scripts to run the compiled code on daint (or eiger) can be found in scripts/. They are named
-  `run_<name_of_executable>`. 
 - The cmake stuff can largely be ignored as it does not work and is only present such that the clion code introspection
   features work.
+
+## Run the project on piz daint or eiger
+Slurm scripts to run the compiled code on daint (or eiger) can be found in scripts/. They are named
+`run_<name_of_compilation_target>`. The versions containing cuda code only work on piz daint. 
+Running the executables this way produces two output files in the folder called `slurm`. 
+`<name_of_compilation_target>.out` and `<name_of_compilation_target>.err`. 
+The .out file contains the power spectrum and some information about the job process.
+The .err file contains information about the time each step of the code took plus any errors the code might have thrown.
+
+## Look at the data
+There is a helper script `scripts/compare_spectra.py`. It can be used to compare two of the slurm output files. 
+You need at least python version 3.7. On piz daint you can load the correct modules for that with
+```bash
+. scripts/load_python.sh
+```
+Then use the python script like
+```bash
+python scripts/compare_spectra.py slurm/<file1>.out slurm/<file2>.out [d]
+```
+The optional `d` parameter will draw the two spectra. For piz daint you'll need to configure your ssh agent to FowardX11.

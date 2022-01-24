@@ -15,8 +15,7 @@
 #SBATCH -e slurm/cuda.err
 
 
-export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export CRAY_CUDA_MPS=1
 
-# srun make-build/cuda /store/uzh/uzh8/ESC412/ic_512.std 512
-srun make-build/cuda ./input/b0-final.std 64 
+#srun make-build/cuda /store/uzh/uzh8/ESC412/ic_512.std 512
+srun make-build/cuda ./input/b0-final.std 64

@@ -8,7 +8,7 @@ mpi_openmp: src/main_mpi_openmp.cpp $(BUILD)/tipsy.o
 	module load cray-fftw; \
 	CC -std=c++17 -I include/ -O2 $^ -o $(BUILD)/$@ -lfftw3_mpi -lfftw3_omp -lfftw3 -lm -lstdc++ -fopenmp
 
-cuda: src/main_cuda.cpp src/tipsy.cpp
+cuda: src/main_cuda.cu src/tipsy.cpp
 	module load daint-gpu; \
 	module load cudatoolkit; \
 	nvcc -std=c++17 -I include/ -O2 $^ -o $(BUILD)/$@ -lcudart -lcufft -lcufftw -lm -lstdc++
@@ -18,12 +18,7 @@ ex13-1: src/Exercise13-1.cu
 	module load cudatoolkit; \
 	nvcc -std=c++17 -I include/ -O2 $^ -o $(BUILD)/$@ -lcudart -lm -lstdc++
 
-ex13-2: src/Exercise13-2.cu src/tipsy.cpp
-	module load daint-gpu; \
-	module load cudatoolkit; \
-	nvcc -std=c++17 -I include/ -O2 $^ -o $(BUILD)/$@ -lcudart -lcufft -lcufftw -lm -lstdc++
-
-cuda_mpi_openmp: $(BUILD)/tipsy.o $(BUILD)/fft.o $(BUILD)/get_time.o $(BUILD)/main_cuda_mpi_openmp.o 
+cuda_mpi_openmp: $(BUILD)/tipsy.o $(BUILD)/fft.o $(BUILD)/get_time.o $(BUILD)/main_cuda_mpi_openmp.o
 	module load cray-fftw; \
 	module load daint-gpu; \
 	module load cudatoolkit; \
